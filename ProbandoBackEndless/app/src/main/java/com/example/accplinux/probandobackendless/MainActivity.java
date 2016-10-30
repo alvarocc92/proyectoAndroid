@@ -2,9 +2,12 @@ package com.example.accplinux.probandobackendless;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+
 import com.backendless.Backendless;
 import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
+import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         Backendless.initApp(this, APP_ID, SECRET_KEY, VERSION );
 
         registerUserAsync();
+
     }
 
 
@@ -40,11 +44,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-            BackendlessUser user = new BackendlessUser();
+            final BackendlessUser user = new BackendlessUser();
             user.setEmail( "alvarocc.ac@gmail.com" );
             user.setPassword( "a1a2a3a4" );
             user.setProperty( "phoneNumber", "666-666-666" );
 
             Backendless.UserService.register( user, callback );
+
+            Backendless.Persistence.save( new Comment( "Funciona!!!!", user.getEmail() ), new BackendlessCallback<Comment>()
+            {
+                @Override
+                public void handleResponse( Comment comment )
+                {
+                    Log.i( "Comments", "Got new comment from " + user.getEmail() );
+                }
+            } );
         }
 }
