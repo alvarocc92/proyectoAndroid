@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ProbandoBackEndless</string>
+    <string name="app_login">RRHH MODULE</string>
+    <string name="app_main">Autentificación</string>
+    <string name="app_description">Aplicación RRHH</string>
+    <string name="app_userName">Usuario</string>
+    <string name="app_userPw">Contraseña</string>
+    <string name="app_buttonLogin">LOGIN</string>
+    <string name="app_buttonRegister">REGISTRARSE</string>
+
+
+
 </resources>
