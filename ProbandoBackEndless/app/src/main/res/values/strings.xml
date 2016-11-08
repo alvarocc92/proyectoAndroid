@@ -7,7 +7,15 @@
     <string name="app_userPw">Contraseña</string>
     <string name="app_buttonLogin">LOGIN</string>
     <string name="app_buttonRegister">REGISTRARSE</string>
-
+    <string name="app_menu_principal">Menú principal</string>
+    <string name="title_activity_menu_empleados">MenuEmpleados</string>
+    <string name="newEmpleado">Crear nuevo empleado</string>
+    <string name="empleado_nombre">Nombre</string>
+    <string name="empleado_apellidos">Apellidos</string>
+    <string name="empleado_movil">Movil</string>
+    <string name="empleado_direccion">Dirección</string>
+    <string name="empleado_email">Email</string>
+    <string name="empleado_guardar">Guardar empleado</string>
 
 
 </resources>
