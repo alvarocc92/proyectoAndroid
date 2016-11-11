@@ -18,6 +18,8 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -25,7 +27,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button bR, bL;
+    BootstrapButton bR,bL;
     EditText ed1, ed2;
     TextView tx1;
     int counter = 3;
@@ -40,15 +42,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //TypefaceProvider.registerDefaultIconSets();
 
         Backendless.initApp(this, BackendSettings.APP_ID, BackendSettings.SECRET_KEY, BackendSettings.VERSION);
 
-        bL = (Button) findViewById(R.id.buttonLogin);
-        bR = (Button) findViewById(R.id.buttonRegister);
+        bL = (BootstrapButton) findViewById(R.id.buttonLogin);
+        bR = (BootstrapButton) findViewById(R.id.buttonRegister);
         ed1 = (EditText) findViewById(R.id.usuario);
         ed2 = (EditText) findViewById(R.id.password);
-
-        //  tx1.setVisibility(View.GONE);
 
         bR.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,9 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 loginUserAsync();
             }
         });
-
-
-        //registerUserAsync();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.

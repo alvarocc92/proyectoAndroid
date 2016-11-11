@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,41 +9,29 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/bootstrap_gray_lighter"
 
     tools:context="com.example.accplinux.probandobackendless.MainActivity">
 
-
-    <TextView
-        android:text="@string/app_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textview"
+    <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:id="@+id/app_titulo"
+        style="@style/wrapping_fa_text"
         android:textSize="35dp"
+        app:bootstrapBrand="primary"
+        app:bootstrapText="@string/app_login"
+        tools:ignore="SpUsage"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        />
+    <com.beardedhen.androidbootstrap.AwesomeTextView
+        style="@style/wrapping_fa_text"
         android:text="@string/app_description"
         android:id="@+id/textView"
-        android:layout_below="@+id/textview"
+        app:bootstrapBrand="success"
+        android:layout_below="@+id/app_titulo"
         android:layout_centerHorizontal="true"
-        android:textColor="#ff7aff24"
-        android:textSize="35dp" />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/password"
-        android:hint="@string/app_userPw"
-        android:focusable="true"
-        android:textColorHighlight="#ff7eff15"
-        android:textColorHint="#ffff25e6"
-        android:layout_marginTop="46dp"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:inputType="textPassword"
-        android:layout_alignEnd="@+id/usuario" />
+        android:textSize="30dp" />
+
 
     <ImageView
         android:layout_width="wrap_content"
@@ -55,15 +44,58 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/password"
+        android:hint="@string/app_userPw"
+        android:focusable="true"
+        android:textColorHighlight="#ff7eff15"
+        android:textColorHint="#afb42b"
+        android:layout_marginTop="46dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:inputType="textPassword"
+        android:layout_alignEnd="@+id/usuario" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/usuario"
-        android:textColorHint="#ffff299f"
+        android:textColorHint="#afb42b"
         android:hint="@string/app_userName"
         android:layout_below="@+id/imageView"
+
         android:layout_alignParentStart="true" />
 
-    <Button
+    <com.beardedhen.androidbootstrap.BootstrapButtonGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="md"
+        app:roundedCorners="true"
+        android:layout_alignBottom="@+id/password"
+        android:layout_alignParentEnd="true">
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonRegister"
+            android:text="@string/app_buttonRegister"
+            android:layout_marginTop="11dp"
+            />
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonLogin"
+            android:text="@string/app_buttonLogin"
+
+            />
+    </com.beardedhen.androidbootstrap.BootstrapButtonGroup>
+
+    <!--<Button
         android:text="@string/app_buttonRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,10 +109,10 @@
       android:layout_height="wrap_content"
       android:text="@string/app_buttonLogin"
       android:id="@+id/buttonLogin"
-        android:layout_below="@+id/buttonRegister"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="11dp"
-        android:layout_alignStart="@+id/buttonRegister" />
+       android:layout_below="@+id/buttonRegister"
+       android:layout_alignParentEnd="true"
+       android:layout_marginTop="11dp"
+       android:layout_alignStart="@+id/buttonRegister" />-->
 
 
 </RelativeLayout>
