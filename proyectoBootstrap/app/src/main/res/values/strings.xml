@@ -10,6 +10,8 @@
     <string name="app_menu_principal">Menú principal</string>
     <string name="title_activity_menu_empleados">MenuEmpleados</string>
     <string name="newEmpleado">Crear nuevo empleado</string>
+    <string name="empleados">Empleados</string>
+    <string name="proyectos">Proyectos</string>
     <string name="empleado_nombre">Nombre</string>
     <string name="empleado_apellidos">Apellidos</string>
     <string name="empleado_movil">Movil</string>
