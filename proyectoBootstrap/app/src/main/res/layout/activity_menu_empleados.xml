@@ -13,12 +13,32 @@
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         style="@style/wrapping_button"
-        android:text="Primary (Disabled)"
         app:bootstrapBrand="primary"
         app:roundedCorners="true"
         app:showOutline="true"
+        android:text="@string/newEmpleado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newEmpleado"
+        android:layout_marginTop="112dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         />
 
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        style="@style/wrapping_button"
+        app:bootstrapBrand="danger"
+        app:roundedCorners="true"
+        app:showOutline="true"
+        android:text="@string/listar_empleados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listarEmpleados"
+        android:layout_marginTop="41dp"
+        android:layout_below="@+id/newEmpleado"
+        android:layout_centerHorizontal="true"
+        />
+<!--
     <Button
         android:text="@string/newEmpleado"
         android:layout_width="wrap_content"
@@ -35,4 +55,5 @@
         android:layout_marginTop="41dp"
         android:layout_below="@+id/newEmpleado"
         android:layout_centerHorizontal="true" />
+        -->
 </RelativeLayout>

@@ -21,6 +21,7 @@ import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.BackendlessDataQuery;
 import com.backendless.persistence.QueryOptions;
 import com.backendless.property.ObjectProperty;
+import com.beardedhen.androidbootstrap.BootstrapButton;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,7 +30,7 @@ import java.util.Map;
 
 public class MenuEmpleados extends AppCompatActivity {
 
-    Button newEmpleado,listarEmpleados;
+    BootstrapButton newEmpleado,listarEmpleados;
     ArrayList<String> mostrar =new ArrayList<>();
 
 
@@ -39,8 +40,8 @@ public class MenuEmpleados extends AppCompatActivity {
         setContentView(R.layout.activity_menu_empleados);
 
 
-        newEmpleado = (Button) findViewById(R.id.newEmpleado);
-        listarEmpleados = (Button) findViewById(R.id.listarEmpleados);
+        newEmpleado = (BootstrapButton) findViewById(R.id.newEmpleado);
+        listarEmpleados = (BootstrapButton) findViewById(R.id.listarEmpleados);
         cargarEmpleados();
 
 

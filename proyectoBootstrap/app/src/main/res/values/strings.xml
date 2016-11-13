@@ -18,6 +18,12 @@
     <string name="empleado_direccion">Dirección</string>
     <string name="empleado_email">Email</string>
     <string name="empleado_guardar">Guardar empleado</string>
+    <string name="listar_empleados">Listar empleados</string>
+    <string name="edit_empleado">Editar empleado</string>
+    <string name="delete_empleado">Borrar empleado</string>
+
+
+
 
 
 </resources>
