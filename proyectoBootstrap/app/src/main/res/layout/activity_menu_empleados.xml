@@ -36,24 +36,17 @@
         android:id="@+id/listarEmpleados"
         android:layout_marginTop="41dp"
         android:layout_below="@+id/newEmpleado"
-        android:layout_centerHorizontal="true"
-        />
-<!--
-    <Button
-        android:text="@string/newEmpleado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/newEmpleado"
-        android:layout_marginTop="112dp"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
-    <Button
-        android:text="Listar empleados"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listarEmpleados"
-        android:layout_marginTop="41dp"
-        android:layout_below="@+id/newEmpleado"
-        android:layout_centerHorizontal="true" />
-        -->
+
+    <LinearLayout
+        style="@style/progress_weight_container">
+        <com.beardedhen.androidbootstrap.BootstrapProgressBar
+            android:id="@+id/barraInfo"
+            style="@style/progress_example"
+            app:animated="true"
+            app:bootstrapBrand="info"
+            app:bootstrapProgress="0"
+            app:striped="true" />
+    </LinearLayout>
+
 </RelativeLayout>

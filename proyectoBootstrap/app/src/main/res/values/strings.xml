@@ -7,8 +7,10 @@
     <string name="app_userPw">Contraseña</string>
     <string name="app_buttonLogin">LOGIN</string>
     <string name="app_buttonRegister">REGISTRARSE</string>
-    <string name="app_menu_principal">Menú principal</string>
-    <string name="title_activity_menu_empleados">MenuEmpleados</string>
+    <string name="app_menu_principal">Menú Principal</string>
+    <string name="app_menu_proyectos">Menú Proyectos</string>
+    <string name="app_menu_empleados">Menú Empleados</string>
+    <string name="app_crear_empleado">Crear Empleado</string>
     <string name="newEmpleado">Crear nuevo empleado</string>
     <string name="empleados">Empleados</string>
     <string name="proyectos">Proyectos</string>
@@ -22,7 +24,6 @@
     <string name="edit_empleado">Editar empleado</string>
     <string name="delete_empleado">Borrar empleado</string>
     <string name="empleado_actualizar">Actualizar empleado</string>
-
 
 
 </resources>

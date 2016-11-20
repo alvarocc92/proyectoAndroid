@@ -22,17 +22,21 @@ import com.backendless.persistence.BackendlessDataQuery;
 import com.backendless.persistence.QueryOptions;
 import com.backendless.property.ObjectProperty;
 import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.BootstrapProgressBar;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class MenuEmpleados extends AppCompatActivity {
 
     BootstrapButton newEmpleado,listarEmpleados;
     ArrayList<String> mostrarEmpleados =new ArrayList<>();
     ArrayList<String> idEmpleados = new ArrayList<>();
+    BootstrapProgressBar bar;
+    private Random random;
 
 
     @Override
@@ -40,10 +44,11 @@ public class MenuEmpleados extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_empleados);
 
-
         newEmpleado = (BootstrapButton) findViewById(R.id.newEmpleado);
         listarEmpleados = (BootstrapButton) findViewById(R.id.listarEmpleados);
+        bar = (BootstrapProgressBar) findViewById(R.id.barraInfo);
 
+        bar.setProgress(0);
         cargarEmpleados();
 
 
@@ -57,11 +62,14 @@ public class MenuEmpleados extends AppCompatActivity {
         listarEmpleados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                while(bar.getProgress()<100){
+                        bar.setProgress(randomProgress(bar.getProgress(), 100));
+                    }
                 Intent listEmpleados = new Intent(MenuEmpleados.this,ListarEmpleados.class);
                 listEmpleados.putExtra("listado",mostrarEmpleados);
                 listEmpleados.putExtra("idEmpleados",idEmpleados);
                 startActivity(listEmpleados);
-            }
+                }
         });
 
     }
@@ -79,16 +87,29 @@ public class MenuEmpleados extends AppCompatActivity {
                     String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
                     mostrarEmpleados.add(nombreCompleto);
                     idEmpleados.add(foundContacts.getData().get(i).getObjectId());
-
                 }
-                // all Empleados instances have been found
             }
             @Override
             public void handleFault( BackendlessFault fault )
             {
-                // an error has occurred, the error code can be retrieved with fault.getCode()
+                Toast.makeText(getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), fault.getCode(), Toast.LENGTH_LONG).show();
             }
         });
 
+    }
+    private int randomProgress(int currentProgress, int maxProgress) {
+
+        if (random == null) {
+            random = new Random();
+        }
+
+        int prog = currentProgress + random.nextInt(5);
+
+        if (prog > maxProgress) {
+            prog -= maxProgress;
+        }
+
+        return prog;
     }
 }

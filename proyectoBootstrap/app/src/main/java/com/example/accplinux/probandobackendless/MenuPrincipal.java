@@ -25,7 +25,6 @@ public class MenuPrincipal extends AppCompatActivity {
             public void onClick(View v) {
                 Intent menuEmpleados = new Intent(MenuPrincipal.this,MenuEmpleados.class);
                 startActivity(menuEmpleados);
-
             }
         });
 
@@ -34,9 +33,7 @@ public class MenuPrincipal extends AppCompatActivity {
             public void onClick(View v) {
                 Intent menuProyectos = new Intent(MenuPrincipal.this,MenuProyectos.class);
                 startActivity(menuProyectos);
-
             }
         });
-
     }
 }

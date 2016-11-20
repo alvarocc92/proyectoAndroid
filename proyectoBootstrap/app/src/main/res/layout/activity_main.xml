@@ -10,7 +10,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/bootstrap_gray_lighter"
-
     tools:context="com.example.accplinux.probandobackendless.MainActivity">
 
     <com.beardedhen.androidbootstrap.AwesomeTextView
@@ -23,6 +22,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         />
+
     <com.beardedhen.androidbootstrap.AwesomeTextView
         style="@style/wrapping_fa_text"
         android:text="@string/app_description"

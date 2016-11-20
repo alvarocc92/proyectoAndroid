@@ -10,8 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
-import com.backendless.BackendlessUser;
-import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 
@@ -35,30 +33,26 @@ public class CrearEmpleado extends AppCompatActivity {
         guardarEmpleado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                guardarEmpleado();
+
+                Empleado empleado = new Empleado();
+
+                empleado.setNombre(nombre.getText().toString());
+                empleado.setApellidos(apellidos.getText().toString());
+                empleado.setMovil(movil.getText().toString());
+                empleado.setDireccion(direccion.getText().toString());
+                empleado.setEmail(email.getText().toString());
+
+                guardarEmpleado(empleado);
             }
         });
     }
-    public void guardarEmpleado() {
+    public void guardarEmpleado(Empleado empleado) {
 
-        final Empleado empleado = new Empleado();
-
-        empleado.setNombre(nombre.getText().toString());
-        empleado.setApellidos(apellidos.getText().toString());
-        empleado.setMovil(movil.getText().toString());
-        empleado.setDireccion(direccion.getText().toString());
-        empleado.setEmail(email.getText().toString());
-        String nombreCompleto = empleado.getNombre()+" "+empleado.getApellidos();
-        empleado.setNombreCompleto(nombreCompleto);
-        System.out.println("Antes de guardar");
-
-        Backendless.Persistence.save(new Empleado(empleado.getNombre(), empleado.getApellidos(), empleado.getEmail(), empleado.getMovil(), empleado.getDireccion(),empleado.getNombreCompleto(),empleado.getObjectId()), new BackendlessCallback<Empleado>() {
+        Backendless.Persistence.save(new Empleado(empleado.getNombre(), empleado.getApellidos(), empleado.getEmail(), empleado.getMovil(), empleado.getDireccion(),empleado.getObjectId()), new BackendlessCallback<Empleado>() {
             @Override
             public void handleResponse(Empleado empleado) {
                 Log.i("Empleado", "Nuevo empleado registrado" + empleado.getEmail());
                 Log.i("Empleado", "id del empleado: " + empleado.getObjectId());
-                Log.i("Empleado", "nombre del empleado: " + empleado.getNombreCompleto());
-
 
                 Toast.makeText(getApplicationContext(), "Empleado registrado.", Toast.LENGTH_LONG).show();
                 Intent menuEmpleados = new Intent(CrearEmpleado.this, MenuEmpleados.class);
@@ -66,8 +60,8 @@ public class CrearEmpleado extends AppCompatActivity {
             }
             @Override
             public void handleFault(BackendlessFault backendlessFault) {
-                System.out.println("Server reported an error - " + backendlessFault.getMessage());
                 Toast.makeText(getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
             }
         });
     }

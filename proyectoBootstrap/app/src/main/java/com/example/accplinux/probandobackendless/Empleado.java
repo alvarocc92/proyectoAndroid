@@ -13,20 +13,20 @@ public class Empleado implements Serializable{
     private String email;
     private String movil;
     private String direccion;
-    private String nombreCompleto;
     private String objectId;
 
-    public Empleado()
-    {}
+    public Empleado(){
 
-    public Empleado( String nombre, String apellidos,String email,String movil,String direccion,String nombreCompleto,String objectId)
+    }
+
+
+    public Empleado( String nombre, String apellidos,String email,String movil,String direccion,String objectId)
     {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
         this.movil = movil;
         this.direccion = direccion;
-        this.nombreCompleto = nombreCompleto;
         this.objectId=objectId;
 
     }
@@ -70,14 +70,6 @@ public class Empleado implements Serializable{
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public String getNombreCompleto() {
-        return getNombre()+getApellidos();
-    }
-
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = getNombre()+" "+getApellidos();
     }
 
     public String getObjectId() {

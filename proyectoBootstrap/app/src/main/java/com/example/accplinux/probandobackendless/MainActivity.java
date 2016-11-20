@@ -29,12 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     BootstrapButton bR,bL;
     EditText ed1, ed2;
-    TextView tx1;
-    int counter = 3;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+
     private GoogleApiClient client;
 
 
@@ -42,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //TypefaceProvider.registerDefaultIconSets();
 
         Backendless.initApp(this, BackendSettings.APP_ID, BackendSettings.SECRET_KEY, BackendSettings.VERSION);
 
@@ -64,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
@@ -80,34 +72,26 @@ public class MainActivity extends AppCompatActivity {
         AsyncCallback<BackendlessUser> callback = new AsyncCallback<BackendlessUser>() {
             @Override
             public void handleResponse(BackendlessUser registeredUser) {
-                System.out.println("User has been registered - " + registeredUser.getObjectId());
 
                 Backendless.Persistence.save(new Comment("Se ha producido un nuevo registro : " + user.getEmail() + ".", user.getEmail()), new BackendlessCallback<Comment>() {
                     @Override
                     public void handleResponse(Comment comment) {
                         Log.i("Comments", "Got new comment from " + user.getEmail());
                         Toast.makeText(getApplicationContext(), "Registrado con éxito, pulsa 'login'.", Toast.LENGTH_LONG).show();
-
                     }
                 });
-
             }
-
             @Override
             public void handleFault(BackendlessFault backendlessFault) {
-                System.out.println("Server reported an error - " + backendlessFault.getMessage());
                 Toast.makeText(getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
             }
         };
-
-        //user.setProperty( "phoneNumber", "666-666-666" );
-
         Backendless.UserService.register(user, callback);
-
-
     }
 
     public void loginUserAsync() {
+
         final BackendlessUser user = new BackendlessUser();
 
         user.setEmail(ed1.getText().toString());
@@ -137,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         Backendless.UserService.login(user.getEmail(), user.getPassword(), callback);
-
     }
 
     /**
