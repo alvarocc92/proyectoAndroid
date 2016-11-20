@@ -48,13 +48,21 @@ public class CrearEmpleado extends AppCompatActivity {
         empleado.setMovil(movil.getText().toString());
         empleado.setDireccion(direccion.getText().toString());
         empleado.setEmail(email.getText().toString());
+        String nombreCompleto = empleado.getNombre()+" "+empleado.getApellidos();
+        empleado.setNombreCompleto(nombreCompleto);
         System.out.println("Antes de guardar");
 
-        Backendless.Persistence.save(new Empleado(empleado.getNombre(), empleado.getApellidos(), empleado.getEmail(), empleado.getMovil(), empleado.getDireccion()), new BackendlessCallback<Empleado>() {
+        Backendless.Persistence.save(new Empleado(empleado.getNombre(), empleado.getApellidos(), empleado.getEmail(), empleado.getMovil(), empleado.getDireccion(),empleado.getNombreCompleto(),empleado.getObjectId()), new BackendlessCallback<Empleado>() {
             @Override
             public void handleResponse(Empleado empleado) {
                 Log.i("Empleado", "Nuevo empleado registrado" + empleado.getEmail());
+                Log.i("Empleado", "id del empleado: " + empleado.getObjectId());
+                Log.i("Empleado", "nombre del empleado: " + empleado.getNombreCompleto());
+
+
                 Toast.makeText(getApplicationContext(), "Empleado registrado.", Toast.LENGTH_LONG).show();
+                Intent menuEmpleados = new Intent(CrearEmpleado.this, MenuEmpleados.class);
+                startActivity(menuEmpleados);
             }
             @Override
             public void handleFault(BackendlessFault backendlessFault) {
@@ -62,7 +70,5 @@ public class CrearEmpleado extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        Intent menuEmpleados = new Intent(CrearEmpleado.this, MenuEmpleados.class);
-        startActivity(menuEmpleados);
     }
 }

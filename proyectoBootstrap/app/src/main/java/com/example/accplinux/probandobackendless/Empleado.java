@@ -1,27 +1,33 @@
 package com.example.accplinux.probandobackendless;
 
+import java.io.Serializable;
+
 /**
  * Created by accplinux on 5/11/16.
  */
 
-public class Empleado {
+public class Empleado implements Serializable{
 
     private String nombre;
     private String apellidos;
     private String email;
     private String movil;
     private String direccion;
+    private String nombreCompleto;
+    private String objectId;
 
     public Empleado()
     {}
 
-    public Empleado( String nombre, String apellidos,String email,String movil,String direccion )
+    public Empleado( String nombre, String apellidos,String email,String movil,String direccion,String nombreCompleto,String objectId)
     {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
         this.movil = movil;
         this.direccion = direccion;
+        this.nombreCompleto = nombreCompleto;
+        this.objectId=objectId;
 
     }
 
@@ -66,5 +72,20 @@ public class Empleado {
         this.direccion = direccion;
     }
 
+    public String getNombreCompleto() {
+        return getNombre()+getApellidos();
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = getNombre()+" "+getApellidos();
+    }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
 }

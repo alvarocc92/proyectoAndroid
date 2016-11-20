@@ -31,7 +31,8 @@ import java.util.Map;
 public class MenuEmpleados extends AppCompatActivity {
 
     BootstrapButton newEmpleado,listarEmpleados;
-    ArrayList<String> mostrar =new ArrayList<>();
+    ArrayList<String> mostrarEmpleados =new ArrayList<>();
+    ArrayList<String> idEmpleados = new ArrayList<>();
 
 
     @Override
@@ -42,6 +43,7 @@ public class MenuEmpleados extends AppCompatActivity {
 
         newEmpleado = (BootstrapButton) findViewById(R.id.newEmpleado);
         listarEmpleados = (BootstrapButton) findViewById(R.id.listarEmpleados);
+
         cargarEmpleados();
 
 
@@ -56,7 +58,8 @@ public class MenuEmpleados extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent listEmpleados = new Intent(MenuEmpleados.this,ListarEmpleados.class);
-                listEmpleados.putExtra("listado",mostrar);
+                listEmpleados.putExtra("listado",mostrarEmpleados);
+                listEmpleados.putExtra("idEmpleados",idEmpleados);
                 startActivity(listEmpleados);
             }
         });
@@ -68,13 +71,15 @@ public class MenuEmpleados extends AppCompatActivity {
     }
 
     public void cargarEmpleados() {
-        Backendless.Persistence.of( Empleado.class).find( new AsyncCallback<BackendlessCollection<Empleado>>(){
+        Backendless.Persistence.of(Empleado.class).find( new AsyncCallback<BackendlessCollection<Empleado>>(){
             @Override
             public void handleResponse( BackendlessCollection<Empleado> foundContacts )
             {
                 for(int i =0 ; i<foundContacts.getTotalObjects();i++){
                     String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
-                    mostrar.add(nombreCompleto);
+                    mostrarEmpleados.add(nombreCompleto);
+                    idEmpleados.add(foundContacts.getData().get(i).getObjectId());
+
                 }
                 // all Empleados instances have been found
             }

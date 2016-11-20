@@ -1,5 +1,6 @@
 package com.example.accplinux.probandobackendless;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -12,17 +13,20 @@ import java.util.List;
 public class ListarEmpleados extends AppCompatActivity {
     ListView tablaEmpleados;
     ArrayAdapter<String> adaptador;
+    ArrayList<String> list = new ArrayList<>();
+    ArrayList<String> idEmpleados = new ArrayList<>();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ArrayList<String> list = new ArrayList<String>();
         setContentView(R.layout.activity_listar_empleados);
 
         list = getIntent().getExtras().getStringArrayList("listado");
+        idEmpleados = getIntent().getExtras().getStringArrayList("idEmpleados");
 
-        CustomAdapter adapter = new CustomAdapter(list, this);
+        CustomAdapter adapter = new CustomAdapter(list,idEmpleados, this);
 
         ListView lView = (ListView)findViewById(R.id.tablaEmpleados);
         lView.setAdapter(adapter);
