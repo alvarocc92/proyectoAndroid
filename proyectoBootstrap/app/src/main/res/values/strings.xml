@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">ProbandoBackEndless</string>
     <string name="app_login">RRHH MODULE</string>
     <string name="app_main">Login</string>
@@ -12,18 +13,35 @@
     <string name="app_menu_empleados">Menú Empleados</string>
     <string name="app_crear_empleado">Crear Empleado</string>
     <string name="newEmpleado">Crear nuevo empleado</string>
+    <string name="newProyecto">Crear nuevo proyecto</string>
     <string name="empleados">Empleados</string>
     <string name="proyectos">Proyectos</string>
     <string name="empleado_nombre">Nombre</string>
+    <string name="proyecto_nombre">Nombre del proyecto</string>
     <string name="empleado_apellidos">Apellidos</string>
     <string name="empleado_movil">Movil</string>
     <string name="empleado_direccion">Dirección</string>
     <string name="empleado_email">Email</string>
     <string name="empleado_guardar">Guardar empleado</string>
+    <string name="proyecto_guardar">Guardar proyecto</string>
     <string name="listar_empleados">Listar empleados</string>
+    <string name="listar_Proyectos">Listar proyectos</string>
     <string name="edit_empleado">Editar empleado</string>
     <string name="delete_empleado">Borrar empleado</string>
     <string name="empleado_actualizar">Actualizar empleado</string>
+    <string name="proyectos_finalizados">Proyectos finalizados</string>
+    <string name="jefe_proyecto">Jefe de proyecto</string>
+    <string name="presupuesto">Presupuesto</string>
+    <string name="cliente">Cliente</string>
+    <string name="fecha_inicio">Fecha de inicio</string>
+    <string name="fecha_fin">Fecha de fin</string>
+    <string name="finalizado">Finalizado</string>
+
+
+
+
+
+
 
 
 </resources>

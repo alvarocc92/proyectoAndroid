@@ -6,24 +6,24 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:label="@string/app_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MenuPrincipal"
             android:label="@string/app_menu_principal">
             <action android:name="android.intent.action.MAIN" />
+
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
 
@@ -31,35 +31,42 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".MenuProyectos"
+        <activity
+            android:name=".MenuProyectos"
             android:label="@string/app_menu_proyectos">
             <action android:name="android.intent.action.MAIN" />
+
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
-
-        <activity android:name=".MenuEmpleados"
+        <activity
+            android:name=".MenuEmpleados"
             android:label="@string/app_menu_empleados">
             <action android:name="android.intent.action.MAIN" />
+
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
-
-        <activity android:name=".CrearEmpleado"
+        <activity
+            android:name=".CrearEmpleado"
             android:label="@string/app_crear_empleado">
             <action android:name="android.intent.action.MAIN" />
+
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
-
-        <activity android:name=".ListarEmpleados"
+        <activity
+            android:name=".ListarEmpleados"
             android:label="@string/empleados">
             <action android:name="android.intent.action.MAIN" />
+
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
-
-        <activity android:name=".EditEmpleado"
+        <activity
+            android:name=".EditEmpleado"
             android:label="@string/edit_empleado">
             <action android:name="android.intent.action.MAIN" />
+
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
-
+        <activity android:name=".NuevoProyecto"></activity>
     </application>
+
 </manifest>

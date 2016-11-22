@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_menu_proyectos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,13 +11,36 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.accplinux.probandobackendless.MenuProyectos">
 
-    <TextView
-        android:text="hola proyectos"
-        android:layout_width="wrap_content"
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/listarProyectos"
+        android:text="@string/listar_Proyectos"
+        android:layout_marginTop="81dp"
+        android:layout_below="@+id/newProyecto"
+        android:layout_alignParentStart="true"
+        app:bootstrapBrand="info"
+        app:roundedCorners="true"/>
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newProyecto"
+        android:text="@string/newProyecto"
+        app:bootstrapBrand="success"
+        android:layout_marginTop="47dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="14dp"
-        android:id="@+id/textView3" />
+        app:roundedCorners="true"/>
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/proyectosFinalizados"
+        app:bootstrapBrand="danger"
+        android:text="@string/proyectos_finalizados"
+        android:layout_marginTop="82dp"
+        android:layout_below="@+id/listarProyectos"
+        android:layout_alignParentStart="true"
+        app:roundedCorners="true"/>
 </RelativeLayout>
