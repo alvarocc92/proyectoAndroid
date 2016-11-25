@@ -15,15 +15,14 @@ public class Proyecto implements Serializable{
     private String cliente;
     private Date fechaInicio;
     private Date fechaFin;
-    private Boolean finalizado;
+    private boolean finalizado;
     private String objectId;
-
 
     public Proyecto(){
 
     }
 
-    public Proyecto( String nombre, String jefeProyecto, Long presupuesto, String cliente, Date fechaInicio,Date fechaFin, Boolean finalizado)
+    public Proyecto( String nombre, String jefeProyecto,Long presupuesto,String cliente,Date fechaInicio,Date fechaFin, Boolean finalizado)
     {
         this.nombre = nombre;
         this.jefeProyecto = jefeProyecto;
@@ -83,11 +82,11 @@ public class Proyecto implements Serializable{
         this.fechaFin = fechaFin;
     }
 
-    public Boolean getFinalizado() {
+    public boolean isFinalizado() {
         return finalizado;
     }
 
-    public void setFinalizado(Boolean finalizado) {
+    public void setFinalizado(boolean finalizado) {
         this.finalizado = finalizado;
     }
 

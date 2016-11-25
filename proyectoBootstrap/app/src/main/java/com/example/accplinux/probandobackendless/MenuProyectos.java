@@ -11,14 +11,18 @@ import com.backendless.BackendlessCollection;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.beardedhen.androidbootstrap.BootstrapButton;
+import java.io.Serializable;
+
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuProyectos extends AppCompatActivity {
 
     BootstrapButton listarProyectos,newProyecto,antiguosProyectos;
-    ArrayList<String> mostrarProyectos =new ArrayList<>();
-    ArrayList<String> idProyectos = new ArrayList<>();
+    //ArrayList<String> mostrarProyectos =new ArrayList<>();
+    //ArrayList<String> idProyectos = new ArrayList<>();
+    List<Proyecto> listProyectos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +33,24 @@ public class MenuProyectos extends AppCompatActivity {
         newProyecto = (BootstrapButton) findViewById(R.id.newProyecto);
         antiguosProyectos = (BootstrapButton) findViewById(R.id.proyectosFinalizados);
 
-       // cargarProyectos();
+        cargarProyectos();
 
         newProyecto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 crearNuevoProyecto();
+            }
+        });
+
+        listarProyectos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* while(bar.getProgress()<100){
+                    bar.setProgress(randomProgress(bar.getProgress(), 100));
+                }*/
+                Intent activityListarProyectos = new Intent(MenuProyectos.this,ListarProyectos.class);
+                activityListarProyectos.putExtra("listProyectos", (Serializable) listProyectos);
+                startActivity(activityListarProyectos);
             }
         });
     }
@@ -51,9 +67,10 @@ public class MenuProyectos extends AppCompatActivity {
             public void handleResponse( BackendlessCollection<Proyecto> foundContacts )
             {
                 for(int i =0 ; i<foundContacts.getTotalObjects();i++){
-                    String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i);
-                    mostrarProyectos.add(nombreCompleto);
-                    idProyectos.add(nombreCompleto);
+                    listProyectos.add(foundContacts.getData().get(i));
+                     // String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i);
+                    //  mostrarProyectos.add(nombreCompleto);
+                   //  idProyectos.add(nombreCompleto);
                 }
             }
             @Override

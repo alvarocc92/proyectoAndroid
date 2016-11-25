@@ -57,11 +57,11 @@ public class NuevoProyecto extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                guardarEmpleado(proyecto);
+                guardarProyecto(proyecto);
             }
         });
     }
-    public void guardarEmpleado(Proyecto proyecto) {
+    public void guardarProyecto(Proyecto proyecto) {
 
         Backendless.Persistence.save(new Proyecto(proyecto.getNombre(), proyecto.getJefeProyecto(), proyecto.getPresupuesto(), proyecto.getCliente(), proyecto.getFechaInicio(),proyecto.getFechaFin(),false), new BackendlessCallback<Proyecto>() {
             @Override

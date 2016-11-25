@@ -66,7 +66,25 @@
 
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
-        <activity android:name=".NuevoProyecto"></activity>
+        <activity android:name=".NuevoProyecto"
+            android:label="@string/crear_proyecto">
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+
+        <activity android:name=".ListarProyectos"
+            android:label="@string/proyecto_activos">
+            <action android:name="android.intent.action.MAIN" />
+
+           <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".EditProyecto"
+                  android:label="@string/editar_proyecto">
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
     </application>
 
 </manifest>

@@ -36,10 +36,9 @@
     <string name="fecha_inicio">Fecha de inicio</string>
     <string name="fecha_fin">Fecha de fin</string>
     <string name="finalizado">Finalizado</string>
-
-
-
-
+    <string name="proyecto_activos">Lista de proyectos</string>
+    <string name="editar_proyecto">Editar proyecto</string>
+    <string name="crear_proyecto">Crear proyecto</string>
 
 
 

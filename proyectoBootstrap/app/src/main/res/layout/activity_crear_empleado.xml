@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/bootstrap_gray_lighter"
     tools:context="com.example.accplinux.probandobackendless.CrearEmpleado">
 
     <EditText

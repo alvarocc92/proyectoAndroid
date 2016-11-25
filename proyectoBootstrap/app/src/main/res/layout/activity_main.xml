@@ -15,13 +15,12 @@
     <com.beardedhen.androidbootstrap.AwesomeTextView
         android:id="@+id/app_titulo"
         style="@style/wrapping_fa_text"
-        android:textSize="35dp"
+        android:textSize="35sp"
         app:bootstrapBrand="primary"
         app:bootstrapText="@string/app_login"
         tools:ignore="SpUsage"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_centerHorizontal="true" />
 
     <com.beardedhen.androidbootstrap.AwesomeTextView
         style="@style/wrapping_fa_text"
@@ -30,16 +29,17 @@
         app:bootstrapBrand="success"
         android:layout_below="@+id/app_titulo"
         android:layout_centerHorizontal="true"
-        android:textSize="30dp" />
-
+        android:textSize="30sp" />
 
     <ImageView
+        android:background="@color/bootstrap_brand_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:src="@drawable/consultoria_rrhh"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/app_login" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -51,12 +51,12 @@
         android:textColorHint="#afb42b"
         android:layout_marginTop="46dp"
         android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:inputType="textPassword"
-        android:layout_alignEnd="@+id/usuario" />
+        android:layout_alignEnd="@+id/usuario"
+        android:layout_alignParentStart="true"/>
 
     <EditText
+        android:textColorHighlight="#ff7eff15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
@@ -65,7 +65,6 @@
         android:textColorHint="#afb42b"
         android:hint="@string/app_userName"
         android:layout_below="@+id/imageView"
-
         android:layout_alignParentStart="true" />
 
     <com.beardedhen.androidbootstrap.BootstrapButtonGroup
@@ -90,29 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/buttonLogin"
-            android:text="@string/app_buttonLogin"
-
-            />
+            android:text="@string/app_buttonLogin" />
     </com.beardedhen.androidbootstrap.BootstrapButtonGroup>
-
-    <!--<Button
-        android:text="@string/app_buttonRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonRegister"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="11dp" />
-
-    <Button
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/app_buttonLogin"
-      android:id="@+id/buttonLogin"
-       android:layout_below="@+id/buttonRegister"
-       android:layout_alignParentEnd="true"
-       android:layout_marginTop="11dp"
-       android:layout_alignStart="@+id/buttonRegister" />-->
-
 
 </RelativeLayout>

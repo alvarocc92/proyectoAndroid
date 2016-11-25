@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void handleFault(BackendlessFault backendlessFault) {
-                System.out.println("Server reported an error - " + backendlessFault.getMessage());
                 Toast.makeText(getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
             }
         };
         Backendless.UserService.login(user.getEmail(), user.getPassword(), callback);
