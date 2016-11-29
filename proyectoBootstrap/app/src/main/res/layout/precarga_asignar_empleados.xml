@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
     <TextView
-        android:id="@+id/list_item_proyecto"
+        android:id="@+id/list_item_empleado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -12,27 +12,18 @@
         android:paddingLeft="8dp"
         android:textSize="18sp"
         android:textStyle="bold" />
+
     <com.beardedhen.androidbootstrap.BootstrapButton
-        app:bootstrapBrand="primary"
+        app:showOutline="true"
         app:roundedCorners="true"
-        android:id="@+id/editProyecto"
+        android:id="@+id/asignar_empleado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignEnd="@+id/list_item_proyecto"
+        android:layout_alignEnd="@+id/list_item_empleado"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:drawableLeft="@android:drawable/ic_menu_edit"
+        android:drawableLeft="@android:drawable/ic_input_add"
         />
-    <com.beardedhen.androidbootstrap.BootstrapButton
-        app:bootstrapBrand="regular"
-        app:roundedCorners="true"
-        android:id="@+id/asignarProyectoEmpleado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/editProyecto"
-        android:layout_centerVertical="true"
-        android:drawableLeft="@android:drawable/btn_star"
-        android:layout_marginRight="10dp"/>
 
 </RelativeLayout>

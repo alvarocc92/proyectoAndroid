@@ -20,8 +20,6 @@ import java.util.List;
 public class MenuProyectos extends AppCompatActivity {
 
     BootstrapButton listarProyectos,newProyecto,antiguosProyectos;
-    //ArrayList<String> mostrarProyectos =new ArrayList<>();
-    //ArrayList<String> idProyectos = new ArrayList<>();
     List<Proyecto> listProyectos = new ArrayList<>();
 
     @Override
@@ -53,6 +51,7 @@ public class MenuProyectos extends AppCompatActivity {
                 startActivity(activityListarProyectos);
             }
         });
+
     }
 
     public void crearNuevoProyecto(){

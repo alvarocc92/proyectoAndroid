@@ -1,7 +1,9 @@
 package com.example.accplinux.probandobackendless;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by accplinux on 22/11/16.
@@ -17,6 +19,7 @@ public class Proyecto implements Serializable{
     private Date fechaFin;
     private boolean finalizado;
     private String objectId;
+    private List<Empleado> empleadoAsignados = new ArrayList<>();
 
     public Proyecto(){
 
@@ -96,5 +99,13 @@ public class Proyecto implements Serializable{
 
     public void setObjectId(String objectId) {
         this.objectId = objectId;
+    }
+
+    public List<Empleado> getEmpleadoAsignados() {
+        return empleadoAsignados;
+    }
+
+    public void setEmpleadoAsignados(List<Empleado> empleadoAsignados) {
+        this.empleadoAsignados = empleadoAsignados;
     }
 }
