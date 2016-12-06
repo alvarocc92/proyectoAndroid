@@ -22,7 +22,7 @@ public class ListarProyectos extends AppCompatActivity {
 
         //idEmpleados = getIntent().getExtras().getStringArrayList("idEmpleados");
 
-        CustomAdapterProyectos customProyectos = new CustomAdapterProyectos(listProyectos, this);
+        CustomAdapterProyectos customProyectos = new CustomAdapterProyectos(listProyectos, ListarProyectos.this);
 
         ListView lView = (ListView)findViewById(R.id.activity_listar_proyectos);
         lView.setAdapter(customProyectos);

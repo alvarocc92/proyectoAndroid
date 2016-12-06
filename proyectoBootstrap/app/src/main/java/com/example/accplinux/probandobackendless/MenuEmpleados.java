@@ -1,6 +1,9 @@
 package com.example.accplinux.probandobackendless;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,24 +36,16 @@ import java.util.Random;
 public class MenuEmpleados extends AppCompatActivity {
 
     BootstrapButton newEmpleado,listarEmpleados;
-    ArrayList<String> mostrarEmpleados =new ArrayList<>();
-    ArrayList<String> idEmpleados = new ArrayList<>();
-    BootstrapProgressBar bar;
-    private Random random;
-
+    ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_empleados);
 
         newEmpleado = (BootstrapButton) findViewById(R.id.newEmpleado);
         listarEmpleados = (BootstrapButton) findViewById(R.id.listarEmpleados);
-        bar = (BootstrapProgressBar) findViewById(R.id.barraInfo);
-
-        bar.setProgress(0);
-        cargarEmpleados();
-
 
         newEmpleado.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,29 +55,117 @@ public class MenuEmpleados extends AppCompatActivity {
         });
 
         listarEmpleados.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                while(bar.getProgress()<100){
-                        bar.setProgress(randomProgress(bar.getProgress(), 100));
-                    }
-                Intent listEmpleados = new Intent(MenuEmpleados.this,ListarEmpleados.class);
-                listEmpleados.putExtra("listado",mostrarEmpleados);
-                listEmpleados.putExtra("idEmpleados",idEmpleados);
-                startActivity(listEmpleados);
-                }
+
+                pDialog = new ProgressDialog(MenuEmpleados.this);
+                pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pDialog.setMessage("Cargando empleados...");
+                pDialog.setCancelable(true);
+                pDialog.setMax(100);
+
+                CargarEmpleados cargarEmpleados = new CargarEmpleados();
+                cargarEmpleados.execute();
+
+            }
         });
 
     }
+
     public void registrarEmpleado(){
         Intent crearEmpleado = new Intent(MenuEmpleados.this, CrearEmpleado.class);
         startActivity(crearEmpleado);
     }
 
-    public void cargarEmpleados() {
+    private class CargarEmpleados extends AsyncTask<Void, Integer, Boolean> {
+
+        ArrayList<String> mostrarEmpleados = new ArrayList<>();
+        ArrayList<String> idEmpleados = new ArrayList<>();
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+
+
+            final boolean[] acabado = {false};
+
+            Backendless.Persistence.of(Empleado.class).find( new AsyncCallback<BackendlessCollection<Empleado>>(){
+                @Override
+                public void handleResponse( BackendlessCollection<Empleado> foundContacts )
+                {
+
+                    for(int i =0 ; i<foundContacts.getTotalObjects();i++){
+
+                        String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
+                        mostrarEmpleados.add(nombreCompleto);
+                        idEmpleados.add(foundContacts.getData().get(i).getObjectId());
+                    }
+
+                    acabado[0] = true;
+                    onPostExecute(acabado[0]);
+                }
+                @Override
+                public void handleFault( BackendlessFault fault )
+                {
+                    Toast.makeText(MenuEmpleados.this, fault.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MenuEmpleados.this, fault.getCode(), Toast.LENGTH_LONG).show();
+                }
+            });
+            return acabado[0];
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+
+            int progreso = values[0].intValue();
+            pDialog.setProgress(progreso);
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    CargarEmpleados.this.cancel(true);
+                }
+            });
+
+            pDialog.setProgress(0);
+            pDialog.show(); //sirve para mostrar el dialogo
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if(result)
+            {
+                pDialog.dismiss();
+
+                Toast.makeText(MenuEmpleados.this, "Empleados cargados." ,Toast.LENGTH_SHORT).show();
+
+                Intent listEmpleados = new Intent(MenuEmpleados.this,ListarEmpleados.class);
+                listEmpleados.putExtra("listado",mostrarEmpleados);
+                listEmpleados.putExtra("idEmpleados",idEmpleados);
+                startActivity(listEmpleados);
+
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            Toast.makeText(MenuEmpleados.this, "Tarea cancelada!", Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+
+
+    /*public void cargarEmpleados() {
         Backendless.Persistence.of(Empleado.class).find( new AsyncCallback<BackendlessCollection<Empleado>>(){
             @Override
             public void handleResponse( BackendlessCollection<Empleado> foundContacts )
             {
+                int numEmpleados = foundContacts.getTotalObjects();
                 for(int i =0 ; i<foundContacts.getTotalObjects();i++){
                     String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
                     mostrarEmpleados.add(nombreCompleto);
@@ -111,5 +194,19 @@ public class MenuEmpleados extends AppCompatActivity {
         }
 
         return prog;
-    }
-}
+    }*/
+
+
+        /*listarEmpleados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(bar.getProgress()==100){
+                    Intent listEmpleados = new Intent(MenuEmpleados.this,ListarEmpleados.class);
+                    listEmpleados.putExtra("listado",mostrarEmpleados);
+                    listEmpleados.putExtra("idEmpleados",idEmpleados);
+                    startActivity(listEmpleados);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Cargando empleados...", Toast.LENGTH_LONG).show();
+                }
+                }
+        });*/
