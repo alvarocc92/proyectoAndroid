@@ -4,9 +4,15 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,16 +33,23 @@ import com.backendless.property.ObjectProperty;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapProgressBar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class MenuEmpleados extends AppCompatActivity {
+public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener {
 
+    Toolbar toolbar;
     BootstrapButton newEmpleado,listarEmpleados;
     ProgressDialog pDialog;
+
+    ArrayList<String> mostrarEmpleados = new ArrayList<>();
+    ArrayList<String> idEmpleados = new ArrayList<>();
+
+    //List<Empleado> listBusqueadaEmpleados = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +59,12 @@ public class MenuEmpleados extends AppCompatActivity {
 
         newEmpleado = (BootstrapButton) findViewById(R.id.newEmpleado);
         listarEmpleados = (BootstrapButton) findViewById(R.id.listarEmpleados);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         newEmpleado.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +89,6 @@ public class MenuEmpleados extends AppCompatActivity {
 
             }
         });
-
     }
 
     public void registrarEmpleado(){
@@ -78,10 +96,100 @@ public class MenuEmpleados extends AppCompatActivity {
         startActivity(crearEmpleado);
     }
 
-    private class CargarEmpleados extends AsyncTask<Void, Integer, Boolean> {
 
-        ArrayList<String> mostrarEmpleados = new ArrayList<>();
-        ArrayList<String> idEmpleados = new ArrayList<>();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_actions, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.buscar);
+
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(this);
+        MenuItemCompat.setOnActionExpandListener(searchItem, this);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.buscar:
+                return true;
+            case R.id.miCuenta:
+                Intent mi_cuenta = new Intent(MenuEmpleados.this, MiCuenta.class);
+                startActivity(mi_cuenta);
+                return true;
+            case R.id.logout:
+                Backendless.UserService.logout( new AsyncCallback<Void>()
+                {
+                    public void handleResponse( Void response )
+                    {
+                        Toast.makeText(getApplicationContext(), "Sesión finalizada.", Toast.LENGTH_SHORT).show();
+                        Intent login = new Intent(MenuEmpleados.this,MainActivity.class);
+                        startActivity(login);
+                    }
+                    public void handleFault( BackendlessFault fault )
+                    {
+                        Toast.makeText(getApplicationContext(), fault.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public boolean onQueryTextChange(String arg0) {
+        return false;
+    }
+    public boolean onQueryTextSubmit(String arg0) {
+
+        String whereClause = "nombre LIKE '%"+arg0+"%' OR  apellidos LIKE '%"+arg0+"%'";
+        BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+        dataQuery.setWhereClause( whereClause );
+
+        Backendless.Persistence.of( Empleado.class ).find( dataQuery,
+                new AsyncCallback<BackendlessCollection<Empleado>>(){
+                    @Override
+                    public void handleResponse( BackendlessCollection<Empleado> foundContacts )
+                    {
+                        if(foundContacts.getTotalObjects()>0){
+
+                            for(int i = 0; i<foundContacts.getTotalObjects(); i++){
+
+                                String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
+                                mostrarEmpleados.add(nombreCompleto);
+                                idEmpleados.add(foundContacts.getData().get(i).getObjectId());
+                                //listBusqueadaEmpleados.add(foundContacts.getData().get(i));
+                            }
+                            Intent listEmpleados = new Intent(MenuEmpleados.this,ListarEmpleados.class);
+                            listEmpleados.putExtra("listado",mostrarEmpleados);
+                            listEmpleados.putExtra("idEmpleados",idEmpleados);
+                            startActivity(listEmpleados);
+                        }else{
+                            Toast.makeText(MenuEmpleados.this, "No hay empleados con esa búsqueda.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    @Override
+                    public void handleFault( BackendlessFault fault )
+                    {
+                        Toast.makeText(MenuEmpleados.this, fault.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(MenuEmpleados.this, fault.getCode(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        return false;
+    }
+
+    public boolean onMenuItemActionCollapse(MenuItem arg0) {
+        return true;
+    }
+    public boolean onMenuItemActionExpand(MenuItem arg0) {
+        return true;
+    }
+
+    private class CargarEmpleados extends AsyncTask<Void, Integer, Boolean> {
 
         @Override
         protected Boolean doInBackground(Void... params) {
@@ -157,6 +265,7 @@ public class MenuEmpleados extends AppCompatActivity {
             Toast.makeText(MenuEmpleados.this, "Tarea cancelada!", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
 
 

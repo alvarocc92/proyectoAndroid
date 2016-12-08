@@ -40,7 +40,11 @@
         </activity>
         <activity
             android:name=".MenuEmpleados"
-            android:label="@string/app_menu_empleados">
+            android:label="@string/app_menu_empleados"
+            android:parentActivityName=".MenuPrincipal">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuPrincipal"/>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />
@@ -87,7 +91,20 @@
 
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
-        <activity android:name=".AsignarProyectoEmpleado"></activity>
+        <activity
+            android:name=".AsignarProyectoEmpleado"
+            android:label="@string/asignar_proyecto">
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+
+        <activity
+            android:name=".MiCuenta"
+            android:label="@string/mi_cuenta">
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
     </application>
 
 </manifest>

@@ -12,6 +12,11 @@
     android:background="@color/bootstrap_gray_lighter"
     tools:context="com.example.accplinux.probandobackendless.MenuEmpleados">
 
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar"
+        ></include>
+
     <com.beardedhen.androidbootstrap.BootstrapButton
         style="@style/wrapping_button"
         app:bootstrapBrand="primary"
@@ -39,15 +44,5 @@
         android:layout_below="@+id/newEmpleado"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
-        style="@style/progress_weight_container">
-        <com.beardedhen.androidbootstrap.BootstrapProgressBar
-            android:id="@+id/barraInfo"
-            style="@style/progress_example"
-            app:animated="true"
-            app:bootstrapBrand="info"
-            app:bootstrapProgress="0"
-            app:striped="true" />
-    </LinearLayout>
 
 </RelativeLayout>

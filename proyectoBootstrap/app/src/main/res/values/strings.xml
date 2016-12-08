@@ -41,6 +41,9 @@
     <string name="crear_proyecto">Crear proyecto</string>
     <string name="asignar_proyecto">Asignar proyecto a empleado</string>
     <string name="asignar_empleado">Asignar empleado</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="mi_cuenta">Mi cuenta</string>
+    <string name="buscar">Buscar</string>
 
 
 </resources>
