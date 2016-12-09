@@ -140,10 +140,11 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
                 return super.onOptionsItemSelected(item);
         }
     }
-
+    @Override
     public boolean onQueryTextChange(String arg0) {
         return false;
     }
+    @Override
     public boolean onQueryTextSubmit(String arg0) {
 
         String whereClause = "nombre LIKE '%"+arg0+"%' OR  apellidos LIKE '%"+arg0+"%'";

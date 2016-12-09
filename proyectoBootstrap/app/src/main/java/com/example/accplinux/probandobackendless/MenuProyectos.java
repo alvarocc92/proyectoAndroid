@@ -4,8 +4,14 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,6 +19,7 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessCollection;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.BackendlessDataQuery;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import java.io.Serializable;
 
@@ -20,11 +27,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuProyectos extends AppCompatActivity {
+public class MenuProyectos extends AppCompatActivity implements SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener {
 
     BootstrapButton listarProyectos,newProyecto,antiguosProyectos;
     List<Proyecto> listProyectos = new ArrayList<>();
     ProgressDialog pDialog;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,12 @@ public class MenuProyectos extends AppCompatActivity {
         listarProyectos = (BootstrapButton) findViewById(R.id.listarProyectos);
         newProyecto = (BootstrapButton) findViewById(R.id.newProyecto);
         antiguosProyectos = (BootstrapButton) findViewById(R.id.proyectosFinalizados);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+
+
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         newProyecto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,10 +73,102 @@ public class MenuProyectos extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_actions, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.buscar);
+
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        searchView.setOnQueryTextListener(this);
+        MenuItemCompat.setOnActionExpandListener(searchItem, this);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.buscar:
+                return true;
+            case R.id.miCuenta:
+                Intent mi_cuenta = new Intent(MenuProyectos.this, MiCuenta.class);
+                startActivity(mi_cuenta);
+                return true;
+            case R.id.logout:
+                Backendless.UserService.logout( new AsyncCallback<Void>()
+                {
+                    public void handleResponse( Void response )
+                    {
+                        Toast.makeText(getApplicationContext(), "Sesión finalizada.", Toast.LENGTH_SHORT).show();
+                        Intent login = new Intent(MenuProyectos.this,MainActivity.class);
+                        startActivity(login);
+                    }
+                    public void handleFault( BackendlessFault fault )
+                    {
+                        Toast.makeText(getApplicationContext(), fault.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onQueryTextChange(String arg0) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String arg0) {
+
+        String whereClause = "nombre LIKE '%"+arg0+"%' OR  cliente LIKE '%"+arg0+"%'";
+        BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+        dataQuery.setWhereClause( whereClause );
+
+        Backendless.Persistence.of( Proyecto.class ).find( dataQuery,
+                new AsyncCallback<BackendlessCollection<Proyecto>>(){
+                    @Override
+                    public void handleResponse( BackendlessCollection<Proyecto> foundContacts )
+                    {
+                        if(foundContacts.getTotalObjects()>0){
+
+                            for(int i = 0; i<foundContacts.getTotalObjects(); i++){
+                                listProyectos.add(foundContacts.getData().get(i));
+                                //listBusqueadaEmpleados.add(foundContacts.getData().get(i));
+                            }
+                            Intent busquedaProyectos = new Intent(MenuProyectos.this,ListarProyectos.class);
+                            busquedaProyectos.putExtra("listProyectos", (Serializable) listProyectos);
+                            startActivity(busquedaProyectos);
+                        }else{
+                            Toast.makeText(MenuProyectos.this, "No hay proyectos con esa búsqueda.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    @Override
+                    public void handleFault( BackendlessFault fault )
+                    {
+                        Toast.makeText(MenuProyectos.this, fault.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(MenuProyectos.this, fault.getCode(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        return false;
+    }
+
+    public boolean onMenuItemActionCollapse(MenuItem arg0) {
+        return true;
+    }
+    public boolean onMenuItemActionExpand(MenuItem arg0) {
+        return true;
+    }
+
     public void crearNuevoProyecto(){
         Intent nuevoProyecto = new Intent(MenuProyectos.this,NuevoProyecto.class);
         startActivity(nuevoProyecto);
     }
+
 
     private class CargarProyectos extends AsyncTask<Void, Integer, Boolean> {
 

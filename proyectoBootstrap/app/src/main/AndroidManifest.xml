@@ -33,7 +33,11 @@
 
         <activity
             android:name=".MenuProyectos"
-            android:label="@string/app_menu_proyectos">
+            android:label="@string/app_menu_proyectos"
+            android:parentActivityName=".MenuPrincipal">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuPrincipal"/>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />
