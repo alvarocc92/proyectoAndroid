@@ -1,6 +1,7 @@
 package com.example.accplinux.probandobackendless;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Created by accplinux on 5/11/16.
@@ -14,13 +15,14 @@ public class Empleado implements Serializable{
     private String movil;
     private String direccion;
     private String objectId;
+    private BigDecimal salario;
 
     public Empleado(){
 
     }
 
 
-    public Empleado( String nombre, String apellidos,String email,String movil,String direccion,String objectId)
+    public Empleado( String nombre, String apellidos,String email,String movil,String direccion,String objectId,BigDecimal salario)
     {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -28,6 +30,7 @@ public class Empleado implements Serializable{
         this.movil = movil;
         this.direccion = direccion;
         this.objectId=objectId;
+        this.salario = salario;
 
     }
 
@@ -80,4 +83,11 @@ public class Empleado implements Serializable{
         this.objectId = objectId;
     }
 
+    public BigDecimal getSalario() {
+        return salario;
+    }
+
+    public void setSalario(BigDecimal salario) {
+        this.salario = salario;
+    }
 }

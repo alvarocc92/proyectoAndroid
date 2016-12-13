@@ -13,10 +13,12 @@ import com.backendless.Backendless;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 
+import java.math.BigDecimal;
+
 
 public class CrearEmpleado extends AppCompatActivity {
 
-    EditText nombre,apellidos,email,direccion,movil;
+    EditText nombre,apellidos,email,direccion,movil,salario;
     Button guardarEmpleado;
 
     @Override
@@ -29,6 +31,7 @@ public class CrearEmpleado extends AppCompatActivity {
         email = (EditText) findViewById(R.id.empleado_email);
         direccion = (EditText) findViewById(R.id.empleado_direccion);
         movil = (EditText) findViewById(R.id.empleado_movil);
+        salario = (EditText) findViewById(R.id.salario);
         guardarEmpleado = (Button) findViewById(R.id.guardarEmpleado);
 
         guardarEmpleado.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +45,8 @@ public class CrearEmpleado extends AppCompatActivity {
                 empleado.setMovil(movil.getText().toString());
                 empleado.setDireccion(direccion.getText().toString());
                 empleado.setEmail(email.getText().toString());
+                empleado.setSalario(BigDecimal.valueOf(Long.parseLong(salario.getText().toString())));
+
 
                 guardarEmpleado(empleado);
             }
@@ -49,7 +54,8 @@ public class CrearEmpleado extends AppCompatActivity {
     }
     public void guardarEmpleado(Empleado empleado) {
 
-        Backendless.Persistence.save(new Empleado(empleado.getNombre(), empleado.getApellidos(), empleado.getEmail(), empleado.getMovil(), empleado.getDireccion(),empleado.getObjectId()), new BackendlessCallback<Empleado>() {
+        Backendless.Persistence.save(new Empleado(empleado.getNombre(), empleado.getApellidos(), empleado.getEmail(),
+                empleado.getMovil(), empleado.getDireccion(),empleado.getObjectId(), empleado.getSalario()), new BackendlessCallback<Empleado>() {
             @Override
             public void handleResponse(Empleado empleado) {
                 Log.i("Empleado", "Nuevo empleado registrado" + empleado.getEmail());

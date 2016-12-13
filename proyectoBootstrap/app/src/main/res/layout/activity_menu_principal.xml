@@ -60,6 +60,30 @@
         android:layout_below="@+id/titulo_proyectos"
         android:layout_alignParentEnd="true" />
 
+    <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:id="@+id/titulo_informes"
+        style="@style/wrapping_fa_text"
+        android:textSize="20dp"
+        app:bootstrapBrand="warning"
+        app:bootstrapText="@string/informes"
+        tools:ignore="SpUsage"
+        android:layout_below="@+id/empleados"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="21dp"
+        android:layout_alignEnd="@+id/empleados"
+        android:layout_alignStart="@+id/empleados"
+        />
+
+    <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+        android:id="@+id/informes"
+        android:clickable="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/titulo_informes"
+        android:src="@drawable/informes"
+        app:bootstrapBrand="warning"
+        app:hasBorder="true" />
+
 
     <!--
     <ImageView

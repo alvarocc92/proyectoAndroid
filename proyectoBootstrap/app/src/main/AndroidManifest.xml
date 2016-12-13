@@ -11,8 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_main">
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +36,8 @@
             android:parentActivityName=".MenuPrincipal">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuPrincipal"/>
+                android:value=".MenuPrincipal" />
+
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />
@@ -48,7 +48,8 @@
             android:parentActivityName=".MenuPrincipal">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuPrincipal"/>
+                android:value=".MenuPrincipal" />
+
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />
@@ -102,11 +103,18 @@
 
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
-
         <activity
             android:name=".MiCuenta"
             android:label="@string/mi_cuenta">
             <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity
+            android:name=".MenuInformes"
+            android:label="@string/informes">
+            <action android:name="android.intent.action.MAIN" />
+
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
     </application>

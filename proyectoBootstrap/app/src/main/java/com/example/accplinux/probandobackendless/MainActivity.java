@@ -27,7 +27,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity {
 
-    BootstrapButton bR,bL;
+    BootstrapButton bR,bL,pR;
     EditText ed1, ed2;
 
     private GoogleApiClient client;
@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         bL = (BootstrapButton) findViewById(R.id.buttonLogin);
         bR = (BootstrapButton) findViewById(R.id.buttonRegister);
+        pR = (BootstrapButton) findViewById(R.id.resetPw);
+
         ed1 = (EditText) findViewById(R.id.usuario);
         ed2 = (EditText) findViewById(R.id.password);
 
@@ -51,12 +53,32 @@ public class MainActivity extends AppCompatActivity {
                 registerUserAsync();
             }
         });
+
         bL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loginUserAsync();
             }
         });
+
+        pR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Backendless.UserService.restorePassword( "alvarito_casado@hotmail.com", new AsyncCallback<Void>()
+                {
+                    public void handleResponse( Void response )
+                    {
+                        Toast.makeText(getApplicationContext(), "Se ha enviado un email.", Toast.LENGTH_LONG).show();
+                    }
+
+                    public void handleFault( BackendlessFault fault )
+                    {
+                        Toast.makeText(getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
 
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
@@ -84,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void handleFault(BackendlessFault backendlessFault) {
                 Toast.makeText(getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
             }
         };
         Backendless.UserService.register(user, callback);
@@ -117,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void handleFault(BackendlessFault backendlessFault) {
                 Toast.makeText(getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
             }
         };
         Backendless.UserService.login(user.getEmail(), user.getPassword(), callback);

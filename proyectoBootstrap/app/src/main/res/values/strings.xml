@@ -44,6 +44,8 @@
     <string name="logout">Cerrar sesión</string>
     <string name="mi_cuenta">Mi cuenta</string>
     <string name="buscar">Buscar</string>
+    <string name="informes">Informes</string>
+    <string name="salario">Salario</string>
 
 
 </resources>

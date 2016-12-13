@@ -31,16 +31,6 @@
         android:layout_centerHorizontal="true"
         android:textSize="30sp" />
 
-    <ImageView
-        android:background="@color/bootstrap_brand_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/consultoria_rrhh"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/app_login" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,24 +38,53 @@
         android:hint="@string/app_userPw"
         android:focusable="true"
         android:textColorHighlight="#ff7eff15"
+        android:background="@drawable/edit_text_style"
         android:textColorHint="#afb42b"
-        android:layout_marginTop="46dp"
-        android:layout_below="@+id/imageView"
         android:inputType="textPassword"
-        android:layout_alignEnd="@+id/usuario"
-        android:layout_alignParentStart="true"/>
+        android:layout_below="@+id/usuario"
+        android:ellipsize="start"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/usuario"/>
 
     <EditText
         android:textColorHighlight="#ff7eff15"
-        android:layout_width="wrap_content"
+        android:background="@drawable/edit_text_style"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
+        android:textSize="20sp"
         android:ems="10"
+        android:layout_marginTop="20dp"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
         android:id="@+id/usuario"
         android:textColorHint="#afb42b"
         android:hint="@string/app_userName"
         android:layout_below="@+id/imageView"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:background="@color/bootstrap_brand_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/consultoria_rrhh"
+        android:contentDescription="@string/app_login"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp" />
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/resetPw"
+        android:layout_below="@+id/password"
+        android:text="Contraseña perdida"
+        android:layout_marginTop="11dp"
+        />
+
 
     <com.beardedhen.androidbootstrap.BootstrapButtonGroup
         android:layout_width="wrap_content"
@@ -74,8 +93,8 @@
         app:bootstrapBrand="success"
         app:bootstrapSize="md"
         app:roundedCorners="true"
-        android:layout_alignBottom="@+id/password"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/password">
 
         <com.beardedhen.androidbootstrap.BootstrapButton
             android:layout_width="wrap_content"

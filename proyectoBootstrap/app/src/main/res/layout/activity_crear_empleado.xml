@@ -76,6 +76,20 @@
         android:layout_alignParentStart="true"
         android:inputType="text"/>
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/salario"
+        android:hint="@string/salario"
+        android:focusable="true"
+        android:textColorHighlight="#ff7eff15"
+        android:textColorHint="#ffff25e6"
+        android:layout_marginTop="46dp"
+        android:layout_below="@+id/empleado_direccion"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:inputType="number"/>
+
     <Button
         android:text="@string/empleado_guardar"
         android:layout_width="wrap_content"
