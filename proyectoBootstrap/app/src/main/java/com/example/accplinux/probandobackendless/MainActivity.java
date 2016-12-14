@@ -18,6 +18,7 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.beardedhen.androidbootstrap.AwesomeTextView;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.google.android.gms.appindexing.Action;
@@ -27,8 +28,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity {
 
-    BootstrapButton bR,bL,pR;
+    BootstrapButton bR,bL;
     EditText ed1, ed2;
+    AwesomeTextView lostPw;
 
     private GoogleApiClient client;
 
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         bL = (BootstrapButton) findViewById(R.id.buttonLogin);
         bR = (BootstrapButton) findViewById(R.id.buttonRegister);
-        pR = (BootstrapButton) findViewById(R.id.resetPw);
+        lostPw = (AwesomeTextView) findViewById(R.id.resetPw);
 
         ed1 = (EditText) findViewById(R.id.usuario);
         ed2 = (EditText) findViewById(R.id.password);
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        pR.setOnClickListener(new View.OnClickListener() {
+        lostPw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Backendless.UserService.restorePassword( "alvarito_casado@hotmail.com", new AsyncCallback<Void>()

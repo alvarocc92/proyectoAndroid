@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activity_main"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -13,95 +13,97 @@
     tools:context="com.example.accplinux.probandobackendless.MainActivity">
 
     <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:id="@+id/app_titulo"
-        style="@style/wrapping_fa_text"
         android:textSize="35sp"
         app:bootstrapBrand="primary"
         app:bootstrapText="@string/app_login"
-        tools:ignore="SpUsage"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        style="@style/wrapping_fa_text"
+        tools:ignore="SpUsage" />
 
     <com.beardedhen.androidbootstrap.AwesomeTextView
-        style="@style/wrapping_fa_text"
-        android:text="@string/app_description"
-        android:id="@+id/textView"
-        app:bootstrapBrand="success"
         android:layout_below="@+id/app_titulo"
         android:layout_centerHorizontal="true"
-        android:textSize="30sp" />
+        android:text="@string/app_description"
+        android:id="@+id/textView"
+        android:textSize="30sp"
+        style="@style/wrapping_fa_text"
+        app:bootstrapBrand="success" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:id="@+id/password"
-        android:hint="@string/app_userPw"
-        android:focusable="true"
-        android:textColorHighlight="#ff7eff15"
-        android:background="@drawable/edit_text_style"
-        android:textColorHint="#afb42b"
-        android:inputType="textPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/usuario"
+        android:id="@+id/password"
+        android:gravity="center_horizontal"
+        android:inputType="textPassword"
+        android:hint="@string/app_userPw"
         android:ellipsize="start"
         android:textSize="20sp"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/usuario"/>
+        android:textColorHint="#afb42b"
+        android:textColorHighlight="#ff7eff15"
+        android:background="@drawable/edit_text_style"/>
 
     <EditText
-        android:textColorHighlight="#ff7eff15"
-        android:background="@drawable/edit_text_style"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/usuario"
+        android:gravity="center_horizontal"
+        android:focusable="true"
         android:inputType="textEmailAddress"
+        android:hint="@string/app_userName"
         android:textSize="20sp"
         android:ems="10"
-        android:layout_marginTop="20dp"
         android:ellipsize="start"
-        android:gravity="center_horizontal"
-        android:id="@+id/usuario"
         android:textColorHint="#afb42b"
-        android:hint="@string/app_userName"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentStart="true" />
+        android:textColorHighlight="#ff7eff15"
+        android:background="@drawable/edit_text_style"/>
 
     <ImageView
-        android:background="@color/bootstrap_brand_info"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="14dp"
         android:id="@+id/imageView"
         android:src="@drawable/consultoria_rrhh"
-        android:contentDescription="@string/app_login"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="14dp" />
-    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:contentDescription="@string/app_login"/>
+
+    <com.beardedhen.androidbootstrap.AwesomeTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/resetPw"
-        android:layout_below="@+id/password"
-        android:text="Contraseña perdida"
+        android:layout_below="@+id/grupoMain"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp"
-        />
+        android:id="@+id/resetPw"
+        android:text="@string/contraseña_perdida"
+        app:bootstrapBrand="info"/>
 
 
     <com.beardedhen.androidbootstrap.BootstrapButtonGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_marginTop="14dp"
+        android:layout_centerHorizontal="true"
         android:orientation="vertical"
+        android:id="@+id/grupoMain"
         app:bootstrapBrand="success"
         app:bootstrapSize="md"
-        app:roundedCorners="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/password">
+        app:roundedCorners="true">
 
         <com.beardedhen.androidbootstrap.BootstrapButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
             android:id="@+id/buttonRegister"
             android:text="@string/app_buttonRegister"
-            android:layout_marginTop="11dp"
             />
 
         <com.beardedhen.androidbootstrap.BootstrapButton
