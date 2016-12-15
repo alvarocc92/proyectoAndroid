@@ -1,12 +1,16 @@
 package com.example.accplinux.probandobackendless;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,23 +70,50 @@ public class MainActivity extends AppCompatActivity {
         lostPw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Backendless.UserService.restorePassword( "alvarito_casado@hotmail.com", new AsyncCallback<Void>()
+                dialogoRecuperarPw();
+            }
+
+        });
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private void dialogoRecuperarPw(){
+
+        final Dialog openDialog = new Dialog(MainActivity.this);
+        openDialog.setContentView(R.layout.dialog_lost_pw);
+        openDialog.setCanceledOnTouchOutside(false);
+
+        Button enviar = (Button) openDialog.findViewById(R.id.btn_yes);
+        Button cancelar = (Button) openDialog.findViewById(R.id.btn_no);
+
+        final EditText emailUsuario = (EditText) openDialog.findViewById(R.id.emailUsuario);
+
+        enviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Backendless.UserService.restorePassword( emailUsuario.getText().toString(), new AsyncCallback<Void>()
                 {
                     public void handleResponse( Void response )
                     {
                         Toast.makeText(getApplicationContext(), "Se ha enviado un email.", Toast.LENGTH_LONG).show();
+                        openDialog.dismiss();
+
                     }
 
                     public void handleFault( BackendlessFault fault )
                     {
-                        Toast.makeText(getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_LONG).show();
                     }
                 });
             }
         });
-
-
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog.dismiss();
+            }
+        });
+        openDialog.show();
     }
 
 

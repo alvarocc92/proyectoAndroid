@@ -65,7 +65,6 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
         newEmpleado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
