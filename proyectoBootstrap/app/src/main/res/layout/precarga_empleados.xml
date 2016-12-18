@@ -3,15 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
     <TextView
         android:id="@+id/list_item_empleado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:paddingLeft="8dp"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_alignParentStart="true"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:background="#f3f3f3"
+        android:layout_marginLeft="20dp" />
+
+
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         app:bootstrapBrand="primary"
@@ -19,12 +23,12 @@
         android:id="@+id/editEmpleado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignEnd="@+id/list_item_empleado"
         android:layout_centerVertical="true"
-        android:layout_marginRight="5dp"
-        android:drawableLeft="@android:drawable/ic_menu_edit"
-        />
+        android:layout_marginEnd="5dp"
+        android:drawableStart="@android:drawable/ic_menu_edit"
+        app:bootstrapSize="xs" />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         app:bootstrapBrand="danger"
@@ -32,9 +36,10 @@
         android:id="@+id/deleteEmpleado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/editEmpleado"
+        android:layout_toStartOf="@id/editEmpleado"
         android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
-        android:drawableLeft="@android:drawable/ic_delete"/>
+        android:layout_marginEnd="10dp"
+        android:drawableStart="@android:drawable/ic_delete"
+        app:bootstrapSize="xs" />
 
 </RelativeLayout>

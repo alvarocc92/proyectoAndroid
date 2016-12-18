@@ -12,11 +12,14 @@ import android.widget.Toast;
 import com.backendless.Backendless;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.beardedhen.androidbootstrap.BootstrapButton;
+
+import java.math.BigDecimal;
 
 public class EditEmpleado extends AppCompatActivity {
 
-    EditText nombre,apellidos,email,direccion,movil;
-    Button actualizarEmpleado;
+    EditText nombre,apellidos,email,direccion,movil,salario;
+    BootstrapButton actualizarEmpleado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,8 @@ public class EditEmpleado extends AppCompatActivity {
         email = (EditText) findViewById(R.id.empleado_email);
         direccion = (EditText) findViewById(R.id.empleado_direccion);
         movil = (EditText) findViewById(R.id.empleado_movil);
-        actualizarEmpleado = (Button) findViewById(R.id.actualizarEmpleado);
+        salario = (EditText) findViewById(R.id.salario);
+        actualizarEmpleado = (BootstrapButton) findViewById(R.id.actualizarEmpleado);
 
         final Empleado empleado = (Empleado) getIntent().getSerializableExtra("empleado");
 
@@ -37,6 +41,8 @@ public class EditEmpleado extends AppCompatActivity {
         email.setText(empleado.getEmail());
         direccion.setText(empleado.getMovil());
         movil.setText(empleado.getDireccion());
+        salario.setText(empleado.getSalario().toString());
+
 
         Log.i("Empleado", "id del empleado: " + empleado.getObjectId());
 
@@ -55,6 +61,8 @@ public class EditEmpleado extends AppCompatActivity {
         empleado.setEmail(email.getText().toString());
         empleado.setDireccion(direccion.getText().toString());
         empleado.setMovil(movil.getText().toString());
+        empleado.setSalario(BigDecimal.valueOf(Long.parseLong(salario.getText().toString())));
+
 
         Backendless.Persistence.save(empleado, new BackendlessCallback<Empleado>() {
             @Override

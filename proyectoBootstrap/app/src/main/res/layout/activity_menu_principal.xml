@@ -12,18 +12,23 @@
     android:background="@color/bootstrap_gray_lighter"
     tools:context="com.example.accplinux.probandobackendless.MenuPrincipal">
 
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar"
+        ></include>
+
     <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="21dp"
+        android:layout_alignEnd="@+id/empleados"
+        android:layout_alignStart="@+id/empleados"
+        android:layout_below="@+id/tool_bar"
         android:id="@+id/titulo_empleado"
         style="@style/wrapping_fa_text"
         android:textSize="20dp"
         app:bootstrapBrand="primary"
         app:bootstrapText="@string/empleados"
-        tools:ignore="SpUsage"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="21dp"
-        android:layout_alignEnd="@+id/empleados"
-        android:layout_alignStart="@+id/empleados"
-        />
+        tools:ignore="SpUsage"/>
 
     <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
         android:id="@+id/empleados"
@@ -37,17 +42,17 @@
 
 
     <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="21dp"
+        android:layout_alignEnd="@+id/proyectos"
+        android:layout_alignStart="@+id/proyectos"
+        android:layout_below="@+id/tool_bar"
         android:id="@+id/titulo_proyectos"
         style="@style/wrapping_fa_text"
         android:textSize="20dp"
         app:bootstrapBrand="danger"
         app:bootstrapText="@string/proyectos"
-        tools:ignore="SpUsage"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="21dp"
-        android:layout_alignEnd="@+id/proyectos"
-        android:layout_alignStart="@+id/proyectos"
-        />
+        tools:ignore="SpUsage"/>
 
     <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
         android:id="@+id/proyectos"

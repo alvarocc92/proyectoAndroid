@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.backendless.Backendless;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.beardedhen.androidbootstrap.BootstrapButton;
 
 import java.math.BigDecimal;
 
@@ -19,7 +20,7 @@ import java.math.BigDecimal;
 public class CrearEmpleado extends AppCompatActivity {
 
     EditText nombre,apellidos,email,direccion,movil,salario;
-    Button guardarEmpleado;
+    BootstrapButton guardarEmpleado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class CrearEmpleado extends AppCompatActivity {
         direccion = (EditText) findViewById(R.id.empleado_direccion);
         movil = (EditText) findViewById(R.id.empleado_movil);
         salario = (EditText) findViewById(R.id.salario);
-        guardarEmpleado = (Button) findViewById(R.id.guardarEmpleado);
+        guardarEmpleado = (BootstrapButton) findViewById(R.id.guardarEmpleado);
 
         guardarEmpleado.setOnClickListener(new View.OnClickListener() {
             @Override

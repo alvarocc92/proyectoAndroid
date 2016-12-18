@@ -76,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
         });
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+    //impedir la tecla de Back del telefono para no volver a la activity login
+    @Override
+    public void onBackPressed() {
+
+    }
 
     private void dialogoRecuperarPw(){
 

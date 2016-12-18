@@ -18,31 +18,43 @@
         ></include>
 
     <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="81dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/newEmpleado"
+        android:id="@+id/newEmpleado"
         style="@style/wrapping_button"
         app:bootstrapBrand="primary"
         app:roundedCorners="true"
-        app:showOutline="true"
-        android:text="@string/newEmpleado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/newEmpleado"
-        android:layout_marginTop="112dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        />
+        app:showOutline="true"/>
 
     <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_marginTop="81dp"
+        android:layout_below="@+id/newEmpleado"
+        android:layout_centerHorizontal="true"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/listar_empleados"
+        android:id="@+id/listarEmpleados"
+        style="@style/wrapping_button"
+        app:bootstrapBrand="success"
+        app:roundedCorners="true"
+        app:showOutline="true"/>
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listarEmpleados"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="81dp"
+        android:text="@string/antiguo_empleado"
+        android:id="@+id/listarAntiguosEmpleados"
         style="@style/wrapping_button"
         app:bootstrapBrand="danger"
         app:roundedCorners="true"
-        app:showOutline="true"
-        android:text="@string/listar_empleados"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listarEmpleados"
-        android:layout_marginTop="41dp"
-        android:layout_below="@+id/newEmpleado"
-        android:layout_centerHorizontal="true" />
+        app:showOutline="true" />
 
 
 </RelativeLayout>

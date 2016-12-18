@@ -1,82 +1,117 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_crear_empleado"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/bootstrap_gray_lighter"
-    tools:context="com.example.accplinux.probandobackendless.CrearEmpleado">
+<ScrollView
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/crearEmpleado"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent" >
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#DCEDC8"
+    android:orientation="vertical">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nombre"
-        android:focusable="true"
-        android:textColorHighlight="#ff7eff15"
-        android:textColorHint="#ffff25e6"
-        android:layout_marginTop="46dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:inputType="text"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/apellidos"
-        android:focusable="true"
-        android:textColorHighlight="#ff7eff15"
-        android:textColorHint="#ffff25e6"
-        android:layout_marginTop="46dp"
-        android:layout_below="@+id/nombre"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:inputType="text" />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/empleado_email"
-        android:focusable="true"
-        android:textColorHighlight="#ff7eff15"
-        android:textColorHint="#ffff25e6"
-        android:layout_marginTop="46dp"
-        android:layout_below="@+id/apellidos"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:inputType="textEmailAddress"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/empleado_movil"
-        android:focusable="true"
-        android:textColorHighlight="#ff7eff15"
-        android:textColorHint="#ffff25e6"
-        android:layout_marginTop="46dp"
-        android:layout_below="@+id/empleado_email"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:inputType="phone"/>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/empleado_direccion"
-        android:focusable="true"
-        android:textColorHighlight="#ff7eff15"
-        android:textColorHint="#ffff25e6"
-        android:layout_marginTop="46dp"
-        android:layout_below="@+id/empleado_movil"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:inputType="text"/>
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar"
+        ></include>
 
-    <Button
-        android:text="@string/empleado_guardar"
-        android:layout_width="wrap_content"
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/iconoEmpleado"
+                android:background="@drawable/edit_empleado"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="140dp"
+                android:contentDescription="@string/edit_empleado"/>
+        </RelativeLayout>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/nombre"
+            android:inputType="text"
+            android:focusable="true"
+            android:background="#f3f3f3"/>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:background="#f3f3f3"
+            android:id="@+id/apellidos"
+            android:focusable="true"
+            android:inputType="text" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:background="#f3f3f3"
+            android:id="@+id/empleado_email"
+            android:focusable="true"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:background="#f3f3f3"
+            android:id="@+id/empleado_movil"
+            android:focusable="true"
+            android:inputType="phone"/>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:background="#f3f3f3"
+            android:id="@+id/empleado_direccion"
+            android:focusable="true"
+            android:inputType="text"/>
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:background="#f3f3f3"
+            android:id="@+id/salario"
+            android:focusable="true"
+            android:inputType="number" />
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:text="@string/empleado_actualizar"
+            android:layout_width="190dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:id="@+id/actualizarEmpleado"
+            style="@style/wrapping_button"
+            app:bootstrapBrand="success"
+            app:roundedCorners="true"
+            app:showOutline="true"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/actualizarEmpleado" />
-</RelativeLayout>
+        android:orientation="vertical"
+        android:background="#DCEDC8">
+    </LinearLayout>
+</LinearLayout>
+
+
+
+</ScrollView>
+
 

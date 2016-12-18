@@ -63,7 +63,8 @@
         </activity>
         <activity
             android:name=".ListarEmpleados"
-            android:label="@string/empleados">
+            android:label="@string/listar_empleados"
+            android:parentActivityName=".MenuEmpleados">
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />

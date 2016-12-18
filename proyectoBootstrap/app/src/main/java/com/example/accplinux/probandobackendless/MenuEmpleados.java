@@ -114,6 +114,10 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.home:
+                Intent menuPrincipal = new Intent (MenuEmpleados.this,MenuPrincipal.class);
+                startActivity(menuPrincipal);
+                return true;
             case R.id.buscar:
                 return true;
             case R.id.miCuenta:
@@ -197,13 +201,14 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
 
             final boolean[] acabado = {false};
 
-            Backendless.Persistence.of(Empleado.class).find( new AsyncCallback<BackendlessCollection<Empleado>>(){
+            BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+            dataQuery.setPageSize(20);
+
+            Backendless.Persistence.of(Empleado.class).find( dataQuery, new AsyncCallback<BackendlessCollection<Empleado>>(){
                 @Override
                 public void handleResponse( BackendlessCollection<Empleado> foundContacts )
                 {
-
                     for(int i =0 ; i<foundContacts.getTotalObjects();i++){
-
                         String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
                         mostrarEmpleados.add(nombreCompleto);
                         idEmpleados.add(foundContacts.getData().get(i).getObjectId());

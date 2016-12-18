@@ -9,8 +9,8 @@
     <string name="app_buttonLogin">LOGIN</string>
     <string name="app_buttonRegister">REGISTRARSE</string>
     <string name="app_menu_principal">Menú Principal</string>
-    <string name="app_menu_proyectos">Menú Proyectos</string>
-    <string name="app_menu_empleados">Menú Empleados</string>
+    <string name="app_menu_proyectos">Proyectos</string>
+    <string name="app_menu_empleados">Empleados</string>
     <string name="app_crear_empleado">Crear Empleado</string>
     <string name="newEmpleado">Crear nuevo empleado</string>
     <string name="newProyecto">Crear nuevo proyecto</string>
@@ -49,6 +49,10 @@
     <string name="contraseña_perdida">¿Contraseña perdida?</string>
     <string name="enviar">Enviar correo</string>
     <string name="cancelar">Cancelar</string>
+    <string name="antiguo_empleado">Listar antiguos empleados</string>
+    <string name="menu_home">Home</string>
+
+
 
 
 
