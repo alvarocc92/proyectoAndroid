@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/listEmpleado"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/bootstrap_gray_lighter">
+<include
+    android:id="@+id/tool_bar"
+    layout="@layout/toolbar"
+    ></include>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tablaAntiguosEmpleados"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_below="@+id/tool_bar"
+    tools:context="com.example.accplinux.probandobackendless.ListarAntiguosEmpleados"
+    android:background="#DCEDC8">
+</ListView>
+</RelativeLayout>
+

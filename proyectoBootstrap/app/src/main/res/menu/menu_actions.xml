@@ -13,7 +13,7 @@
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/buscar"
         com.example.actionbar:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView" />
+        app:showAsAction="always" />
 
     <item
         android:layout_width="wrap_content"

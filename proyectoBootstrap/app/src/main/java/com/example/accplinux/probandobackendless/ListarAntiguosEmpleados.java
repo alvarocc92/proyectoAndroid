@@ -17,16 +17,15 @@ import com.backendless.exceptions.BackendlessFault;
 
 import java.util.ArrayList;
 
-public class ListarEmpleados extends AppCompatActivity implements MenuItemCompat.OnActionExpandListener{
+public class ListarAntiguosEmpleados extends AppCompatActivity implements MenuItemCompat.OnActionExpandListener{
 
     ArrayList<String> listEmpleados = new ArrayList<>();
     ArrayList<String> idEmpleados = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listar_empleados);
+        setContentView(R.layout.activity_listar_antiguos_empleados);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -36,9 +35,9 @@ public class ListarEmpleados extends AppCompatActivity implements MenuItemCompat
         listEmpleados = getIntent().getExtras().getStringArrayList("listado");
         idEmpleados = getIntent().getExtras().getStringArrayList("idEmpleados");
 
-        CustomAdapter adapter = new CustomAdapter(listEmpleados,idEmpleados, this);
+        CustomAdapterAntiguosEmpleados adapter = new CustomAdapterAntiguosEmpleados(listEmpleados,idEmpleados, this);
 
-        ListView lView = (ListView)findViewById(R.id.tablaEmpleados);
+        ListView lView = (ListView)findViewById(R.id.tablaAntiguosEmpleados);
         lView.setAdapter(adapter);
     }
 
@@ -59,11 +58,11 @@ public class ListarEmpleados extends AppCompatActivity implements MenuItemCompat
 
         switch (item.getItemId()) {
             case R.id.home:
-                Intent menuPrincipal = new Intent (ListarEmpleados.this,MenuPrincipal.class);
+                Intent menuPrincipal = new Intent (ListarAntiguosEmpleados.this,MenuPrincipal.class);
                 startActivity(menuPrincipal);
                 return true;
             case R.id.miCuenta:
-                Intent mi_cuenta = new Intent(ListarEmpleados.this, MiCuenta.class);
+                Intent mi_cuenta = new Intent(ListarAntiguosEmpleados.this, MiCuenta.class);
                 startActivity(mi_cuenta);
                 return true;
             case R.id.logout:
@@ -72,7 +71,7 @@ public class ListarEmpleados extends AppCompatActivity implements MenuItemCompat
                     public void handleResponse( Void response )
                     {
                         Toast.makeText(getApplicationContext(), "Sesión finalizada.", Toast.LENGTH_SHORT).show();
-                        Intent login = new Intent(ListarEmpleados.this,MainActivity.class);
+                        Intent login = new Intent(ListarAntiguosEmpleados.this,MainActivity.class);
                         startActivity(login);
                     }
                     public void handleFault( BackendlessFault fault )

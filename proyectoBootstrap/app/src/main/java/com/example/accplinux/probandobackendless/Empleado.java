@@ -15,6 +15,7 @@ public class Empleado implements Serializable{
     private String movil;
     private String direccion;
     private String objectId;
+    private Boolean antiguo;
     private BigDecimal salario;
 
     public Empleado(){
@@ -22,7 +23,7 @@ public class Empleado implements Serializable{
     }
 
 
-    public Empleado( String nombre, String apellidos,String email,String movil,String direccion,String objectId,BigDecimal salario)
+    public Empleado( String nombre, String apellidos,String email,String movil,String direccion,String objectId,BigDecimal salario,Boolean antiguo)
     {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -31,6 +32,7 @@ public class Empleado implements Serializable{
         this.direccion = direccion;
         this.objectId=objectId;
         this.salario = salario;
+        this.antiguo=antiguo;
 
     }
 
@@ -89,5 +91,13 @@ public class Empleado implements Serializable{
 
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
+    }
+
+    public Boolean getAntiguo() {
+        return antiguo;
+    }
+
+    public void setAntiguo(Boolean antiguo) {
+        this.antiguo = antiguo;
     }
 }
