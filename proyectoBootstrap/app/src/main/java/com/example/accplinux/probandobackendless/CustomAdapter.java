@@ -1,9 +1,7 @@
 package com.example.accplinux.probandobackendless;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +14,6 @@ import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.async.callback.AsyncCallback;
-import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 
@@ -52,30 +49,8 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
             public void onClick(View v) {
                 Log.i("Empleado", "id empleado: " + idEmpleados.get(position));
 
-                final String idEmpleado = idEmpleados.get(position);
-
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                builder1.setMessage("¿Deseas enviar a antiguos empleados?");
-                builder1.setCancelable(true);
-
-                builder1.setPositiveButton(
-                        "Si",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                deleteEmpleado(idEmpleado);                            }
-                        });
-
-                builder1.setNegativeButton(
-                        "No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
-
+                String idEmpleado = idEmpleados.get(position);
+                deleteEmpleado(idEmpleado);
             }
         });
 
@@ -93,34 +68,6 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
     public void deleteEmpleado(String idEmpleado){
 
         Backendless.Persistence.of( Empleado.class ).findById(idEmpleado, new AsyncCallback<Empleado>() {
-            @Override
-            public void handleResponse(final Empleado empleado )
-            {
-                empleado.setAntiguo(true);
-
-                Backendless.Persistence.save(empleado, new BackendlessCallback<Empleado>() {
-                    @Override
-                    public void handleResponse(Empleado empleado) {
-                        Toast.makeText(context.getApplicationContext(), "Empleado eliminado.", Toast.LENGTH_LONG).show();
-                        Intent menuEmpleados = new Intent(context.getApplicationContext(),MenuEmpleados.class);
-                        context.startActivity(menuEmpleados);
-                    }
-                    @Override
-                    public void handleFault(BackendlessFault backendlessFault) {
-                        Toast.makeText(context.getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
-                        Toast.makeText(context.getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-
-            @Override
-            public void handleFault( BackendlessFault fault )
-            {
-                Toast.makeText(context.getApplicationContext(), fault.getCode(), Toast.LENGTH_LONG).show();
-                Toast.makeText(context.getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-        /*Backendless.Persistence.of( Empleado.class ).findById(idEmpleado, new AsyncCallback<Empleado>() {
             @Override
             public void handleResponse(final Empleado empleado )
             {
@@ -146,7 +93,7 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
                 Toast.makeText(context.getApplicationContext(), fault.getCode(), Toast.LENGTH_LONG).show();
                 Toast.makeText(context.getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
             }
-        });*/
+        });
     }
     public void editEmpleado(String idEmpleado){
 

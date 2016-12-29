@@ -58,10 +58,6 @@ public class ListarEmpleados extends AppCompatActivity implements MenuItemCompat
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.home:
-                Intent menuPrincipal = new Intent (ListarEmpleados.this,MenuPrincipal.class);
-                startActivity(menuPrincipal);
-                return true;
             case R.id.miCuenta:
                 Intent mi_cuenta = new Intent(ListarEmpleados.this, MiCuenta.class);
                 startActivity(mi_cuenta);

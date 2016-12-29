@@ -10,7 +10,8 @@
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -55,8 +56,7 @@
         </activity>
         <activity
             android:name=".CrearEmpleado"
-            android:label="@string/app_crear_empleado"
-            android:parentActivityName=".MenuEmpleados">
+            android:label="@string/app_crear_empleado">
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />
@@ -114,13 +114,6 @@
         <activity
             android:name=".MenuInformes"
             android:label="@string/informes">
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-        </activity>
-        <activity android:name=".ListarAntiguosEmpleados"
-            android:label="@string/antiguos"
-            android:parentActivityName=".MenuEmpleados">
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />

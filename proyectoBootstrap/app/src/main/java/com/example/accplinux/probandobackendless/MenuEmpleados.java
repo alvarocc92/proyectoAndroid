@@ -43,7 +43,7 @@ import java.util.Random;
 public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener {
 
     Toolbar toolbar;
-    BootstrapButton newEmpleado,listarEmpleados,listarAntiguosEmpleados;
+    BootstrapButton newEmpleado,listarEmpleados;
     ProgressDialog pDialog;
 
     ArrayList<String> mostrarEmpleados = new ArrayList<>();
@@ -59,8 +59,6 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
 
         newEmpleado = (BootstrapButton) findViewById(R.id.newEmpleado);
         listarEmpleados = (BootstrapButton) findViewById(R.id.listarEmpleados);
-        listarAntiguosEmpleados = (BootstrapButton) findViewById(R.id.listarAntiguosEmpleados);
-
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
 
         setSupportActionBar(toolbar);
@@ -87,23 +85,6 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
 
                 CargarEmpleados cargarEmpleados = new CargarEmpleados();
                 cargarEmpleados.execute();
-
-            }
-        });
-
-        listarAntiguosEmpleados.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                pDialog = new ProgressDialog(MenuEmpleados.this);
-                pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                pDialog.setMessage("Cargando empleados...");
-                pDialog.setCancelable(true);
-                pDialog.setMax(100);
-
-                CargarAntiguosEmpleados cargarAntiguosEmpleados = new CargarAntiguosEmpleados();
-                cargarAntiguosEmpleados.execute();
 
             }
         });
@@ -228,11 +209,9 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
                 public void handleResponse( BackendlessCollection<Empleado> foundContacts )
                 {
                     for(int i =0 ; i<foundContacts.getTotalObjects();i++){
-                            if(foundContacts.getData().get(i).getAntiguo().equals(false)){
-                                String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
-                                mostrarEmpleados.add(nombreCompleto);
-                                idEmpleados.add(foundContacts.getData().get(i).getObjectId());
-                            }
+                        String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
+                        mostrarEmpleados.add(nombreCompleto);
+                        idEmpleados.add(foundContacts.getData().get(i).getObjectId());
                     }
 
                     acabado[0] = true;
@@ -292,85 +271,6 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
         }
     }
 
-    private class CargarAntiguosEmpleados extends AsyncTask<Void, Integer, Boolean> {
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-
-
-            final boolean[] acabado = {false};
-
-            BackendlessDataQuery dataQuery = new BackendlessDataQuery();
-            dataQuery.setPageSize(20);
-
-            Backendless.Persistence.of(Empleado.class).find( dataQuery, new AsyncCallback<BackendlessCollection<Empleado>>(){
-                @Override
-                public void handleResponse( BackendlessCollection<Empleado> foundContacts )
-                {
-                    for(int i =0 ; i<foundContacts.getTotalObjects();i++){
-                        if(foundContacts.getData().get(i).getAntiguo().equals(true)){
-                            String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
-                            mostrarEmpleados.add(nombreCompleto);
-                            idEmpleados.add(foundContacts.getData().get(i).getObjectId());
-                        }
-                    }
-
-                    acabado[0] = true;
-                    onPostExecute(acabado[0]);
-                }
-                @Override
-                public void handleFault( BackendlessFault fault )
-                {
-                    Toast.makeText(MenuEmpleados.this, fault.getMessage(), Toast.LENGTH_LONG).show();
-                    Toast.makeText(MenuEmpleados.this, fault.getCode(), Toast.LENGTH_LONG).show();
-                }
-            });
-            return acabado[0];
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-
-            int progreso = values[0].intValue();
-            pDialog.setProgress(progreso);
-
-        }
-
-        @Override
-        protected void onPreExecute() {
-
-            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    CargarAntiguosEmpleados.this.cancel(true);
-                }
-            });
-
-            pDialog.setProgress(0);
-            pDialog.show(); //sirve para mostrar el dialogo
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            if(result)
-            {
-                pDialog.dismiss();
-
-                Toast.makeText(MenuEmpleados.this, "Antiguos empleados cargados." ,Toast.LENGTH_SHORT).show();
-
-                Intent listEmpleados = new Intent(MenuEmpleados.this,ListarAntiguosEmpleados.class);
-                listEmpleados.putExtra("listado",mostrarEmpleados);
-                listEmpleados.putExtra("idEmpleados",idEmpleados);
-                startActivity(listEmpleados);
-
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            Toast.makeText(MenuEmpleados.this, "Tarea cancelada!", Toast.LENGTH_SHORT).show();
-        }
-    }
 }
 
 
