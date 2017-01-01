@@ -136,7 +136,4 @@
             android:background="#DCEDC8">
         </LinearLayout>
     </LinearLayout>
-
-
-
 </ScrollView>

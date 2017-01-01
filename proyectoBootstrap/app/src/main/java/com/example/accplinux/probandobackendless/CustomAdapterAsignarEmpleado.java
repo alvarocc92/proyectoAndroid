@@ -46,7 +46,7 @@ public class CustomAdapterAsignarEmpleado extends BaseAdapter implements ListAda
         }
         final TextView listItemText = (TextView)view.findViewById(R.id.list_item_empleado);
 
-        listItemText.setText(listEmpleados.get(position).getNombre());
+        listItemText.setText(listEmpleados.get(position).getNombre()+" "+listEmpleados.get(position).getApellidos());
 
         BootstrapButton asignarEmpleado = (BootstrapButton) view.findViewById(R.id.asignar_empleado);
 
@@ -57,8 +57,6 @@ public class CustomAdapterAsignarEmpleado extends BaseAdapter implements ListAda
                 asignarProyectoEmpleado(listEmpleados.get(position),proyecto);
             }
         });
-
-
         return view;
     }
     /*public void deleteEmpleado(String idEmpleado){

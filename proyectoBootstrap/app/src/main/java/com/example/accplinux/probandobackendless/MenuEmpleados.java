@@ -3,6 +3,7 @@ package com.example.accplinux.probandobackendless;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
@@ -46,6 +48,8 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
     BootstrapButton newEmpleado,listarEmpleados,listarAntiguosEmpleados;
     ProgressDialog pDialog;
 
+    ImageView gif;
+
     ArrayList<String> mostrarEmpleados = new ArrayList<>();
     ArrayList<String> idEmpleados = new ArrayList<>();
 
@@ -60,6 +64,11 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
         newEmpleado = (BootstrapButton) findViewById(R.id.newEmpleado);
         listarEmpleados = (BootstrapButton) findViewById(R.id.listarEmpleados);
         listarAntiguosEmpleados = (BootstrapButton) findViewById(R.id.listarAntiguosEmpleados);
+
+        gif = (ImageView) findViewById(R.id.gif);
+        gif.setBackgroundResource(R.drawable.gif_empleado);
+        AnimationDrawable frame = (AnimationDrawable) gif.getBackground();
+        frame.start();
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
 

@@ -10,7 +10,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:paddingLeft="8dp"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
     <com.beardedhen.androidbootstrap.BootstrapButton
         app:bootstrapBrand="primary"
@@ -23,6 +23,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
         android:drawableLeft="@android:drawable/ic_menu_edit"
+        app:bootstrapSize="xs"
         />
     <com.beardedhen.androidbootstrap.BootstrapButton
         app:bootstrapBrand="regular"
@@ -33,6 +34,7 @@
         android:layout_toLeftOf="@id/editProyecto"
         android:layout_centerVertical="true"
         android:drawableLeft="@android:drawable/btn_star"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="10dp"
+        app:bootstrapSize="xs"/>
 
 </RelativeLayout>

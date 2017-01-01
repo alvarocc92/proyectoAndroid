@@ -91,6 +91,9 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.home:
+                Intent menuPrincipal = new Intent (MenuProyectos.this,MenuPrincipal.class);
+                startActivity(menuPrincipal);
             case R.id.buscar:
                 return true;
             case R.id.miCuenta:

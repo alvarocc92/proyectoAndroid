@@ -18,6 +18,7 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessCollection;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.BackendlessDataQuery;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 
 import java.io.Serializable;
@@ -111,7 +112,10 @@ public class CustomAdapterProyectos extends BaseAdapter implements ListAdapter {
 
             final boolean[] acabado = {false};
 
-            Backendless.Persistence.of(Empleado.class).find( new AsyncCallback<BackendlessCollection<Empleado>>(){
+            BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+            dataQuery.setPageSize(20);
+
+            Backendless.Persistence.of(Empleado.class).find(dataQuery, new AsyncCallback<BackendlessCollection<Empleado>>(){
                 @Override
                 public void handleResponse( BackendlessCollection<Empleado> foundContacts )
                 {

@@ -78,14 +78,16 @@
         </activity>
         <activity
             android:name=".NuevoProyecto"
-            android:label="@string/crear_proyecto">
+            android:label="@string/crear_proyecto"
+            android:parentActivityName=".MenuProyectos">
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
         <activity
             android:name=".ListarProyectos"
-            android:label="@string/proyecto_activos">
+            android:label="@string/proyecto_activos"
+            android:parentActivityName=".MenuProyectos">
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />
