@@ -17,13 +17,18 @@ public class Empleado implements Serializable{
     private String objectId;
     private Boolean antiguo;
     private BigDecimal salario;
+    private Proyecto proyecto;
+
+
+    private Boolean desasignado;
+
 
     public Empleado(){
 
     }
 
 
-    public Empleado( String nombre, String apellidos,String email,String movil,String direccion,String objectId,BigDecimal salario,Boolean antiguo)
+    public Empleado( String nombre, String apellidos,String email,String movil,String direccion,String objectId,BigDecimal salario,Boolean antiguo, Boolean desasignado)
     {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -33,7 +38,7 @@ public class Empleado implements Serializable{
         this.objectId=objectId;
         this.salario = salario;
         this.antiguo=antiguo;
-
+        this.desasignado = desasignado;
     }
 
 
@@ -99,5 +104,21 @@ public class Empleado implements Serializable{
 
     public void setAntiguo(Boolean antiguo) {
         this.antiguo = antiguo;
+    }
+
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
+
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
+    }
+
+    public Boolean getDesasignado() {
+        return desasignado;
+    }
+
+    public void setDesasignado(Boolean desasignado) {
+        this.desasignado = desasignado;
     }
 }

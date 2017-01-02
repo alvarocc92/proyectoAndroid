@@ -17,7 +17,7 @@ public class Proyecto implements Serializable{
     private String cliente;
     private Date fechaInicio;
     private Date fechaFin;
-    private boolean finalizado;
+    private Boolean finalizado;
     private String objectId;
     private List<Empleado> empleadoAsignados = new ArrayList<>();
 
@@ -85,11 +85,11 @@ public class Proyecto implements Serializable{
         this.fechaFin = fechaFin;
     }
 
-    public boolean isFinalizado() {
+    public Boolean getFinalizado() {
         return finalizado;
     }
 
-    public void setFinalizado(boolean finalizado) {
+    public void setFinalizado(Boolean finalizado) {
         this.finalizado = finalizado;
     }
 

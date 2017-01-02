@@ -77,6 +77,7 @@ public class CustomAdapterProyectos extends BaseAdapter implements ListAdapter {
 
                 Log.i("Proyecto", "id proyecto: " + listProyectos.get(position).getObjectId());
 
+                proyecto = listProyectos.get(position);
                 CargarEmpleados cargarEmpleados = new CargarEmpleados();
                 cargarEmpleados.execute();
             }
@@ -120,7 +121,9 @@ public class CustomAdapterProyectos extends BaseAdapter implements ListAdapter {
                 public void handleResponse( BackendlessCollection<Empleado> foundContacts )
                 {
                     for(int i =0 ; i<foundContacts.getTotalObjects();i++){
-                        listEmpleados.add(foundContacts.getData().get(i));
+                        if(foundContacts.getData().get(i).getAntiguo().equals(false)){
+                            listEmpleados.add(foundContacts.getData().get(i));
+                        }
                     }
                     acabado[0]=true;
                     onPostExecute(acabado[0]);

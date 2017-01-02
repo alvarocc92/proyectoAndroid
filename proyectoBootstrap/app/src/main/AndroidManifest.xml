@@ -101,7 +101,8 @@
         </activity>
         <activity
             android:name=".AsignarProyectoEmpleado"
-            android:label="@string/asignar_proyecto">
+            android:label="@string/asignar_proyecto"
+            android:parentActivityName=".ListarProyectos">
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />
@@ -120,9 +121,18 @@
 
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
-        <activity android:name=".ListarAntiguosEmpleados"
+        <activity
+            android:name=".ListarAntiguosEmpleados"
             android:label="@string/antiguos"
             android:parentActivityName=".MenuEmpleados">
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity
+            android:name=".ListarAntiguosProyectos"
+            android:label="@string/antiguos_proyectos"
+            android:parentActivityName=".MenuProyectos">
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.DEFAULT" />

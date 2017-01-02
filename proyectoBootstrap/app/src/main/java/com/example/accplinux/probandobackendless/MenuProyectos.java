@@ -71,6 +71,21 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
             }
         });
 
+        antiguosProyectos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                pDialog = new ProgressDialog(MenuProyectos.this);
+                pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pDialog.setMessage("Cargando proyectos...");
+                pDialog.setCancelable(true);
+                pDialog.setMax(100);
+
+                CargarAntiguosProyectos cargarAntiguosProyectos = new CargarAntiguosProyectos();
+                cargarAntiguosProyectos.execute();
+            }
+        });
+
     }
 
     @Override
@@ -186,7 +201,9 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
                 public void handleResponse( BackendlessCollection<Proyecto> foundContacts )
                 {
                     for(int i =0 ; i<foundContacts.getTotalObjects();i++){
-                        listProyectos.add(foundContacts.getData().get(i));
+                        if(foundContacts.getData().get(i).getFinalizado().equals(false)){
+                            listProyectos.add(foundContacts.getData().get(i));
+                        }
                     }
                     acabado[0] = true;
                     onPostExecute(acabado[0]);
@@ -232,6 +249,79 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
                 Toast.makeText(MenuProyectos.this, "Proyectos cargados." ,Toast.LENGTH_SHORT).show();
 
                 Intent activityListarProyectos = new Intent(MenuProyectos.this,ListarProyectos.class);
+                activityListarProyectos.putExtra("listProyectos", (Serializable) listProyectos);
+                startActivity(activityListarProyectos);
+
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            Toast.makeText(MenuProyectos.this, "Tarea cancelada!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private class CargarAntiguosProyectos extends AsyncTask<Void, Integer, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+
+
+            final boolean[] acabado = {false};
+
+            Backendless.Persistence.of(Proyecto.class).find(new AsyncCallback<BackendlessCollection<Proyecto>>(){
+                @Override
+                public void handleResponse( BackendlessCollection<Proyecto> foundContacts )
+                {
+                    for(int i =0 ; i<foundContacts.getTotalObjects();i++){
+                        if(foundContacts.getData().get(i).getFinalizado().equals(true)){
+                            listProyectos.add(foundContacts.getData().get(i));
+                        }
+                    }
+                    acabado[0] = true;
+                    onPostExecute(acabado[0]);
+                }
+                @Override
+                public void handleFault( BackendlessFault fault )
+                {
+                    Toast.makeText(MenuProyectos.this, fault.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MenuProyectos.this, fault.getCode(), Toast.LENGTH_LONG).show();
+                }
+            });
+            return acabado[0];
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+
+            int progreso = values[0].intValue();
+            pDialog.setProgress(progreso);
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    MenuProyectos.CargarAntiguosProyectos.this.cancel(true);
+                }
+            });
+
+            pDialog.setProgress(0);
+            pDialog.show(); //sirve para mostrar el dialogo
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if(result)
+            {
+                pDialog.dismiss();
+
+                Toast.makeText(MenuProyectos.this, "Proyectos cargados." ,Toast.LENGTH_SHORT).show();
+
+                Intent activityListarProyectos = new Intent(MenuProyectos.this,ListarAntiguosProyectos.class);
                 activityListarProyectos.putExtra("listProyectos", (Serializable) listProyectos);
                 startActivity(activityListarProyectos);
 

@@ -40,7 +40,7 @@
     <string name="proyecto_activos">Lista de proyectos</string>
     <string name="editar_proyecto">Editar proyecto</string>
     <string name="crear_proyecto">Crear proyecto</string>
-    <string name="asignar_proyecto">Asignar proyecto a empleado</string>
+    <string name="asignar_proyecto">Asignar proyecto</string>
     <string name="asignar_empleado">Asignar empleado</string>
     <string name="logout">Cerrar sesión</string>
     <string name="mi_cuenta">Mi cuenta</string>
@@ -53,6 +53,7 @@
     <string name="antiguo_empleado">Listar antiguos empleados</string>
     <string name="menu_home">Home</string>
     <string name="antiguos">Antiguos Empleados</string>
+    <string name="antiguos_proyectos">Antiguos Proyectos</string>
 
 
 
