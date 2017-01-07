@@ -49,6 +49,7 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
     ProgressDialog pDialog;
 
     ImageView gif;
+    AnimationDrawable frame;
 
     ArrayList<String> mostrarEmpleados = new ArrayList<>();
     ArrayList<String> idEmpleados = new ArrayList<>();
@@ -67,7 +68,7 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
 
         gif = (ImageView) findViewById(R.id.gif);
         gif.setBackgroundResource(R.drawable.gif_empleado);
-        AnimationDrawable frame = (AnimationDrawable) gif.getBackground();
+        frame = (AnimationDrawable) gif.getBackground();
         frame.start();
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
@@ -121,6 +122,13 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
     public void registrarEmpleado(){
         Intent crearEmpleado = new Intent(MenuEmpleados.this, CrearEmpleado.class);
         startActivity(crearEmpleado);
+    }
+
+    @Override
+    protected void onDestroy() {
+        frame.stop();
+        super.onDestroy();
+
     }
 
 

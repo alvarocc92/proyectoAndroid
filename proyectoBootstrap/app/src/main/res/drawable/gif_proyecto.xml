@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+        android:drawable="@drawable/proyecto_12" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_13" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_14" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_15" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_16" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_17" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_18" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_19" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_20" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_21" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_22" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_23" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_24" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_25" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_26" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_27" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_28" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_29" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_30" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_31" android:duration="100"></item>
+    <item
+        android:drawable="@drawable/proyecto_32" android:duration="100"></item>
+
+</animation-list>

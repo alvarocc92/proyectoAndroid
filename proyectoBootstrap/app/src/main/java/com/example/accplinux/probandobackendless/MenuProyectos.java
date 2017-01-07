@@ -3,6 +3,7 @@ package com.example.accplinux.probandobackendless;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
@@ -34,6 +36,9 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
     ProgressDialog pDialog;
     Toolbar toolbar;
 
+    ImageView gif;
+    AnimationDrawable frame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +49,14 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
         antiguosProyectos = (BootstrapButton) findViewById(R.id.proyectosFinalizados);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
 
-
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        gif = (ImageView) findViewById(R.id.gifProyecto);
+        gif.setBackgroundResource(R.drawable.gif_proyecto);
+        frame = (AnimationDrawable) gif.getBackground();
+        frame.start();
 
         newProyecto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +95,12 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
             }
         });
 
+    }
+
+    @Override
+    public void onDestroy(){
+        frame.stop();
+        super.onDestroy();
     }
 
     @Override
