@@ -20,6 +20,7 @@ public class Proyecto implements Serializable{
     private Boolean finalizado;
     private String objectId;
     private List<Empleado> empleadoAsignados = new ArrayList<>();
+    private List<Gastos> listGastos = new ArrayList<>();
 
     public Proyecto(){
 
@@ -107,5 +108,13 @@ public class Proyecto implements Serializable{
 
     public void setEmpleadoAsignados(List<Empleado> empleadoAsignados) {
         this.empleadoAsignados = empleadoAsignados;
+    }
+
+    public List<Gastos> getListGastos() {
+        return listGastos;
+    }
+
+    public void setListGastos(List<Gastos> listGastos) {
+        this.listGastos = listGastos;
     }
 }
