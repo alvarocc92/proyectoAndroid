@@ -54,7 +54,7 @@
     <string name="menu_home">Home</string>
     <string name="antiguos">Antiguos Empleados</string>
     <string name="antiguos_proyectos">Antiguos Proyectos</string>
-
-
-
+    <string name="descripcion_gasto">Descripción del gasto</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="guardar_gasto">Guardar Gasto</string>
 </resources>

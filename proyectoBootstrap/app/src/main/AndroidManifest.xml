@@ -138,7 +138,16 @@
 
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
-        <activity android:name=".ListarProyectosInformes"></activity>
+        <activity
+            android:name=".ListarProyectosInformes"
+            android:label="@string/informes"
+            android:parentActivityName=".MenuPrincipal">
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".MenuInformesDetalles" />
+        <activity android:name=".GastoProyecto"></activity>
     </application>
 
 </manifest>

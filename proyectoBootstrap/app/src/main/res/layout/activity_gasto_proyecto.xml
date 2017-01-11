@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/activity_gasto_proyecto"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+tools:context="com.example.accplinux.probandobackendless.GastoProyecto">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#E0F7FA"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/toolbar"
+            ></include>
+
+        <LinearLayout android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/iconoEmpleado"
+                    android:background="@drawable/nuevo_proyecto"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="135dp"
+                    android:contentDescription="@string/crear_proyecto"/>
+            </RelativeLayout>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:id="@+id/descripcion"
+                android:inputType="text"
+                android:hint="@string/descripcion_gasto"
+                android:textColorHighlight="#ff7eff15"
+                android:textColorHint="#26A69A"
+                android:focusable="true"
+                android:background="#f3f3f3"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:background="#f3f3f3"
+                android:id="@+id/cantidad"
+                android:hint="@string/cantidad"
+                android:focusable="true"
+                android:textColorHighlight="#ff7eff15"
+                android:textColorHint="#26A69A"
+                android:inputType="number" />
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:text="@string/guardar_gasto"
+                android:layout_width="190dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:id="@+id/guardarGasto"
+                style="@style/wrapping_button"
+                app:bootstrapBrand="primary"
+                app:roundedCorners="true"
+                app:showOutline="true"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#DCEDC8">
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

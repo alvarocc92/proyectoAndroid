@@ -1,9 +1,12 @@
 package com.example.accplinux.probandobackendless;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -18,14 +21,18 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuInformes extends AppCompatActivity {
+public class MenuInformes extends AppCompatActivity implements OnChartGestureListener {
 
     BarChart chart ;
+    Proyecto proyecto;
+    List<Empleado> listEmpleados = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +41,38 @@ public class MenuInformes extends AppCompatActivity {
 
         chart = (BarChart) findViewById(R.id.chart);
 
-        float[] group1 ={1.0f,2.0f,3.0f,4.0f,3.0f,8.0f,5.0f};
-        float[] group2 = {5.0f,3.0f,0.5f,4.0f,7.0f,10.0f,7.0f};
+        chart.setTouchEnabled(true);
+
+
+
+        proyecto = (Proyecto) getIntent().getSerializableExtra("proyecto");
+
+        listEmpleados.addAll(proyecto.getEmpleadoAsignados());
+
+        float presupuesto = proyecto.getPresupuesto();
+        float gastos = 0f;
+
+        for(int i = 0; i<listEmpleados.size(); i++){
+            if(listEmpleados.get(i).getSalario()!=null){
+                float salario = 0;
+                salario = (listEmpleados.get(i).getSalario().floatValue()/12);
+                gastos+=salario;
+            }
+        }
 
         List<BarEntry> entriesGroup1 = new ArrayList<>();
         List<BarEntry> entriesGroup2 = new ArrayList<>();
 
-        for(int i = 0; i < group1.length; i++) {
-            entriesGroup1.add(new BarEntry(i, group1[i]));
-            entriesGroup2.add(new BarEntry(i, group2[i]));
-        }
+        entriesGroup1.add(new BarEntry(0, presupuesto));
+        entriesGroup2.add(new BarEntry(1, gastos));
 
-        BarDataSet set1 = new BarDataSet(entriesGroup1, "Group 1");
-        BarDataSet set2 = new BarDataSet(entriesGroup2, "Group 2");
+        BarDataSet set1 = new BarDataSet(entriesGroup1, "Presupuesto");
+        set1.setColors(ColorTemplate.COLORFUL_COLORS);
+        BarDataSet set2 = new BarDataSet(entriesGroup2, "Gastos");
+        set2.setColors(ColorTemplate.MATERIAL_COLORS);
 
-        final String[] quarters = new String[] { "Enero" , "Febrero" , "Marzo" , "Abril" , "Mayo" , "Junio" , "Julio" };
+
+        final String[] quarters = new String[] { proyecto.getNombre()," " };
 
         IAxisValueFormatter formatter = new IAxisValueFormatter() {
 
@@ -67,11 +91,56 @@ public class MenuInformes extends AppCompatActivity {
         float barWidth = 0.45f;
 
         BarData data = new BarData(set1, set2);
-        data.setBarWidth(barWidth); // set the width of each bar
+        data.setBarWidth(barWidth);// set the width of each bar
+        chart.setOnChartGestureListener(this);
         chart.setData(data);
         chart.groupBars(-0.5f, groupSpace, barSpace); // perform the "explicit" grouping
 
         chart.invalidate();
+
+    }
+
+    @Override
+    public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+    }
+
+    @Override
+    public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+    }
+
+    @Override
+    public void onChartLongPressed(MotionEvent me) {
+
+        Intent menuInformeDetalles = new Intent(MenuInformes.this, MenuInformesDetalles.class);
+        menuInformeDetalles.putExtra("proyecto",proyecto);
+        Toast.makeText(this , "Detalle de: "+proyecto.getNombre(), Toast.LENGTH_LONG).show();
+        startActivity(menuInformeDetalles);
+    }
+
+    @Override
+    public void onChartDoubleTapped(MotionEvent me) {
+
+    }
+
+    @Override
+    public void onChartSingleTapped(MotionEvent me) {
+
+    }
+
+    @Override
+    public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+
+    }
+
+    @Override
+    public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+
+    }
+
+    @Override
+    public void onChartTranslate(MotionEvent me, float dX, float dY) {
 
     }
 }
