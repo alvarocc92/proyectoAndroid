@@ -147,7 +147,8 @@
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
         <activity android:name=".MenuInformesDetalles" />
-        <activity android:name=".GastoProyecto"></activity>
+        <activity android:name=".GastoProyecto" />
+        <activity android:name=".MenuAgenda"></activity>
     </application>
 
 </manifest>

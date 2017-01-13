@@ -24,9 +24,7 @@ import java.util.List;
 
 public class MenuPrincipal extends AppCompatActivity implements MenuItemCompat.OnActionExpandListener{
 
-    BootstrapCircleThumbnail empleados;
-    BootstrapCircleThumbnail proyectos;
-    BootstrapCircleThumbnail informes;
+    BootstrapCircleThumbnail empleados,proyectos,informes,agenda;
     Toolbar toolbar;
     ProgressDialog pDialog;
     List<Proyecto> listProyectos = new ArrayList<>();
@@ -41,6 +39,7 @@ public class MenuPrincipal extends AppCompatActivity implements MenuItemCompat.O
         empleados = (BootstrapCircleThumbnail) findViewById(R.id.empleados);
         proyectos = (BootstrapCircleThumbnail) findViewById(R.id.proyectos);
         informes = (BootstrapCircleThumbnail) findViewById(R.id.informes);
+        agenda = (BootstrapCircleThumbnail) findViewById(R.id.agenda);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
 
         setSupportActionBar(toolbar);
@@ -72,6 +71,14 @@ public class MenuPrincipal extends AppCompatActivity implements MenuItemCompat.O
 
                 CargarProyectos cargarAntiguos = new CargarProyectos();
                 cargarAntiguos.execute();
+            }
+        });
+
+        agenda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent menuAgenda = new Intent(MenuPrincipal.this,MenuAgenda.class);
+                startActivity(menuAgenda);
             }
         });
     }
