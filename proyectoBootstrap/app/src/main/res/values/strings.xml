@@ -57,6 +57,14 @@
     <string name="descripcion_gasto">Descripción del gasto</string>
     <string name="cantidad">Cantidad</string>
     <string name="guardar_gasto">Guardar Gasto</string>
+    <string name="titulo">Título</string>
+    <string name="description">Descripción</string>
+    <string name="localizacion">Localización</string>
+    <string name="crear_evento">Crear Evento</string>
     <string name="titulo_agenda">Agenda</string>
+
+
+
+
 
 </resources>

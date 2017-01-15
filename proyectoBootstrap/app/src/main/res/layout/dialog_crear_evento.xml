@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialogoReset"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:id="@+id/sendEmail"
+        android:scaleType="center"
+        android:background="#BBDEFB"
+        android:src="@android:drawable/ic_menu_agenda"
+        android:contentDescription="@string/app_name" />
+
+    <EditText
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/titulo"
+        android:gravity="center_horizontal"
+        android:focusable="true"
+        android:inputType="textEmailAddress"
+        android:hint="@string/titulo"
+        android:textSize="16sp"
+        android:ems="10"
+        android:ellipsize="start"
+        android:textColorHint="#afb42b"
+        android:textColorHighlight="#ff7eff15"
+        android:background="@drawable/edit_text_style"/>
+
+    <EditText
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/description"
+        android:gravity="center_horizontal"
+        android:focusable="true"
+        android:inputType="text"
+        android:hint="@string/description"
+        android:textSize="16sp"
+        android:ems="10"
+        android:ellipsize="start"
+        android:textColorHint="#afb42b"
+        android:textColorHighlight="#ff7eff15"
+        android:background="@drawable/edit_text_style"/>
+
+    <EditText
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/localizacion"
+        android:gravity="center_horizontal"
+        android:focusable="true"
+        android:inputType="text"
+        android:hint="@string/localizacion"
+        android:textSize="16sp"
+        android:ems="10"
+        android:ellipsize="start"
+        android:textColorHint="#afb42b"
+        android:textColorHighlight="#ff7eff15"
+        android:background="@drawable/edit_text_style"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#3E80B4"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_yes"
+            android:layout_width="162dp"
+            android:layout_height="30dp"
+            android:background="#AED581"
+            android:clickable="true"
+            android:text="@string/crear_evento" />
+
+        <Button
+            android:id="@+id/btn_no"
+            android:layout_width="162dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:background="#EF9A9A"
+            android:clickable="true"
+            android:text="@string/cancelar"/>
+    </LinearLayout>
+</LinearLayout>
