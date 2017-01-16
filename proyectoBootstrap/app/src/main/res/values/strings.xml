@@ -24,6 +24,7 @@
     <string name="empleado_email">Email</string>
     <string name="empleado_guardar">Guardar empleado</string>
     <string name="proyecto_guardar">Guardar proyecto</string>
+    <string name="proyecto_actualizar">Actualizar proyecto</string>
     <string name="listar_empleados">Listar empleados</string>
     <string name="listar_Proyectos">Listar proyectos</string>
     <string name="edit_empleado">Editar empleado</string>
@@ -39,7 +40,7 @@
     <string name="proyecto_activos">Lista de proyectos</string>
     <string name="editar_proyecto">Editar proyecto</string>
     <string name="crear_proyecto">Crear proyecto</string>
-    <string name="asignar_proyecto">Asignar proyecto a empleado</string>
+    <string name="asignar_proyecto">Asignar proyecto</string>
     <string name="asignar_empleado">Asignar empleado</string>
     <string name="logout">Cerrar sesión</string>
     <string name="mi_cuenta">Mi cuenta</string>
@@ -51,8 +52,16 @@
     <string name="cancelar">Cancelar</string>
     <string name="antiguo_empleado">Listar antiguos empleados</string>
     <string name="menu_home">Home</string>
-
-
+    <string name="antiguos">Antiguos Empleados</string>
+    <string name="antiguos_proyectos">Antiguos Proyectos</string>
+    <string name="descripcion_gasto">Descripción del gasto</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="guardar_gasto">Guardar Gasto</string>
+    <string name="titulo">Título</string>
+    <string name="description">Descripción</string>
+    <string name="localizacion">Localización</string>
+    <string name="crear_evento">Crear Evento</string>
+    <string name="titulo_agenda">Agenda</string>
 
 
 

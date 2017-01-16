@@ -67,7 +67,7 @@ public class GastoProyecto extends AppCompatActivity implements MenuItemCompat.O
             @Override
             public void handleResponse(Gastos gastos) {
                 Log.i("Empleado", "Nuevo gasto registrado");
-                proyecto.getListGastos().add(gastos);
+                //proyecto.getListGastos().add(gastos);
                 updateProyecto();
             }
 
