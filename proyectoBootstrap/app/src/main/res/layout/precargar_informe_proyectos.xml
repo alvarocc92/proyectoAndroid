@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/list_item_informe_proyecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:background="#f3f3f3"
+        android:layout_marginLeft="20dp" />
+
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        app:bootstrapBrand="primary"
+        app:roundedCorners="true"
+        android:id="@+id/gastoProyecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignEnd="@+id/list_item_informe_proyecto"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="5dp"
+        android:drawableStart="@android:drawable/ic_input_add"
+        app:bootstrapSize="xs" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        app:bootstrapBrand="danger"
+        app:roundedCorners="true"
+        android:id="@+id/verInforme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/gastoProyecto"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:drawableStart="@android:drawable/ic_menu_search"
+        app:bootstrapSize="xs" />
+
+
+</RelativeLayout>
