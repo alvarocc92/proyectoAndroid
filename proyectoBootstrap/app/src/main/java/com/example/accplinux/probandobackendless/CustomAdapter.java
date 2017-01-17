@@ -62,7 +62,7 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
                         "Si",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                deleteEmpleado(idEmpleado);                            }
+                                deleteEmpleado(idEmpleado, position);                            }
                         });
 
                 builder1.setNegativeButton(
@@ -90,7 +90,7 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
         });
         return view;
     }
-    public void deleteEmpleado(String idEmpleado){
+    public void deleteEmpleado(final String idEmpleado, final int position){
 
         Backendless.Persistence.of( Empleado.class ).findById(idEmpleado, new AsyncCallback<Empleado>() {
             @Override
@@ -101,9 +101,17 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
                 Backendless.Persistence.save(empleado, new BackendlessCallback<Empleado>() {
                     @Override
                     public void handleResponse(Empleado empleado) {
-                        Toast.makeText(context.getApplicationContext(), "Empleado eliminado.", Toast.LENGTH_LONG).show();
-                        Intent menuEmpleados = new Intent(context.getApplicationContext(),MenuEmpleados.class);
-                        context.startActivity(menuEmpleados);
+                        Toast.makeText(context.getApplicationContext(), "Empleado enviado a antiguos.", Toast.LENGTH_LONG).show();
+
+                        idEmpleados.remove(position);
+                        list.remove(position);
+                        Intent listEmpleados = new Intent(context,ListarEmpleados.class);
+                        listEmpleados.putExtra("listado",list);
+                        listEmpleados.putExtra("idEmpleados",idEmpleados);
+                        context.startActivity(listEmpleados);
+                        //Intent menuEmpleados = new Intent(context.getApplicationContext(),MenuEmpleados.class);
+                        //context.startActivity(menuEmpleados);
+
                     }
                     @Override
                     public void handleFault(BackendlessFault backendlessFault) {
@@ -120,34 +128,8 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
                 Toast.makeText(context.getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        /*Backendless.Persistence.of( Empleado.class ).findById(idEmpleado, new AsyncCallback<Empleado>() {
-            @Override
-            public void handleResponse(final Empleado empleado )
-            {
-                Backendless.Persistence.of( Empleado.class ).remove( empleado,new AsyncCallback<Long>(){
-                    public void handleResponse( Long response )
-                    {
-                        Toast.makeText(context.getApplicationContext(), "Empleado borrado.", Toast.LENGTH_LONG).show();
-
-                        Intent menuEmpleados = new Intent(context.getApplicationContext(),MenuEmpleados.class);
-                        context.startActivity(menuEmpleados);
-                        //notifyDataSetChanged();
-                    }
-                    public void handleFault( BackendlessFault fault )
-                    {
-                        Toast.makeText(context.getApplicationContext(), fault.getCode(), Toast.LENGTH_LONG).show();
-                        Toast.makeText(context.getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-            @Override
-            public void handleFault( BackendlessFault fault )
-            {
-                Toast.makeText(context.getApplicationContext(), fault.getCode(), Toast.LENGTH_LONG).show();
-                Toast.makeText(context.getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });*/
     }
+
     public void editEmpleado(String idEmpleado){
 
         Backendless.Persistence.of( Empleado.class ).findById(idEmpleado, new AsyncCallback<Empleado>() {
@@ -192,3 +174,31 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
     }
 
 }
+
+   /*Backendless.Persistence.of( Empleado.class ).findById(idEmpleado, new AsyncCallback<Empleado>() {
+            @Override
+            public void handleResponse(final Empleado empleado )
+            {
+                Backendless.Persistence.of( Empleado.class ).remove( empleado,new AsyncCallback<Long>(){
+                    public void handleResponse( Long response )
+                    {
+                        Toast.makeText(context.getApplicationContext(), "Empleado borrado.", Toast.LENGTH_LONG).show();
+
+                        Intent menuEmpleados = new Intent(context.getApplicationContext(),MenuEmpleados.class);
+                        context.startActivity(menuEmpleados);
+                        //notifyDataSetChanged();
+                    }
+                    public void handleFault( BackendlessFault fault )
+                    {
+                        Toast.makeText(context.getApplicationContext(), fault.getCode(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context.getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+            @Override
+            public void handleFault( BackendlessFault fault )
+            {
+                Toast.makeText(context.getApplicationContext(), fault.getCode(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context.getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });*/

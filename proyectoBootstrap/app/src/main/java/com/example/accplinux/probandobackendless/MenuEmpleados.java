@@ -229,7 +229,7 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
         return true;
     }
 
-    private class CargarEmpleados extends AsyncTask<Void, Integer, Boolean> {
+    public class CargarEmpleados extends AsyncTask<Void, Integer, Boolean> {
 
         @Override
         protected Boolean doInBackground(Void... params) {
@@ -238,7 +238,7 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
             final boolean[] acabado = {false};
 
             BackendlessDataQuery dataQuery = new BackendlessDataQuery();
-            dataQuery.setPageSize(20);
+            dataQuery.setPageSize(40);
 
             Backendless.Persistence.of(Empleado.class).find( dataQuery, new AsyncCallback<BackendlessCollection<Empleado>>(){
                 @Override
