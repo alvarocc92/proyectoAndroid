@@ -198,10 +198,14 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
                         if(foundContacts.getTotalObjects()>0){
 
                             for(int i = 0; i<foundContacts.getTotalObjects(); i++){
-
-                                String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
-                                mostrarEmpleados.add(nombreCompleto);
-                                idEmpleados.add(foundContacts.getData().get(i).getObjectId());
+                                if(foundContacts.getData().get(i).getAntiguo().equals(false)){
+                                    String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
+                                    mostrarEmpleados.add(nombreCompleto);
+                                    idEmpleados.add(foundContacts.getData().get(i).getObjectId());
+                                }
+                                //String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
+                                //mostrarEmpleados.add(nombreCompleto);
+                                //idEmpleados.add(foundContacts.getData().get(i).getObjectId());
                                 //listBusqueadaEmpleados.add(foundContacts.getData().get(i));
                             }
                             Intent listEmpleados = new Intent(MenuEmpleados.this,ListarEmpleados.class);
@@ -318,7 +322,7 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
             final boolean[] acabado = {false};
 
             BackendlessDataQuery dataQuery = new BackendlessDataQuery();
-            dataQuery.setPageSize(20);
+            dataQuery.setPageSize(40);
 
             Backendless.Persistence.of(Empleado.class).find( dataQuery, new AsyncCallback<BackendlessCollection<Empleado>>(){
                 @Override

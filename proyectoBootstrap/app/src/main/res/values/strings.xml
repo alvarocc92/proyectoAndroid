@@ -62,6 +62,14 @@
     <string name="localizacion">Localización</string>
     <string name="crear_evento">Crear Evento</string>
     <string name="titulo_agenda">Agenda</string>
+    <string name="pw_actual">Contraseña actual</string>
+    <string name="pw_nueva">Nueva contraseña</string>
+    <string name="confirmacion_pw">Confirmacion contraseña</string>
+    <string name="cambiar_pw">Cambiar contraseña</string>
+
+
+
+
 
 
 

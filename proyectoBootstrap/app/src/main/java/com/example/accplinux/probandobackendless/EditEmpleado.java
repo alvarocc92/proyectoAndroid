@@ -49,8 +49,6 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
         final int position = (int) getIntent().getSerializableExtra("position");
         antiguo = (boolean) getIntent().getSerializableExtra("antiguo");
 
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
