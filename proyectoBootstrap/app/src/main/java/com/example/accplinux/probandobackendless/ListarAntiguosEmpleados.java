@@ -19,13 +19,13 @@ import java.util.ArrayList;
 
 public class ListarAntiguosEmpleados extends AppCompatActivity implements MenuItemCompat.OnActionExpandListener{
 
-    ArrayList<String> listEmpleados = new ArrayList<>();
-    ArrayList<String> idEmpleados = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_antiguos_empleados);
+
+        ArrayList<String> listEmpleados = new ArrayList<>();
+        ArrayList<String> idEmpleados = new ArrayList<>();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);

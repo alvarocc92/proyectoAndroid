@@ -148,6 +148,8 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
                 listEmpleados.putExtra("listado", list);
                 listEmpleados.putExtra("idEmpleados", idEmpleados);
                 listEmpleados.putExtra("position", position);
+                listEmpleados.putExtra("antiguo",false);
+
                 context.startActivity(listEmpleados);
             }
 

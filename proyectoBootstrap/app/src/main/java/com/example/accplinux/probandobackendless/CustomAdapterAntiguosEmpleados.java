@@ -65,7 +65,7 @@ public class CustomAdapterAntiguosEmpleados extends BaseAdapter implements ListA
                         "Si",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                deleteEmpleado(idEmpleado);                            }
+                                deleteEmpleado(idEmpleado, position);                            }
                         });
 
                 builder1.setNegativeButton(
@@ -88,12 +88,12 @@ public class CustomAdapterAntiguosEmpleados extends BaseAdapter implements ListA
                 Log.i("Empleado", "id empleado: " + idEmpleados.get(position));
 
                 String idEmpleado = idEmpleados.get(position);
-                editEmpleado(idEmpleado);
+                editEmpleado(idEmpleado, position);
             }
         });
         return view;
     }
-    public void deleteEmpleado(String idEmpleado){
+    public void deleteEmpleado(String idEmpleado,final int position){
 
         Backendless.Persistence.of( Empleado.class ).findById(idEmpleado, new AsyncCallback<Empleado>() {
             @Override
@@ -104,9 +104,15 @@ public class CustomAdapterAntiguosEmpleados extends BaseAdapter implements ListA
                     {
                         Toast.makeText(context.getApplicationContext(), "Empleado borrado.", Toast.LENGTH_LONG).show();
 
-                        Intent menuEmpleados = new Intent(context.getApplicationContext(),MenuEmpleados.class);
-                        context.startActivity(menuEmpleados);
-                        //notifyDataSetChanged();
+                        idEmpleados.remove(position);
+                        list.remove(position);
+                        Intent listEmpleados = new Intent(context,ListarAntiguosEmpleados.class);
+                        listEmpleados.putExtra("listado",list);
+                        listEmpleados.putExtra("idEmpleados",idEmpleados);
+                        context.startActivity(listEmpleados);
+
+                        /*Intent menuEmpleados = new Intent(context.getApplicationContext(),MenuEmpleados.class);
+                        context.startActivity(menuEmpleados);*/
                     }
                     public void handleFault( BackendlessFault fault )
                     {
@@ -123,7 +129,7 @@ public class CustomAdapterAntiguosEmpleados extends BaseAdapter implements ListA
             }
         });
     }
-    public void editEmpleado(String idEmpleado){
+    public void editEmpleado(String idEmpleado, final int position){
 
         Backendless.Persistence.of( Empleado.class ).findById(idEmpleado, new AsyncCallback<Empleado>() {
             @Override
@@ -138,6 +144,10 @@ public class CustomAdapterAntiguosEmpleados extends BaseAdapter implements ListA
 
                 Intent listEmpleados = new Intent(context.getApplicationContext(),EditEmpleado.class);
                 listEmpleados.putExtra("empleado",empleado);
+                listEmpleados.putExtra("listado", list);
+                listEmpleados.putExtra("idEmpleados", idEmpleados);
+                listEmpleados.putExtra("position", position);
+                listEmpleados.putExtra("antiguo",true);
                 context.startActivity(listEmpleados);
             }
 

@@ -28,6 +28,7 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
 
     EditText nombre,apellidos,email,direccion,movil,salario;
     BootstrapButton actualizarEmpleado;
+    boolean antiguo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
         final List<String> list = (List<String>) getIntent().getSerializableExtra("listado");
         final List<String> idEmpleados = (List<String>) getIntent().getSerializableExtra("idEmpleados");
         final int position = (int) getIntent().getSerializableExtra("position");
+        antiguo = (boolean) getIntent().getSerializableExtra("antiguo");
+
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
@@ -87,11 +90,19 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
 
                 list.remove(position);
                 list.add(position,empleado.getNombre()+" "+empleado.getApellidos());
-                Intent listEmpleados = new Intent(EditEmpleado.this,ListarEmpleados.class);
-                listEmpleados.putExtra("listado", (Serializable) list);
-                listEmpleados.putExtra("idEmpleados", (Serializable) idEmpleados);
-                Toast.makeText(getApplicationContext(), "Empleado actualizado.", Toast.LENGTH_LONG).show();
-                startActivity(listEmpleados);
+                if(antiguo){
+                    Intent listEmpleados = new Intent(EditEmpleado.this,ListarAntiguosEmpleados.class);
+                    listEmpleados.putExtra("listado", (Serializable) list);
+                    listEmpleados.putExtra("idEmpleados", (Serializable) idEmpleados);
+                    Toast.makeText(getApplicationContext(), "Empleado actualizado.", Toast.LENGTH_LONG).show();
+                    startActivity(listEmpleados);
+                }else{
+                    Intent listEmpleados = new Intent(EditEmpleado.this,ListarEmpleados.class);
+                    listEmpleados.putExtra("listado", (Serializable) list);
+                    listEmpleados.putExtra("idEmpleados", (Serializable) idEmpleados);
+                    Toast.makeText(getApplicationContext(), "Empleado actualizado.", Toast.LENGTH_LONG).show();
+                    startActivity(listEmpleados);
+                }
 
                 /*Intent menuEmpleados = new Intent(EditEmpleado.this, MenuEmpleados.class);
                 startActivity(menuEmpleados);*/
