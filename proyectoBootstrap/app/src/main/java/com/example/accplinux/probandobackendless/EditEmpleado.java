@@ -20,7 +20,9 @@ import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.OnActionExpandListener{
 
@@ -41,6 +43,10 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
         actualizarEmpleado = (BootstrapButton) findViewById(R.id.actualizarEmpleado);
 
         final Empleado empleado = (Empleado) getIntent().getSerializableExtra("empleado");
+        final List<String> list = (List<String>) getIntent().getSerializableExtra("listado");
+        final List<String> idEmpleados = (List<String>) getIntent().getSerializableExtra("idEmpleados");
+        final int position = (int) getIntent().getSerializableExtra("position");
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -58,12 +64,12 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
         actualizarEmpleado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actualizarEmpleado(empleado);
+                actualizarEmpleado(empleado, list, idEmpleados, position);
             }
         });
     }
 
-    public void actualizarEmpleado(Empleado empleado){
+    public void actualizarEmpleado(Empleado empleado,final List<String> list,final List<String> idEmpleados,final int position){
 
         empleado.setNombre(nombre.getText().toString());
         empleado.setApellidos(apellidos.getText().toString());
@@ -79,9 +85,16 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
                 Log.i("Empleado", "empleado actualizado" + empleado.getApellidos());
                 Log.i("Empleado", "id del empleado: " + empleado.getObjectId());
 
+                list.remove(position);
+                list.add(position,empleado.getNombre()+" "+empleado.getApellidos());
+                Intent listEmpleados = new Intent(EditEmpleado.this,ListarEmpleados.class);
+                listEmpleados.putExtra("listado", (Serializable) list);
+                listEmpleados.putExtra("idEmpleados", (Serializable) idEmpleados);
                 Toast.makeText(getApplicationContext(), "Empleado actualizado.", Toast.LENGTH_LONG).show();
-                Intent menuEmpleados = new Intent(EditEmpleado.this, MenuEmpleados.class);
-                startActivity(menuEmpleados);
+                startActivity(listEmpleados);
+
+                /*Intent menuEmpleados = new Intent(EditEmpleado.this, MenuEmpleados.class);
+                startActivity(menuEmpleados);*/
             }
             @Override
             public void handleFault(BackendlessFault backendlessFault) {

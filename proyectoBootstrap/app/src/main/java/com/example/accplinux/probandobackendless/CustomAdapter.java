@@ -85,7 +85,7 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
                 Log.i("Empleado", "id empleado: " + idEmpleados.get(position));
 
                 String idEmpleado = idEmpleados.get(position);
-                editEmpleado(idEmpleado);
+                editEmpleado(idEmpleado, position);
             }
         });
         return view;
@@ -130,7 +130,7 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
         });
     }
 
-    public void editEmpleado(String idEmpleado){
+    public void editEmpleado(String idEmpleado,final int position){
 
         Backendless.Persistence.of( Empleado.class ).findById(idEmpleado, new AsyncCallback<Empleado>() {
             @Override
@@ -145,6 +145,9 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
 
                 Intent listEmpleados = new Intent(context.getApplicationContext(),EditEmpleado.class);
                 listEmpleados.putExtra("empleado",empleado);
+                listEmpleados.putExtra("listado", list);
+                listEmpleados.putExtra("idEmpleados", idEmpleados);
+                listEmpleados.putExtra("position", position);
                 context.startActivity(listEmpleados);
             }
 
