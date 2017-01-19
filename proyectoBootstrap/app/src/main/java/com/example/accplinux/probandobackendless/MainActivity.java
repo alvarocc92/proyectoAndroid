@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
             }
         };
-        Backendless.UserService.login(user.getEmail(), user.getPassword(), callback);
+        Backendless.UserService.login(user.getEmail(), user.getPassword(), callback,true);
     }
 
     /**

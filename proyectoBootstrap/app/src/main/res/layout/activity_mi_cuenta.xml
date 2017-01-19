@@ -19,7 +19,7 @@
             layout="@layout/toolbar"
             ></include>
 
-        
+
         <LinearLayout android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginLeft="16dp"
@@ -40,31 +40,6 @@
                     android:layout_marginEnd="135dp"
                     android:contentDescription="@string/crear_proyecto"/>
             </RelativeLayout>
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="30dp"
-                android:id="@+id/email"
-                android:inputType="textEmailAddress"
-                android:hint="@string/empleado_email"
-                android:textColorHighlight="#ff7eff15"
-                android:textColorHint="#26A69A"
-                android:focusable="true"
-                android:background="#f3f3f3"/>
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="15dp"
-                android:background="#f3f3f3"
-                android:id="@+id/contraseñaActual"
-                android:hint="@string/pw_actual"
-                android:focusable="true"
-                android:textColorHighlight="#ff7eff15"
-                android:textColorHint="#26A69A"
-                android:inputType="textPassword"/>
-
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
@@ -87,7 +62,7 @@
                 android:focusable="true"
                 android:textColorHighlight="#ff7eff15"
                 android:textColorHint="#26A69A"
-                android:inputType="date"/>
+                android:inputType="textPassword"/>
 
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:text="@string/cambiar_pw"
