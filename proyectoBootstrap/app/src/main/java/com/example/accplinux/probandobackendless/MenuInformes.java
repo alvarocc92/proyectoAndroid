@@ -26,13 +26,15 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MenuInformes extends AppCompatActivity implements OnChartGestureListener {
 
     BarChart chart ;
     Proyecto proyecto;
-    List<Empleado> listEmpleados = new ArrayList<>();
+    List<Empleado> listEmpleados;
+    List<Gastos> listGastos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,24 +42,37 @@ public class MenuInformes extends AppCompatActivity implements OnChartGestureLis
         setContentView(R.layout.activity_menu_informes);
 
         chart = (BarChart) findViewById(R.id.chart);
-
         chart.setTouchEnabled(true);
-
-
 
         proyecto = (Proyecto) getIntent().getSerializableExtra("proyecto");
 
+        listEmpleados = new ArrayList<>();
         listEmpleados.addAll(proyecto.getEmpleadoAsignados());
+
+        listGastos = new ArrayList<>();
+        listGastos.addAll(proyecto.getListGastos());
 
         float presupuesto = proyecto.getPresupuesto();
         float gastos = 0f;
 
+        Date fechaIni = proyecto.getFechaInicio();
+        Date fechaFin = proyecto.getFechaFin();
+
+        long diferencia = fechaFin.getTime()-fechaIni.getTime();
+        long dias = diferencia / (1000*60*60*24);
+
+        long meses = dias / 28;
+
         for(int i = 0; i<listEmpleados.size(); i++){
             if(listEmpleados.get(i).getSalario()!=null){
                 float salario = 0;
-                salario = (listEmpleados.get(i).getSalario().floatValue()/12);
+                salario = ((listEmpleados.get(i).getSalario().floatValue()/12)*meses);
                 gastos+=salario;
             }
+        }
+
+        for(int i = 0; i<listGastos.size(); i++){
+            gastos+=listGastos.get(i).getCantidad();
         }
 
         List<BarEntry> entriesGroup1 = new ArrayList<>();
@@ -75,7 +90,6 @@ public class MenuInformes extends AppCompatActivity implements OnChartGestureLis
         final String[] quarters = new String[] { proyecto.getNombre()," " };
 
         IAxisValueFormatter formatter = new IAxisValueFormatter() {
-
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
                 return quarters[(int) value];

@@ -9,9 +9,11 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:paddingLeft="8dp"
+        android:layout_marginLeft="20dp"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="#f3f3f3" />
+
     <com.beardedhen.androidbootstrap.BootstrapButton
         app:bootstrapBrand="primary"
         app:roundedCorners="true"
@@ -23,8 +25,8 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
         android:drawableLeft="@android:drawable/ic_menu_edit"
-        app:bootstrapSize="xs"
-        />
+        app:bootstrapSize="xs" />
+
     <com.beardedhen.androidbootstrap.BootstrapButton
         app:bootstrapBrand="regular"
         app:roundedCorners="true"

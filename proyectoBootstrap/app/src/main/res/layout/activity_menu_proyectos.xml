@@ -5,10 +5,6 @@
     android:id="@+id/activity_menu_proyectos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/bootstrap_gray_lighter"
     tools:context="com.example.accplinux.probandobackendless.MenuProyectos">
 
@@ -18,36 +14,36 @@
     </include>
 
     <com.beardedhen.androidbootstrap.BootstrapButton
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/listarProyectos"
         android:text="@string/listar_Proyectos"
         android:layout_marginTop="81dp"
         android:layout_below="@+id/newProyecto"
-        android:layout_alignParentStart="true"
-        app:bootstrapBrand="info"
+        android:layout_centerHorizontal="true"
+        app:bootstrapBrand="success"
         app:roundedCorners="true"/>
 
     <com.beardedhen.androidbootstrap.BootstrapButton
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/newProyecto"
         android:text="@string/newProyecto"
-        app:bootstrapBrand="success"
+        app:bootstrapBrand="info"
         android:layout_marginTop="81dp"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         app:roundedCorners="true"/>
 
     <com.beardedhen.androidbootstrap.BootstrapButton
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:id="@+id/proyectosFinalizados"
         app:bootstrapBrand="danger"
         android:text="@string/proyectos_finalizados"
         android:layout_marginTop="82dp"
         android:layout_below="@+id/listarProyectos"
-        android:layout_alignParentStart="true"
         app:roundedCorners="true"/>
 
     <ImageView

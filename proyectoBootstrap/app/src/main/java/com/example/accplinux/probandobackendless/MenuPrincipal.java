@@ -16,6 +16,7 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessCollection;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.BackendlessDataQuery;
 import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
 
 import java.io.Serializable;
@@ -69,8 +70,8 @@ public class MenuPrincipal extends AppCompatActivity implements MenuItemCompat.O
                 pDialog.setCancelable(true);
                 pDialog.setMax(100);
 
-                CargarProyectos cargarAntiguos = new CargarProyectos();
-                cargarAntiguos.execute();
+                CargarProyectos cargarProyectos = new CargarProyectos();
+                cargarProyectos.execute();
             }
         });
 
@@ -146,7 +147,10 @@ public class MenuPrincipal extends AppCompatActivity implements MenuItemCompat.O
 
             final boolean[] acabado = {false};
 
-            Backendless.Persistence.of(Proyecto.class).find(new AsyncCallback<BackendlessCollection<Proyecto>>(){
+            BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+            dataQuery.setPageSize(20);
+
+            Backendless.Persistence.of(Proyecto.class).find(dataQuery, new AsyncCallback<BackendlessCollection<Proyecto>>(){
                 @Override
                 public void handleResponse( BackendlessCollection<Proyecto> foundContacts )
                 {

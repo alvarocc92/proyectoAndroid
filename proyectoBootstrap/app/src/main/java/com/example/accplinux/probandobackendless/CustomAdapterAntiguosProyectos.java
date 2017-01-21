@@ -60,7 +60,7 @@ public class CustomAdapterAntiguosProyectos extends BaseAdapter implements ListA
             @Override
             public void onClick(View v)  {
                 Log.i("Proyecto", "id proyecto: " + listProyectos.get(position).getObjectId());
-                editProyecto(listProyectos.get(position));
+                editProyecto(listProyectos.get(position),position);
             }
         });
 
@@ -98,9 +98,13 @@ public class CustomAdapterAntiguosProyectos extends BaseAdapter implements ListA
         return view;
     }
 
-    public void editProyecto(Proyecto proyecto){
+    public void editProyecto(Proyecto proyecto, final int position){
         Intent listarProyectos = new Intent(context.getApplicationContext(),EditProyecto.class);
         listarProyectos.putExtra("proyecto",proyecto);
+        listarProyectos.putExtra("proyecto",proyecto);
+        listarProyectos.putExtra("antiguo",false);
+        listarProyectos.putExtra("position",position);
+        listarProyectos.putExtra("listProyectos", (Serializable) listProyectos);
         context.startActivity(listarProyectos);
     }
 

@@ -61,7 +61,7 @@ public class CustomAdapterProyectos extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v)  {
                 Log.i("Proyecto", "id proyecto: " + listProyectos.get(position).getObjectId());
-                editProyecto(listProyectos.get(position));
+                editProyecto(listProyectos.get(position), position);
             }
         });
 
@@ -85,9 +85,14 @@ public class CustomAdapterProyectos extends BaseAdapter implements ListAdapter {
         return view;
     }
 
-    public void editProyecto(Proyecto proyecto){
+    public void editProyecto(Proyecto proyecto, final int position){
+
         Intent listarProyectos = new Intent(context.getApplicationContext(),EditProyecto.class);
         listarProyectos.putExtra("proyecto",proyecto);
+        listarProyectos.putExtra("antiguo",false);
+        listarProyectos.putExtra("position",position);
+        listarProyectos.putExtra("listProyectos", (Serializable) listProyectos);
+
         context.startActivity(listarProyectos);
     }
 
@@ -114,7 +119,7 @@ public class CustomAdapterProyectos extends BaseAdapter implements ListAdapter {
             final boolean[] acabado = {false};
 
             BackendlessDataQuery dataQuery = new BackendlessDataQuery();
-            dataQuery.setPageSize(20);
+            dataQuery.setPageSize(40);
 
             Backendless.Persistence.of(Empleado.class).find(dataQuery, new AsyncCallback<BackendlessCollection<Empleado>>(){
                 @Override
@@ -170,6 +175,8 @@ public class CustomAdapterProyectos extends BaseAdapter implements ListAdapter {
                 Intent asignarProyecto = new Intent(context.getApplicationContext(),AsignarProyectoEmpleado.class);
                 asignarProyecto.putExtra("proyecto",proyecto);
                 asignarProyecto.putExtra("listEmpleados",(Serializable) listEmpleados);
+                asignarProyecto.putExtra("listProyectos",(Serializable) listProyectos);
+
                 context.startActivity(asignarProyecto);
             }
         }

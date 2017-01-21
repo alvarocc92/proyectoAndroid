@@ -255,7 +255,6 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
                                 idEmpleados.add(foundContacts.getData().get(i).getObjectId());
                             }
                     }
-
                     acabado[0] = true;
                     onPostExecute(acabado[0]);
                 }

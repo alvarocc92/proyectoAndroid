@@ -208,10 +208,12 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
         @Override
         protected Boolean doInBackground(Void... params) {
 
-
             final boolean[] acabado = {false};
 
-            Backendless.Persistence.of(Proyecto.class).find(new AsyncCallback<BackendlessCollection<Proyecto>>(){
+            BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+            dataQuery.setPageSize(20);
+
+            Backendless.Persistence.of(Proyecto.class).find(dataQuery, new AsyncCallback<BackendlessCollection<Proyecto>>(){
                 @Override
                 public void handleResponse( BackendlessCollection<Proyecto> foundContacts )
                 {
@@ -284,7 +286,10 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
 
             final boolean[] acabado = {false};
 
-            Backendless.Persistence.of(Proyecto.class).find(new AsyncCallback<BackendlessCollection<Proyecto>>(){
+            BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+            dataQuery.setPageSize(20);
+
+            Backendless.Persistence.of(Proyecto.class).find(dataQuery, new AsyncCallback<BackendlessCollection<Proyecto>>(){
                 @Override
                 public void handleResponse( BackendlessCollection<Proyecto> foundContacts )
                 {

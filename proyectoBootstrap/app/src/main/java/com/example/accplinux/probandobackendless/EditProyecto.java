@@ -21,9 +21,11 @@ import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class EditProyecto extends AppCompatActivity implements MenuItemCompat.OnActionExpandListener{
 
@@ -31,6 +33,7 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
     EditText nombre,jefeProyecto,presupuesto,cliente,fechaInicio,fechaFin;
     //CheckBox proyectoAcabado;
     BootstrapButton actualizarProyecto;
+    boolean antiguo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,10 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
         setSupportActionBar(toolbar);
 
         final Proyecto proyecto = (Proyecto) getIntent().getSerializableExtra("proyecto");
+        final List<Proyecto> listProyectos = (List<Proyecto>) getIntent().getSerializableExtra("listProyectos");
+        final int position = (int) getIntent().getSerializableExtra("position");
+        antiguo = (boolean) getIntent().getSerializableExtra("antiguo");
+
 
         nombre.setText(proyecto.getNombre());
         jefeProyecto.setText(proyecto.getJefeProyecto());
@@ -71,28 +78,26 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        //proyectoAcabado.setText("Finalizado");
-
 
         Log.i("Proyecto", "id del proyecto: " + proyecto.getObjectId());
 
         actualizarProyecto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actualizarProyecto(proyecto);
+                actualizarProyecto(proyecto, listProyectos, position);
             }
         });
     }
 
-    public void actualizarProyecto(Proyecto proyecto){
+    public void actualizarProyecto(Proyecto proyecto, final List<Proyecto> listProyectos, final int position){
 
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
 
         proyecto.setNombre(nombre.getText().toString());
         proyecto.setJefeProyecto(jefeProyecto.getText().toString());
         proyecto.setPresupuesto(Long.parseLong(presupuesto.getText().toString()));
         proyecto.setCliente(cliente.getText().toString());
+
         try {
             proyecto.setFechaInicio(format.parse(fechaInicio.getText().toString()));
         } catch (ParseException e) {
@@ -103,7 +108,10 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         //proyecto.setFinalizado(Boolean.valueOf(proyectoAcabado.getText().toString()));
+        listProyectos.remove(position);
+        listProyectos.add(position, proyecto);
 
         Backendless.Persistence.save(proyecto, new BackendlessCallback<Proyecto>() {
             @Override
@@ -112,8 +120,18 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
                 Log.i("Proyecto", "id del proyecto: " + proyecto.getObjectId());
 
                 Toast.makeText(getApplicationContext(), "Proyecto actualizado.", Toast.LENGTH_LONG).show();
-                Intent menuEmpleados = new Intent(EditProyecto.this, MenuProyectos.class);
-                startActivity(menuEmpleados);
+
+                if(antiguo) {
+                    Intent listarProyectos = new Intent(EditProyecto.this, ListarProyectos.class);
+                    listarProyectos.putExtra("listProyectos", (Serializable) listProyectos);
+
+                    startActivity(listarProyectos);
+                }else{
+                    Intent listarProyectos = new Intent(EditProyecto.this, ListarAntiguosProyectos.class);
+                    listarProyectos.putExtra("listProyectos", (Serializable) listProyectos);
+
+                    startActivity(listarProyectos);
+                }
             }
             @Override
             public void handleFault(BackendlessFault backendlessFault) {

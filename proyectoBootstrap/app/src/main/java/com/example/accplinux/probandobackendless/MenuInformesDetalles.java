@@ -21,13 +21,15 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MenuInformesDetalles extends AppCompatActivity {
 
     PieChart chart ;
     Proyecto proyecto;
-    List<Empleado> listEmpleados = new ArrayList<>();
+    List<Empleado> listEmpleados;
+    List<Gastos> listGastos;
     List<PieEntry> entries = new ArrayList<>();
 
     @Override
@@ -39,14 +41,29 @@ public class MenuInformesDetalles extends AppCompatActivity {
 
         proyecto = (Proyecto) getIntent().getSerializableExtra("proyecto");
 
+        listEmpleados = new ArrayList<>();
         listEmpleados.addAll(proyecto.getEmpleadoAsignados());
+
+        listGastos = new ArrayList<>();
+        listGastos.addAll(proyecto.getListGastos());
+
+        Date fechaIni = proyecto.getFechaInicio();
+        Date fechaFin = proyecto.getFechaFin();
+
+        long diferencia = fechaFin.getTime()-fechaIni.getTime();
+        long dias = diferencia / (1000*60*60*24);
+
+        long meses = dias / 28;
 
         for(int i = 0; i<listEmpleados.size(); i++){
             if(listEmpleados.get(i).getSalario()!=null){
-                entries.add(new PieEntry(listEmpleados.get(i).getSalario().floatValue()/12, listEmpleados.get(i).getNombre()));
+                entries.add(new PieEntry((listEmpleados.get(i).getSalario().floatValue()/12)*meses, listEmpleados.get(i).getNombre()));
             }
         }
 
+        for(int i = 0; i<listGastos.size(); i++){
+            entries.add(new PieEntry(listGastos.get(i).getCantidad(), listGastos.get(i).getDescripcion()));
+        }
 
         PieDataSet set = new PieDataSet(entries, "Detalle Informe");
         set.setColors(ColorTemplate.COLORFUL_COLORS);

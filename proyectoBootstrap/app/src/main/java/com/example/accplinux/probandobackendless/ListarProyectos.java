@@ -29,7 +29,9 @@ public class ListarProyectos extends AppCompatActivity implements MenuItemCompat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_proyectos);
 
-        final List<Proyecto> listProyectos = (List<Proyecto>) getIntent().getSerializableExtra("listProyectos");
+        List<Proyecto> listProyectos = new ArrayList<>();
+
+        listProyectos =  (List<Proyecto>) getIntent().getSerializableExtra("listProyectos");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);

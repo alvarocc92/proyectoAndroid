@@ -48,16 +48,9 @@ public class CustomAdapterAsignarEmpleado extends BaseAdapter implements ListAda
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.precarga_asignar_empleados, null);
         }
-        /*boolean asignado = false;
-        for(int i = 0; i<empleadosAsignados.size();i++){
-            if(listEmpleados.get(position).getObjectId().equals(empleadosAsignados.get(i).getObjectId())){
-                asignado=true;
-                break;
-            }else{
-                asignado=false;
-            }
-        }*/
+
         if(listEmpleados.get(position).getDesasignado().equals(true)){
+
             final TextView listItemText = (TextView)view.findViewById(R.id.list_item_empleado);
             listItemText.setText(listEmpleados.get(position).getNombre()+" "+listEmpleados.get(position).getApellidos());
             BootstrapButton asignarEmpleado = (BootstrapButton) view.findViewById(R.id.asignar_empleado);
@@ -70,7 +63,7 @@ public class CustomAdapterAsignarEmpleado extends BaseAdapter implements ListAda
                 @Override
                 public void onClick(View v)  {
                     Log.i("AsignarProyecto", "id empleado: " + listEmpleados.get(position).getObjectId()+" .Nombre del empleado : "+ listEmpleados.get(position).getNombre());
-                    desAsignarProyectoEmpleado(listEmpleados.get(position),proyecto);
+                    desAsignarProyectoEmpleado(listEmpleados.get(position),proyecto, position);
                 }
             });
 
@@ -88,24 +81,153 @@ public class CustomAdapterAsignarEmpleado extends BaseAdapter implements ListAda
                 @Override
                 public void onClick(View v)  {
                     Log.i("AsignarProyecto", "id empleado: " + listEmpleados.get(position).getObjectId()+" .Nombre del empleado : "+ listEmpleados.get(position).getNombre());
-                    asignarProyectoEmpleado(listEmpleados.get(position),proyecto);
+                    asignarProyectoEmpleado(listEmpleados.get(position), proyecto, position);
                 }
             });
         }
-        /*final TextView listItemText = (TextView)view.findViewById(R.id.list_item_empleado);
-        listItemText.setText(listEmpleados.get(position).getNombre()+" "+listEmpleados.get(position).getApellidos());
-
-        BootstrapButton asignarEmpleado = (BootstrapButton) view.findViewById(R.id.asignar_empleado);
-
-        asignarEmpleado.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v)  {
-                Log.i("AsignarProyecto", "id empleado: " + listEmpleados.get(position).getObjectId()+" .Nombre del empleado : "+ listEmpleados.get(position).getNombre());
-                asignarProyectoEmpleado(listEmpleados.get(position),proyecto);
-            }
-        });*/
         return view;
     }
+
+    public void asignarProyectoEmpleado(final Empleado empleado, final Proyecto proyecto, final int position){
+
+        proyecto.getEmpleadoAsignados().add(empleado);
+        empleado.setProyecto(proyecto);
+        empleado.setDesasignado(true);
+
+        Backendless.Persistence.save(empleado, new BackendlessCallback<Empleado>() {
+
+            @Override
+            public void handleResponse(Empleado empleadoActualizado) {
+
+                Log.i("Empleado", "empleado asignado" + empleado.getNombre());
+                Log.i("Empleado", "id empleado asignado" + empleado.getObjectId());
+
+                listEmpleados.remove(position);
+                listEmpleados.add(position, empleadoActualizado);
+
+                Intent asignarProyectoEmpleado = new Intent(context.getApplicationContext(), AsignarProyectoEmpleado.class);
+
+                asignarProyectoEmpleado.putExtra("listEmpleados", (Serializable) listEmpleados);
+                asignarProyectoEmpleado.putExtra("proyecto", proyecto);
+
+                context.startActivity(asignarProyectoEmpleado);
+
+
+                Toast.makeText(context.getApplicationContext(), "Empleado asignado.", Toast.LENGTH_LONG).show();
+
+            }
+            @Override
+            public void handleFault(BackendlessFault backendlessFault) {
+                Toast.makeText(context.getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context.getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        Backendless.Persistence.save(proyecto, new BackendlessCallback<Proyecto>() {
+            @Override
+            public void handleResponse(Proyecto proyecto) {
+
+                Log.i("Empleado", "empleado asignado" + empleado.getNombre());
+                Log.i("Empleado", "id empleado asignado" + empleado.getObjectId());
+
+            }
+            @Override
+            public void handleFault(BackendlessFault backendlessFault) {
+                Toast.makeText(context.getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context.getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void desAsignarProyectoEmpleado(final Empleado empleado, Proyecto proyecto, final int position) {
+
+
+        proyecto.getEmpleadoAsignados().remove(empleado);
+
+        //para update la actividad
+
+        Backendless.Persistence.save(proyecto, new BackendlessCallback<Proyecto>() {
+            @Override
+            public void handleResponse(final Proyecto proyecto) {
+
+                empleado.setDesasignado(false);
+                empleado.setProyecto(null);
+
+                Backendless.Persistence.save(empleado, new BackendlessCallback<Empleado>() {
+                    @Override
+                    public void handleResponse(Empleado empleado) {
+
+                        listEmpleados.remove(position);
+                        listEmpleados.add(position, empleado);
+
+                        Log.i("Empleado", "empleado asignado" + empleado.getNombre());
+                        Log.i("Empleado", "id empleado asignado" + empleado.getObjectId());
+
+                        Toast.makeText(context.getApplicationContext(), "Empleado desasignado.", Toast.LENGTH_LONG).show();
+
+                        Intent asignarProyectoEmpleado = new Intent(context, AsignarProyectoEmpleado.class);
+
+                        asignarProyectoEmpleado.putExtra("listEmpleados", (Serializable) listEmpleados);
+                        asignarProyectoEmpleado.putExtra("proyecto",proyecto);
+
+                        context.startActivity(asignarProyectoEmpleado);
+
+                    }
+                    @Override
+                    public void handleFault(BackendlessFault backendlessFault) {
+                        Toast.makeText(context.getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context.getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                Log.i("Empleado", "empleado asignado" + empleado.getNombre());
+                Log.i("Empleado", "id empleado asignado" + empleado.getObjectId());
+
+            }
+            @Override
+            public void handleFault(BackendlessFault backendlessFault) {
+                Toast.makeText(context.getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context.getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    @Override
+    public int getCount() {
+        return listEmpleados.size();
+    }
+
+    @Override
+    public Object getItem(int pos) {
+        return listEmpleados.get(pos);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+}
+
+     /* empleado.setDesasignado(false);
+        empleado.setProyecto(null);
+
+        Backendless.Persistence.save(empleado, new BackendlessCallback<Empleado>() {
+            @Override
+            public void handleResponse(Empleado empleado) {
+
+                Log.i("Empleado", "empleado asignado" + empleado.getNombre());
+                Log.i("Empleado", "id empleado asignado" + empleado.getObjectId());
+
+                Toast.makeText(context.getApplicationContext(), "Empleado desasignado.", Toast.LENGTH_LONG).show();
+
+            }
+            @Override
+            public void handleFault(BackendlessFault backendlessFault) {
+                Toast.makeText(context.getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context.getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
+            }
+        });*/
     /*public void deleteEmpleado(String idEmpleado){
 
         Backendless.Persistence.of( Empleado.class ).findById(idEmpleado, new AsyncCallback<Empleado>() {
@@ -136,99 +258,24 @@ public class CustomAdapterAsignarEmpleado extends BaseAdapter implements ListAda
             }
         });
     }*/
-    public void asignarProyectoEmpleado(final Empleado empleado, Proyecto proyecto){
+   /*final TextView listItemText = (TextView)view.findViewById(R.id.list_item_empleado);
+        listItemText.setText(listEmpleados.get(position).getNombre()+" "+listEmpleados.get(position).getApellidos());
 
-        proyecto.getEmpleadoAsignados().add(empleado);
-        empleado.setProyecto(proyecto);
-        empleado.setDesasignado(true);
+        BootstrapButton asignarEmpleado = (BootstrapButton) view.findViewById(R.id.asignar_empleado);
 
-
-        Backendless.Persistence.save(empleado, new BackendlessCallback<Empleado>() {
-
+        asignarEmpleado.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void handleResponse(Empleado empleado) {
-
-                Log.i("Empleado", "empleado asignado" + empleado.getNombre());
-                Log.i("Empleado", "id empleado asignado" + empleado.getObjectId());
-
-                Toast.makeText(context.getApplicationContext(), "Empleado asignado.", Toast.LENGTH_LONG).show();
-
-            }
-            @Override
-            public void handleFault(BackendlessFault backendlessFault) {
-                Toast.makeText(context.getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
-                Toast.makeText(context.getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        Backendless.Persistence.save(proyecto, new BackendlessCallback<Proyecto>() {
-            @Override
-            public void handleResponse(Proyecto proyecto) {
-
-                Log.i("Empleado", "empleado asignado" + empleado.getNombre());
-                Log.i("Empleado", "id empleado asignado" + empleado.getObjectId());
-
-            }
-            @Override
-            public void handleFault(BackendlessFault backendlessFault) {
-                Toast.makeText(context.getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
-                Toast.makeText(context.getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public void desAsignarProyectoEmpleado(final Empleado empleado, Proyecto proyecto) {
-
-
-        empleado.setDesasignado(false);
-
-        Backendless.Persistence.save(empleado, new BackendlessCallback<Empleado>() {
-            @Override
-            public void handleResponse(Empleado empleado) {
-
-                Log.i("Empleado", "empleado asignado" + empleado.getNombre());
-                Log.i("Empleado", "id empleado asignado" + empleado.getObjectId());
-
-                Toast.makeText(context.getApplicationContext(), "Empleado desasignado.", Toast.LENGTH_LONG).show();
-
-            }
-            @Override
-            public void handleFault(BackendlessFault backendlessFault) {
-                Toast.makeText(context.getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
-                Toast.makeText(context.getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
-            }
-        });
-        /*
-        proyecto.getEmpleadoAsignados().remove(0)
-        Backendless.Persistence.save(proyecto, new BackendlessCallback<Proyecto>() {
-            @Override
-            public void handleResponse(Proyecto proyecto) {
-
-                Log.i("Empleado", "empleado asignado" + empleado.getNombre());
-                Log.i("Empleado", "id empleado asignado" + empleado.getObjectId());
-
-            }
-            @Override
-            public void handleFault(BackendlessFault backendlessFault) {
-                Toast.makeText(context.getApplicationContext(), backendlessFault.getMessage(), Toast.LENGTH_LONG).show();
-                Toast.makeText(context.getApplicationContext(), backendlessFault.getCode(), Toast.LENGTH_LONG).show();
+            public void onClick(View v)  {
+                Log.i("AsignarProyecto", "id empleado: " + listEmpleados.get(position).getObjectId()+" .Nombre del empleado : "+ listEmpleados.get(position).getNombre());
+                asignarProyectoEmpleado(listEmpleados.get(position),proyecto);
             }
         });*/
-    }
-
-    @Override
-    public int getCount() {
-        return listEmpleados.size();
-    }
-
-    @Override
-    public Object getItem(int pos) {
-        return listEmpleados.get(pos);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-}
+      /*boolean asignado = false;
+        for(int i = 0; i<empleadosAsignados.size();i++){
+            if(listEmpleados.get(position).getObjectId().equals(empleadosAsignados.get(i).getObjectId())){
+                asignado=true;
+                break;
+            }else{
+                asignado=false;
+            }
+        }*/

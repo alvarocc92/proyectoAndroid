@@ -18,6 +18,7 @@ import com.backendless.Backendless;
 import com.backendless.BackendlessCollection;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.BackendlessDataQuery;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,11 +29,9 @@ public class AsignarProyectoEmpleado extends AppCompatActivity implements MenuIt
     //ArrayList<String> listEmpleados = new ArrayList<>();
     ArrayList<String> idEmpleados = new ArrayList<>();
     Proyecto proyecto;
-    List<Empleado> listEmpleados = new ArrayList<>();
     ProgressDialog pDialog;
-    List<Proyecto> listProyectos = new ArrayList<>();
-
-
+    List<Proyecto> listProyectos;
+    List<Empleado> listEmpleados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +41,12 @@ public class AsignarProyectoEmpleado extends AppCompatActivity implements MenuIt
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        //idEmpleados = getIntent().getExtras().getStringArrayList("idEmpleados");
-        //listEmpleados = getIntent().getExtras().getStringArrayList("nombreEmpleados");
+        listEmpleados = new ArrayList<>();
+        listProyectos = new ArrayList<>();
 
         proyecto = (Proyecto) getIntent().getExtras().getSerializable("proyecto");
         listEmpleados = (List<Empleado>) getIntent().getExtras().getSerializable("listEmpleados");
-
+        listProyectos = (List<Proyecto>) getIntent().getExtras().getSerializable("listProyectos");
 
         CustomAdapterAsignarEmpleado adapter = new CustomAdapterAsignarEmpleado(proyecto,listEmpleados,this);
 
@@ -58,12 +57,14 @@ public class AsignarProyectoEmpleado extends AppCompatActivity implements MenuIt
 
     @Override
     public void onBackPressed() {
-        //listEmpleados.clear();
+
         pDialog = new ProgressDialog(AsignarProyectoEmpleado.this);
         pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pDialog.setMessage("Cargando proyectos...");
         pDialog.setCancelable(true);
         pDialog.setMax(100);
+
+        listProyectos= new ArrayList<>();
 
         AsignarProyectoEmpleado.CargarProyectos cargarProyectos = new AsignarProyectoEmpleado.CargarProyectos();
         cargarProyectos.execute();
@@ -117,6 +118,7 @@ public class AsignarProyectoEmpleado extends AppCompatActivity implements MenuIt
     public boolean onMenuItemActionCollapse(MenuItem item) {
         return false;
     }
+
     private class CargarProyectos extends AsyncTask<Void, Integer, Boolean> {
 
         @Override
@@ -125,7 +127,10 @@ public class AsignarProyectoEmpleado extends AppCompatActivity implements MenuIt
 
             final boolean[] acabado = {false};
 
-            Backendless.Persistence.of(Proyecto.class).find(new AsyncCallback<BackendlessCollection<Proyecto>>(){
+            BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+            dataQuery.setPageSize(20);
+
+            Backendless.Persistence.of(Proyecto.class).find(dataQuery, new AsyncCallback<BackendlessCollection<Proyecto>>(){
                 @Override
                 public void handleResponse( BackendlessCollection<Proyecto> foundContacts )
                 {
