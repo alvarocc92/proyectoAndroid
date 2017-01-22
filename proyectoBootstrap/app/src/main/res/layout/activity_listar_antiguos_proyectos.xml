@@ -16,6 +16,6 @@
         android:layout_height="fill_parent"
         android:layout_below="@+id/tool_bar"
         tools:context="com.example.accplinux.probandobackendless.ListarAntiguosProyectos"
-        android:background="#DCEDC8">
+        android:background="#FFEBEE">
     </ListView>
 </RelativeLayout>

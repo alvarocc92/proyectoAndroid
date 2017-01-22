@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ public class ListarProyectos extends AppCompatActivity implements MenuItemCompat
 
     //ArrayList<String> listProyectos = new ArrayList<>();
     //ArrayList<String> idEmpleados = new ArrayList<>();
+    View activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,8 @@ public class ListarProyectos extends AppCompatActivity implements MenuItemCompat
         List<Proyecto> listProyectos = new ArrayList<>();
 
         listProyectos =  (List<Proyecto>) getIntent().getSerializableExtra("listProyectos");
+
+        activity = (View) findViewById(R.id.viewListProyectos);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -44,6 +50,7 @@ public class ListarProyectos extends AppCompatActivity implements MenuItemCompat
         ListView lView = (ListView)findViewById(R.id.activity_listar_proyectos);
         lView.setAdapter(customProyectos);
     }
+
     @Override
     public void onBackPressed() {
 

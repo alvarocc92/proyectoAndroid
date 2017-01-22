@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -50,6 +51,7 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
 
     ImageView gif;
     AnimationDrawable frame;
+    View actividad;
 
     ArrayList<String> mostrarEmpleados = new ArrayList<>();
     ArrayList<String> idEmpleados = new ArrayList<>();
@@ -65,6 +67,8 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
         newEmpleado = (BootstrapButton) findViewById(R.id.newEmpleado);
         listarEmpleados = (BootstrapButton) findViewById(R.id.listarEmpleados);
         listarAntiguosEmpleados = (BootstrapButton) findViewById(R.id.listarAntiguosEmpleados);
+
+        actividad = (View) findViewById(R.id.activity_menu_empleados);
 
         gif = (ImageView) findViewById(R.id.gif);
         gif.setBackgroundResource(R.drawable.gif_empleado);
@@ -129,6 +133,20 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
         frame.stop();
         super.onDestroy();
 
+        unbindDrawables(actividad);
+
+    }
+
+    private void unbindDrawables(View view) {
+        if (view.getBackground() != null) {
+            view.getBackground().setCallback(null);
+        }
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                unbindDrawables(((ViewGroup) view).getChildAt(i));
+            }
+            ((ViewGroup) view).removeAllViews();
+        }
     }
 
 

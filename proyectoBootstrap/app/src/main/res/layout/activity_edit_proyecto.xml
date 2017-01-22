@@ -31,7 +31,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:id="@+id/iconoEmpleado"
-                    android:background="@drawable/edit_project"
+                    android:background="@drawable/edit_project2"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="140dp"
                     android:contentDescription="@string/edit_empleado"/>

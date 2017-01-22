@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -39,6 +40,8 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
     ImageView gif;
     AnimationDrawable frame;
 
+    View actividad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,8 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
         newProyecto = (BootstrapButton) findViewById(R.id.newProyecto);
         antiguosProyectos = (BootstrapButton) findViewById(R.id.proyectosFinalizados);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
+
+        actividad = (View) findViewById(R.id.activity_menu_proyectos);
 
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -98,9 +103,30 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        unbindDrawables(actividad);
+        System.gc();
+    }
+
+    @Override
     public void onDestroy(){
         frame.stop();
         super.onDestroy();
+
+        unbindDrawables(actividad);
+    }
+
+    private void unbindDrawables(View view) {
+        if (view.getBackground() != null) {
+            view.getBackground().setCallback(null);
+        }
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                unbindDrawables(((ViewGroup) view).getChildAt(i));
+            }
+            ((ViewGroup) view).removeAllViews();
+        }
     }
 
     @Override

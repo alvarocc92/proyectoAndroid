@@ -49,7 +49,7 @@ public class CustomAdapterProyectos extends BaseAdapter implements ListAdapter {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.precargar_proyectos, null);
+            view = inflater.inflate(R.layout.precargar_proyectos, parent, false);
         }
         final TextView listItemText = (TextView)view.findViewById(R.id.list_item_proyecto);
         listItemText.setText(listProyectos.get(position).getNombre());
@@ -83,6 +83,19 @@ public class CustomAdapterProyectos extends BaseAdapter implements ListAdapter {
             }
         });
         return view;
+    }
+
+
+    private void unbindDrawables(View view) {
+        if (view.getBackground() != null) {
+            view.getBackground().setCallback(null);
+        }
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                unbindDrawables(((ViewGroup) view).getChildAt(i));
+            }
+            ((ViewGroup) view).removeAllViews();
+        }
     }
 
     public void editProyecto(Proyecto proyecto, final int position){
