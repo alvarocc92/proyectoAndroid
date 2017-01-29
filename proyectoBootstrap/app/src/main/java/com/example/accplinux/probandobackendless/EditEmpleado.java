@@ -55,9 +55,9 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
         nombre.setText(empleado.getNombre());
         apellidos.setText(empleado.getApellidos());
         email.setText(empleado.getEmail());
-        direccion.setText(empleado.getMovil());
-        movil.setText(empleado.getDireccion());
-        salario.setText(empleado.getSalario().toString());
+        direccion.setText(empleado.getDireccion());
+        movil.setText(empleado.getMovil());
+        salario.setText(empleado.getSalario().toString()+" €");
 
 
         Log.i("Empleado", "id del empleado: " + empleado.getObjectId());
@@ -77,7 +77,10 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
         empleado.setEmail(email.getText().toString());
         empleado.setDireccion(direccion.getText().toString());
         empleado.setMovil(movil.getText().toString());
-        empleado.setSalario(BigDecimal.valueOf(Long.parseLong(salario.getText().toString())));
+
+        String salarioString = salario.getText().toString();
+        String array[] = salarioString.split(" ", 2);
+        empleado.setSalario(BigDecimal.valueOf(Long.parseLong(array[0])));
 
 
         Backendless.Persistence.save(empleado, new BackendlessCallback<Empleado>() {

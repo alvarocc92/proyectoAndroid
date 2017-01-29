@@ -3,6 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
+    enforceUniquePackageName = false
 
     defaultConfig {
         minSdkVersion 23
@@ -15,4 +16,6 @@ android {
 dependencies {
     compile 'com.android.support:support-annotations:23.3.0'
     compile 'com.android.support:support-v4:24.0.0'
+    compile 'com.beardedhen:androidbootstrap:2.3.0'
+
 }
