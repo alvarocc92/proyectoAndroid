@@ -115,6 +115,18 @@
         app:hasBorder="true"
         android:layout_below="@+id/titulo_agenda"
         android:layout_alignParentEnd="true" />
+
+    <com.whygraphics.gifview.gif.GIFView
+        xmlns:gif_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_activity_gif_vie"
+        android:layout_margin="10dp"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/informes"
+        android:scaleType="center"
+        gif_view:gif_src="url:https://media.giphy.com/media/xTiTnpVDp86JbFCdzi/giphy.gif" />
+
     <!--
     <ImageView
         android:layout_width="200dp"

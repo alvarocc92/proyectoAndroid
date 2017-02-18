@@ -66,13 +66,6 @@
     <string name="pw_nueva">Nueva contraseña</string>
     <string name="confirmacion_pw">Confirmacion contraseña</string>
     <string name="cambiar_pw">Cambiar contraseña</string>
-
-
-
-
-
-
-
-
+    <string name="name_app">Aplicación RRHH</string>
 
 </resources>

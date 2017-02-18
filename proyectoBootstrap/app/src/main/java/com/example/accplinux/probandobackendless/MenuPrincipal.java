@@ -18,6 +18,7 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.BackendlessDataQuery;
 import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
+import com.whygraphics.gifview.gif.GIFView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class MenuPrincipal extends AppCompatActivity implements MenuItemCompat.O
     Toolbar toolbar;
     ProgressDialog pDialog;
     List<Proyecto> listProyectos = new ArrayList<>();
-
+    GIFView mGifView;
 
 
     @Override
@@ -44,6 +45,21 @@ public class MenuPrincipal extends AppCompatActivity implements MenuItemCompat.O
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
 
         setSupportActionBar(toolbar);
+
+
+        mGifView = (GIFView) findViewById(R.id.main_activity_gif_vie);
+
+        mGifView.setOnSettingGifListener(new GIFView.OnSettingGifListener() {
+            @Override
+            public void onSuccess(GIFView view, Exception e) {
+                mGifView.stop();
+                mGifView.setOnClickStartOrPause(true);
+            }
+            @Override
+            public void onFailure(GIFView view, Exception e) {
+
+            }
+        });
 
         empleados.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +98,12 @@ public class MenuPrincipal extends AppCompatActivity implements MenuItemCompat.O
                 startActivity(menuAgenda);
             }
         });
+    }
+
+    @Override
+    public void onDestroy(){
+        mGifView.stop();
+        super.onDestroy();
     }
 
     //impedir la tecla de Back del telefono para no volver a la activity login
