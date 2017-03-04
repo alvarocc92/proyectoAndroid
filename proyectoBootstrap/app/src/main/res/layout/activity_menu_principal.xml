@@ -126,24 +126,4 @@
         android:layout_below="@id/informes"
         android:scaleType="center"
         gif_view:gif_src="url:https://media.giphy.com/media/xTiTnpVDp86JbFCdzi/giphy.gif" />
-
-    <!--
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:id="@+id/empleados"
-        android:src="@drawable/empleados"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
-    <ImageView
-        android:clickable="true"
-        android:layout_width="200dp"
-        android:focusable="true"
-        android:onClick="onClick"
-        android:layout_height="200dp"
-        android:id="@+id/proyectos"
-        android:src="@drawable/iconodeproyecto"
-        android:layout_below="@+id/empleados"
-        android:layout_centerHorizontal="true" />
-        -->
 </RelativeLayout>

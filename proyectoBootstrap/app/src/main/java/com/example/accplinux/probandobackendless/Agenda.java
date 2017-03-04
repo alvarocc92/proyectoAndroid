@@ -16,8 +16,6 @@ public class Agenda {
     Date inicio;
     Date fin;
 
-
-
     public Agenda(String titulo, String localizacion, String description, Date inicio){
 
         this.titulo=titulo;
