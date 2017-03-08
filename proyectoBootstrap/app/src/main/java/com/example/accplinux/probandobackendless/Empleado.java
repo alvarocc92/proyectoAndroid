@@ -2,6 +2,7 @@ package com.example.accplinux.probandobackendless;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created by accplinux on 5/11/16.
@@ -18,8 +19,7 @@ public class Empleado implements Serializable{
     private Boolean antiguo;
     private BigDecimal salario;
     private Proyecto proyecto;
-
-
+    private Date fechaContratacion;
     private Boolean desasignado;
 
 
@@ -28,7 +28,7 @@ public class Empleado implements Serializable{
     }
 
 
-    public Empleado( String nombre, String apellidos,String email,String movil,String direccion,String objectId,BigDecimal salario,Boolean antiguo, Boolean desasignado)
+    public Empleado( String nombre, String apellidos,String email,String movil,String direccion,String objectId,BigDecimal salario,Boolean antiguo, Boolean desasignado, Date fechaContratacion)
     {
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -39,8 +39,8 @@ public class Empleado implements Serializable{
         this.salario = salario;
         this.antiguo=antiguo;
         this.desasignado = desasignado;
+        this.fechaContratacion = fechaContratacion;
     }
-
 
     public String getNombre() {
         return nombre;
@@ -121,4 +121,13 @@ public class Empleado implements Serializable{
     public void setDesasignado(Boolean desasignado) {
         this.desasignado = desasignado;
     }
+
+    public Date getFechaContratacion() {
+        return fechaContratacion;
+    }
+
+    public void setFechaContratacion(Date fechaContratacion) {
+        this.fechaContratacion = fechaContratacion;
+    }
+
 }

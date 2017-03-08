@@ -221,10 +221,6 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
                                     mostrarEmpleados.add(nombreCompleto);
                                     idEmpleados.add(foundContacts.getData().get(i).getObjectId());
                                 }
-                                //String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
-                                //mostrarEmpleados.add(nombreCompleto);
-                                //idEmpleados.add(foundContacts.getData().get(i).getObjectId());
-                                //listBusqueadaEmpleados.add(foundContacts.getData().get(i));
                             }
                             Intent listEmpleados = new Intent(MenuEmpleados.this,ListarEmpleados.class);
                             listEmpleados.putExtra("listado",mostrarEmpleados);
@@ -255,7 +251,6 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
 
         @Override
         protected Boolean doInBackground(Void... params) {
-
 
             final boolean[] acabado = {false};
 
@@ -410,55 +405,3 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
         }
     }
 }
-
-
-    /*public void cargarEmpleados() {
-        Backendless.Persistence.of(Empleado.class).find( new AsyncCallback<BackendlessCollection<Empleado>>(){
-            @Override
-            public void handleResponse( BackendlessCollection<Empleado> foundContacts )
-            {
-                int numEmpleados = foundContacts.getTotalObjects();
-                for(int i =0 ; i<foundContacts.getTotalObjects();i++){
-                    String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i).getApellidos();
-                    mostrarEmpleados.add(nombreCompleto);
-                    idEmpleados.add(foundContacts.getData().get(i).getObjectId());
-                }
-            }
-            @Override
-            public void handleFault( BackendlessFault fault )
-            {
-                Toast.makeText(getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(), fault.getCode(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-    private int randomProgress(int currentProgress, int maxProgress) {
-
-        if (random == null) {
-            random = new Random();
-        }
-
-        int prog = currentProgress + random.nextInt(5);
-
-        if (prog > maxProgress) {
-            prog -= maxProgress;
-        }
-
-        return prog;
-    }*/
-
-
-        /*listarEmpleados.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(bar.getProgress()==100){
-                    Intent listEmpleados = new Intent(MenuEmpleados.this,ListarEmpleados.class);
-                    listEmpleados.putExtra("listado",mostrarEmpleados);
-                    listEmpleados.putExtra("idEmpleados",idEmpleados);
-                    startActivity(listEmpleados);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Cargando empleados...", Toast.LENGTH_LONG).show();
-                }
-                }
-        });*/

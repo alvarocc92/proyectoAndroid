@@ -91,7 +91,7 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
 
     public void actualizarProyecto(Proyecto proyecto, final List<Proyecto> listProyectos, final int position){
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat format= new SimpleDateFormat("dd/MM/yyyy");
 
         proyecto.setNombre(nombre.getText().toString());
         proyecto.setJefeProyecto(jefeProyecto.getText().toString());

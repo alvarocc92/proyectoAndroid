@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/crearEmpleado"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="#E0F7FA">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -25,26 +26,23 @@
             android:layout_marginBottom="30dp"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <ImageView android:layout_width="60dp"
+                    android:layout_marginStart="105dp"
                     android:layout_height="60dp"
                     android:background="@drawable/nueva_empleada"
-                    android:layout_gravity="center_horizontal"
                     android:baselineAlignBottom="true"
-                    android:layout_alignEnd="@+id/iconoEmpleado"
-                    android:layout_marginEnd="66dp"
-                    android:contentDescription="@string/crear_proyecto"/>
+                    android:contentDescription="@string/app_crear_empleado"/>
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:id="@+id/iconoEmpleado"
                     android:background="@drawable/nuevo_empleado"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="121dp"
-                    android:contentDescription="@string/crear_proyecto"/>
-            </RelativeLayout>
+                    android:contentDescription="@string/app_crear_empleado"/>
+            </LinearLayout>
 
             <EditText
                 android:layout_width="fill_parent"
@@ -116,6 +114,17 @@
                 android:textColorHint="#26A69A"
                 android:inputType="number"
                 />
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:background="#f3f3f3"
+                android:id="@+id/fechaContratacion"
+                android:hint="@string/fecha_contratacion"
+                android:focusable="true"
+                android:textColorHighlight="#ff7eff15"
+                android:textColorHint="#26A69A"
+                android:inputType="date"/>
 
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:text="@string/empleado_guardar"

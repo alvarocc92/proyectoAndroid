@@ -22,11 +22,14 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.OnActionExpandListener{
 
-    EditText nombre,apellidos,email,direccion,movil,salario;
+    EditText nombre,apellidos,email,direccion,movil,salario,fechaContratacion;
     BootstrapButton actualizarEmpleado;
     boolean antiguo;
 
@@ -35,6 +38,9 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_empleado);
 
+        SimpleDateFormat input = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+        SimpleDateFormat output = new SimpleDateFormat("dd/MM/yyyy");
+
         nombre = (EditText) findViewById(R.id.nombre);
         apellidos = (EditText) findViewById(R.id.apellidos);
         email = (EditText) findViewById(R.id.empleado_email);
@@ -42,6 +48,7 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
         movil = (EditText) findViewById(R.id.empleado_movil);
         salario = (EditText) findViewById(R.id.salario);
         actualizarEmpleado = (BootstrapButton) findViewById(R.id.actualizarEmpleado);
+        fechaContratacion = (EditText) findViewById(R.id.fechaContratacion);
 
         final Empleado empleado = (Empleado) getIntent().getSerializableExtra("empleado");
         final List<String> list = (List<String>) getIntent().getSerializableExtra("listado");
@@ -59,6 +66,13 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
         movil.setText(empleado.getMovil());
         salario.setText(empleado.getSalario().toString()+" €");
 
+        try {
+            Date fechInicio = input.parse(empleado.getFechaContratacion().toString());
+            String fechIni = output.format(fechInicio);
+            fechaContratacion.setText(fechIni.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         Log.i("Empleado", "id del empleado: " + empleado.getObjectId());
 
@@ -72,11 +86,19 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
 
     public void actualizarEmpleado(Empleado empleado,final List<String> list,final List<String> idEmpleados,final int position){
 
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
         empleado.setNombre(nombre.getText().toString());
         empleado.setApellidos(apellidos.getText().toString());
         empleado.setEmail(email.getText().toString());
         empleado.setDireccion(direccion.getText().toString());
         empleado.setMovil(movil.getText().toString());
+
+        try {
+            empleado.setFechaContratacion(format.parse(fechaContratacion.getText().toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         String salarioString = salario.getText().toString();
         String array[] = salarioString.split(" ", 2);
