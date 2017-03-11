@@ -102,7 +102,7 @@ public class CustomAdapterAntiguosProyectos extends BaseAdapter implements ListA
         Intent listarProyectos = new Intent(context.getApplicationContext(),EditProyecto.class);
         listarProyectos.putExtra("proyecto",proyecto);
         listarProyectos.putExtra("proyecto",proyecto);
-        listarProyectos.putExtra("antiguo",false);
+        listarProyectos.putExtra("antiguo",true);
         listarProyectos.putExtra("position",position);
         listarProyectos.putExtra("listProyectos", (Serializable) listProyectos);
         context.startActivity(listarProyectos);

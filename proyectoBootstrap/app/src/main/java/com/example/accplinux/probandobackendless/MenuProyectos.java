@@ -380,29 +380,3 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
         }
     }
 }
-
-/*
-
-    public void cargarProyectos(){
-
-        Backendless.Persistence.of(Proyecto.class).find(new AsyncCallback<BackendlessCollection<Proyecto>>(){
-            @Override
-            public void handleResponse( BackendlessCollection<Proyecto> foundContacts )
-            {
-                for(int i =0 ; i<foundContacts.getTotalObjects();i++){
-                    listProyectos.add(foundContacts.getData().get(i));
-                     // String nombreCompleto = foundContacts.getData().get(i).getNombre()+" "+foundContacts.getData().get(i);
-                    //  mostrarProyectos.add(nombreCompleto);
-                   //  idProyectos.add(nombreCompleto);
-                }
-            }
-            @Override
-            public void handleFault( BackendlessFault fault )
-            {
-                Toast.makeText(getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(), fault.getCode(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
- */

@@ -179,31 +179,3 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter  {
     }
 
 }
-
-   /*Backendless.Persistence.of( Empleado.class ).findById(idEmpleado, new AsyncCallback<Empleado>() {
-            @Override
-            public void handleResponse(final Empleado empleado )
-            {
-                Backendless.Persistence.of( Empleado.class ).remove( empleado,new AsyncCallback<Long>(){
-                    public void handleResponse( Long response )
-                    {
-                        Toast.makeText(context.getApplicationContext(), "Empleado borrado.", Toast.LENGTH_LONG).show();
-
-                        Intent menuEmpleados = new Intent(context.getApplicationContext(),MenuEmpleados.class);
-                        context.startActivity(menuEmpleados);
-                        //notifyDataSetChanged();
-                    }
-                    public void handleFault( BackendlessFault fault )
-                    {
-                        Toast.makeText(context.getApplicationContext(), fault.getCode(), Toast.LENGTH_LONG).show();
-                        Toast.makeText(context.getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-            @Override
-            public void handleFault( BackendlessFault fault )
-            {
-                Toast.makeText(context.getApplicationContext(), fault.getCode(), Toast.LENGTH_LONG).show();
-                Toast.makeText(context.getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });*/

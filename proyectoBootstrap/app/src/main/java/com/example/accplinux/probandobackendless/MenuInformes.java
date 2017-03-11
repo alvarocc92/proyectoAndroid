@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -43,8 +44,14 @@ public class MenuInformes extends AppCompatActivity implements OnChartGestureLis
 
         chart = (BarChart) findViewById(R.id.chart);
         chart.setTouchEnabled(true);
+        chart.animateX(1000);
+        chart.animateY(1000);
 
         proyecto = (Proyecto) getIntent().getSerializableExtra("proyecto");
+
+        Description descripcion = new Description();
+        descripcion.setText("");
+        chart.setDescription(descripcion);
 
         listEmpleados = new ArrayList<>();
         listEmpleados.addAll(proyecto.getEmpleadoAsignados());

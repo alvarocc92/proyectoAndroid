@@ -11,8 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
         android:textSize="15sp"
-        android:textStyle="bold"
-        android:background="#f3f3f3" />
+        android:textStyle="bold"/>
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         app:bootstrapBrand="primary"

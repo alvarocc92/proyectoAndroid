@@ -54,22 +54,57 @@ public class NuevoProyecto extends AppCompatActivity implements MenuItemCompat.O
                 Proyecto proyecto= new Proyecto();
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-                proyecto.setNombre(nombreProyecto.getText().toString());
-                proyecto.setJefeProyecto(jefeProyecto.getText().toString());
-                proyecto.setPresupuesto(Long.parseLong(presupuesto.getText().toString()));
-                proyecto.setCliente(cliente.getText().toString());
-                try {
-                    proyecto.setFechaInicio(format.parse(fechaInicio.getText().toString()));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    proyecto.setFechaFin(format.parse(fechaFin.getText().toString()));
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                boolean valid = true;
+
+                if(nombreProyecto.getText().toString().length()>0 && nombreProyecto.getText()!=null){
+                    proyecto.setNombre(nombreProyecto.getText().toString());
+                }else{
+                    Toast.makeText(getApplicationContext(), "Nombre no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    valid = false;
                 }
 
-                guardarProyecto(proyecto);
+                if(jefeProyecto.getText().toString().length()>0 && jefeProyecto.getText()!=null){
+                    proyecto.setJefeProyecto(jefeProyecto.getText().toString());
+                }else{
+                    Toast.makeText(getApplicationContext(), "Jefe de proyecto no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    valid = false;
+                }
+
+                if(presupuesto.getText().toString().length()>0 && presupuesto.getText()!=null){
+                    proyecto.setPresupuesto(Long.parseLong(presupuesto.getText().toString()));
+                }else{
+                    Toast.makeText(getApplicationContext(), "Presupuesto no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    valid = false;
+                }
+                if(cliente.getText().toString().length()>0 && cliente.getText()!=null){
+                    proyecto.setCliente(cliente.getText().toString());
+                }else{
+                    Toast.makeText(getApplicationContext(), "Cliente no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    valid = false;
+                }
+
+                if(fechaFin.getText().toString().length()>0 && fechaInicio.getText().toString().length()>0){
+                    try {
+                        proyecto.setFechaFin(format.parse(fechaFin.getText().toString()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        proyecto.setFechaInicio(format.parse(fechaInicio.getText().toString()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if(proyecto.getFechaFin().before(proyecto.getFechaInicio())){
+                        Toast.makeText(getApplicationContext(), "Fecha inicio es superior a fecha fin", Toast.LENGTH_SHORT).show();
+                        valid = false;
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(), "Fecha inicio y fecha fin no pueden estar vacios", Toast.LENGTH_SHORT).show();
+                }
+
+                if(valid){
+                    guardarProyecto(proyecto);
+                }
             }
         });
     }

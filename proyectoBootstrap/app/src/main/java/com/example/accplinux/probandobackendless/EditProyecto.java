@@ -64,7 +64,7 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
 
         nombre.setText(proyecto.getNombre());
         jefeProyecto.setText(proyecto.getJefeProyecto());
-        presupuesto.setText(String.valueOf(proyecto.getPresupuesto()));
+        presupuesto.setText(proyecto.getPresupuesto().toString()+" €");
         cliente.setText(proyecto.getCliente());
 
         try {
@@ -95,7 +95,9 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
 
         proyecto.setNombre(nombre.getText().toString());
         proyecto.setJefeProyecto(jefeProyecto.getText().toString());
-        proyecto.setPresupuesto(Long.parseLong(presupuesto.getText().toString()));
+        String presupuestoString = presupuesto.getText().toString();
+        String array[] = presupuestoString.split(" ", 2);
+        proyecto.setPresupuesto(Long.parseLong(array[0]));
         proyecto.setCliente(cliente.getText().toString());
 
         try {
@@ -121,7 +123,7 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
 
                 Toast.makeText(getApplicationContext(), "Proyecto actualizado.", Toast.LENGTH_LONG).show();
 
-                if(antiguo) {
+                if(!antiguo) {
                     Intent listarProyectos = new Intent(EditProyecto.this, ListarProyectos.class);
                     listarProyectos.putExtra("listProyectos", (Serializable) listProyectos);
 

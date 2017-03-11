@@ -148,9 +148,22 @@
 
             <category android:name="android.intent.category.DEFAULT" />
         </activity>
-        <activity android:name=".MenuInformesDetalles" />
-        <activity android:name=".GastoProyecto" />
-        <activity android:name=".MenuAgenda"></activity>
+        <activity android:name=".MenuInformesDetalles">
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".GastoProyecto"
+            android:label="@string/gastos_proyecto">
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
+        <activity android:name=".MenuAgenda">
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </activity>
     </application>
 
 </manifest>

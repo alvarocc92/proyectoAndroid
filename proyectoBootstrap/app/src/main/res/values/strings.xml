@@ -32,7 +32,7 @@
     <string name="empleado_actualizar">Actualizar empleado</string>
     <string name="proyectos_finalizados">Proyectos finalizados</string>
     <string name="jefe_proyecto">Jefe de proyecto</string>
-    <string name="presupuesto">Presupuesto</string>
+    <string name="presupuesto">Presupuesto €</string>
     <string name="cliente">Cliente</string>
     <string name="fecha_inicio">Fecha de inicio</string>
     <string name="fecha_fin">Fecha de fin</string>
@@ -68,5 +68,6 @@
     <string name="cambiar_pw">Cambiar contraseña</string>
     <string name="name_app">Aplicación RRHH</string>
     <string name="fecha_contratacion">Fecha de contratación</string>
+    <string name="gastos_proyecto">Gastos proyecto</string>
 
 </resources>

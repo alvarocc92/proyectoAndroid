@@ -1,5 +1,6 @@
 package com.example.accplinux.probandobackendless;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -39,7 +41,17 @@ public class MenuInformesDetalles extends AppCompatActivity {
         setContentView(R.layout.activity_menu_informes_detalles);
         chart = (PieChart) findViewById(R.id.chartDetalles);
 
+        chart.setTransparentCircleColor(Color.BLACK);
+        chart.setTransparentCircleAlpha(125);
+        chart.setUsePercentValues(true);
+        chart.setCenterText("Detalle");
+        chart.animateX(1000);
+        chart.animateY(1000);
         proyecto = (Proyecto) getIntent().getSerializableExtra("proyecto");
+
+        Description descripcion = new Description();
+        descripcion.setText(proyecto.getNombre());
+        chart.setDescription(descripcion);
 
         listEmpleados = new ArrayList<>();
         listEmpleados.addAll(proyecto.getEmpleadoAsignados());
