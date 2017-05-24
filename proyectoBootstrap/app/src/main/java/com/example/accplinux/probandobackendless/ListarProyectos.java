@@ -23,9 +23,6 @@ import java.util.List;
 
 public class ListarProyectos extends AppCompatActivity implements MenuItemCompat.OnActionExpandListener{
 
-
-    //ArrayList<String> listProyectos = new ArrayList<>();
-    //ArrayList<String> idEmpleados = new ArrayList<>();
     View activity;
 
     @Override
@@ -43,7 +40,6 @@ public class ListarProyectos extends AppCompatActivity implements MenuItemCompat
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        //idEmpleados = getIntent().getExtras().getStringArrayList("idEmpleados");
 
         CustomAdapterProyectos customProyectos = new CustomAdapterProyectos(listProyectos, ListarProyectos.this);
 

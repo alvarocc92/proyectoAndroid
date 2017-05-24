@@ -4,7 +4,6 @@
     android:id="@+id/activity_menu_agenda"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="com.example.accplinux.probandobackendless.MenuAgenda">
     <com.github.tibolte.agendacalendarview.AgendaCalendarView
         android:id="@+id/agenda_calendar_view"

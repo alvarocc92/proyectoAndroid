@@ -135,7 +135,9 @@ public class AsignarProyectoEmpleado extends AppCompatActivity implements MenuIt
                 public void handleResponse( BackendlessCollection<Proyecto> foundContacts )
                 {
                     for(int i =0 ; i<foundContacts.getTotalObjects();i++){
-                        listProyectos.add(foundContacts.getData().get(i));
+                        if(foundContacts.getData().get(i).getFinalizado().equals(false)){
+                            listProyectos.add(foundContacts.getData().get(i));
+                        }
                     }
                     acabado[0] = true;
                     onPostExecute(acabado[0]);

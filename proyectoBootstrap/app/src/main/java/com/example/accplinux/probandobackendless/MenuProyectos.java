@@ -24,6 +24,8 @@ import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.backendless.persistence.BackendlessDataQuery;
 import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.whygraphics.gifview.gif.GIFView;
+
 import java.io.Serializable;
 
 
@@ -42,6 +44,8 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
 
     View actividad;
 
+    GIFView mGifView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +62,23 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        gif = (ImageView) findViewById(R.id.gifProyecto);
+        mGifView = (GIFView) findViewById(R.id.gif_menu_proyectos);
+        mGifView.setOnSettingGifListener(new GIFView.OnSettingGifListener() {
+            @Override
+            public void onSuccess(GIFView view, Exception e) {
+                mGifView.stop();
+                mGifView.setOnClickStartOrPause(true);
+            }
+            @Override
+            public void onFailure(GIFView view, Exception e) {
+
+            }
+        });
+
+        /*gif = (ImageView) findViewById(R.id.gifProyecto);
         gif.setBackgroundResource(R.drawable.gif_proyecto);
         frame = (AnimationDrawable) gif.getBackground();
-        frame.start();
+        frame.start();*/
 
         newProyecto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +121,9 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
 
     @Override
     protected void onPause() {
+        if(mGifView.isGifInitialized()){
+            mGifView.stop();
+        }
         super.onPause();
         unbindDrawables(actividad);
         System.gc();
@@ -111,7 +131,7 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
 
     @Override
     public void onDestroy(){
-        frame.stop();
+        //frame.stop();
         super.onDestroy();
 
         unbindDrawables(actividad);

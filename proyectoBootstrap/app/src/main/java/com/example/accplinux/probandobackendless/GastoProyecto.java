@@ -50,11 +50,27 @@ public class GastoProyecto extends AppCompatActivity implements MenuItemCompat.O
             public void onClick(View v) {
 
                 Gastos gasto = new Gastos();
+                boolean valid = true;
 
-                gasto.setDescripcion(descripcion.getText().toString());
-                gasto.setCantidad(Float.parseFloat(cantidad.getText().toString()));
-                gasto.setProyecto(proyecto);
-                guardarGastoProyecto(gasto);
+                if(descripcion.getText().toString()!= null && descripcion.getText().toString().length()>0){
+                    gasto.setDescripcion(descripcion.getText().toString());
+                }else{
+                    Toast.makeText(getApplicationContext(), "Descripción no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    valid = false;
+                }
+
+                if(cantidad.getText().toString()!= null && cantidad.getText().toString().length()>0){
+                    gasto.setCantidad(Float.parseFloat(cantidad.getText().toString()));
+                }else{
+                    Toast.makeText(getApplicationContext(), "Cantidad no puede estar vacío", Toast.LENGTH_SHORT).show();
+                    valid = false;
+                }
+
+                if(valid){
+                    gasto.setProyecto(proyecto);
+                    guardarGastoProyecto(gasto);
+                }
+
 
             }
         });

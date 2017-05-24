@@ -91,6 +91,15 @@
                 android:focusable="true"
                 android:inputType="date" />
 
+
+            <RadioButton
+                android:text="Finalizado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/finalizado"
+                android:layout_marginLeft="115dp"
+                 />
+
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:text="@string/proyecto_actualizar"
                 android:layout_width="190dp"

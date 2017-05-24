@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessCollection;
+import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
@@ -39,6 +40,7 @@ public class MenuAgenda extends AppCompatActivity implements  CalendarPickerCont
     Calendar minDate = Calendar.getInstance();
     Calendar maxDate = Calendar.getInstance();
     List<CalendarEvent> eventList = new ArrayList<>();
+    BackendlessUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +53,14 @@ public class MenuAgenda extends AppCompatActivity implements  CalendarPickerCont
         minDate.set(Calendar.DAY_OF_MONTH, 1);
         maxDate.add(Calendar.YEAR, 1);
 
+        currentUser = Backendless.UserService.CurrentUser();
+
         pDialog = new ProgressDialog(MenuAgenda.this);
         pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pDialog.setMessage("Cargando eventos...");
         pDialog.setCancelable(true);
         pDialog.setMax(100);
+
 
         CargarEventos cargareventos = new CargarEventos();
         cargareventos.execute();
@@ -184,7 +189,7 @@ public class MenuAgenda extends AppCompatActivity implements  CalendarPickerCont
 
     private void guardarEvento(Agenda event){
 
-        Backendless.Persistence.save(new Agenda(event.getTitulo(), event.getDescription(), event.getLocalizacion(),event.getInicio()), new BackendlessCallback<Agenda>() {
+        Backendless.Persistence.save(new Agenda(event.getTitulo(), event.getDescription(), event.getLocalizacion(),event.getInicio(),currentUser), new BackendlessCallback<Agenda>() {
             @Override
             public void handleResponse(Agenda empleado) {
 
@@ -210,14 +215,10 @@ public class MenuAgenda extends AppCompatActivity implements  CalendarPickerCont
     private class CargarEventos extends AsyncTask<Void, Integer, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
-
             final boolean[] acabado = {false};
-
             String busqueda = "inicio >= '"+minDate.getTime()+"'";
-
             BackendlessDataQuery dataQuery = new BackendlessDataQuery();
             dataQuery.setWhereClause( busqueda );
-
             Backendless.Persistence.of( Agenda.class ).find( dataQuery,
                     new AsyncCallback<BackendlessCollection<Agenda>>(){
                         @Override
@@ -229,14 +230,12 @@ public class MenuAgenda extends AppCompatActivity implements  CalendarPickerCont
 
                                     Agenda evento = foundContacts.getData().get(i);
 
-                                    if(evento.getFin()==null){
+                                    if(evento.getFin()==null && currentUser.getObjectId().equals(foundContacts.getData().get(i).getUsuario().getObjectId())){
                                         evento.setFin(evento.getInicio());
-
                                         Calendar inicio = Calendar.getInstance();
                                         Calendar fin = Calendar.getInstance();
                                         inicio.setTime(evento.getInicio());
                                         fin.setTime(evento.getFin());
-
                                         BaseCalendarEvent event = new BaseCalendarEvent(evento.getTitulo(), evento.getDescription(), evento.getLocalizacion(),
                                                 ContextCompat.getColor(getApplicationContext(), R.color.bootstrap_brand_success), inicio, fin, true);
                                         eventList.add(event);

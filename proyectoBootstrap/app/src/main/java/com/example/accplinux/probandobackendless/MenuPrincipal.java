@@ -102,7 +102,9 @@ public class MenuPrincipal extends AppCompatActivity implements MenuItemCompat.O
 
     @Override
     public void onDestroy(){
-        mGifView.stop();
+        if(mGifView.isGifInitialized()){
+            mGifView.stop();
+        }
         super.onDestroy();
     }
 

@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     EditText ed1, ed2;
     AwesomeTextView lostPw;
 
+    Boolean exit = false;
+
     private GoogleApiClient client;
 
     @Override
@@ -78,7 +80,17 @@ public class MainActivity extends AppCompatActivity {
     //impedir la tecla de Back del telefono para no volver a la activity login
     @Override
     public void onBackPressed() {
-
+        if(exit){
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***establece la actividad actual como la ultima de la última de la pila***//
+            startActivity(intent);
+            finish();
+            System.exit(0);
+        }else{
+            exit=true;
+            Toast.makeText(getApplicationContext(), "Pulse otra vez para salir.", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void dialogoRecuperarPw(){

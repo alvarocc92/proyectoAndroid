@@ -12,7 +12,6 @@
         android:layout_marginLeft="20dp"
         android:textSize="15sp"
         android:textStyle="bold"/>
-
     <com.beardedhen.androidbootstrap.BootstrapButton
         app:bootstrapBrand="primary"
         app:roundedCorners="true"
@@ -25,7 +24,6 @@
         android:layout_marginRight="5dp"
         android:drawableLeft="@android:drawable/ic_menu_edit"
         app:bootstrapSize="xs" />
-
     <com.beardedhen.androidbootstrap.BootstrapButton
         app:bootstrapBrand="regular"
         app:roundedCorners="true"
@@ -37,5 +35,4 @@
         android:drawableLeft="@android:drawable/btn_star"
         android:layout_marginRight="10dp"
         app:bootstrapSize="xs"/>
-
 </RelativeLayout>

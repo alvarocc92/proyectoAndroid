@@ -1,5 +1,8 @@
 package com.example.accplinux.probandobackendless;
 
+import com.backendless.Backendless;
+import com.backendless.BackendlessUser;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,16 +15,18 @@ public class Agenda {
     private String titulo;
     private String localizacion;
     private String description;
+    private BackendlessUser usuario;
 
     Date inicio;
     Date fin;
 
-    public Agenda(String titulo, String localizacion, String description, Date inicio){
+    public Agenda(String titulo, String localizacion, String description, Date inicio, BackendlessUser usuario){
 
         this.titulo=titulo;
         this.localizacion=localizacion;
         this.description=description;
         this.inicio=inicio;
+        this.usuario=usuario;
 
     }
 
@@ -67,6 +72,15 @@ public class Agenda {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+
+    public BackendlessUser getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(BackendlessUser usuario) {
+        this.usuario = usuario;
     }
 
 }

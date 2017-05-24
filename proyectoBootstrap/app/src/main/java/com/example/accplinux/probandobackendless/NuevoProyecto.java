@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -108,6 +107,7 @@ public class NuevoProyecto extends AppCompatActivity implements MenuItemCompat.O
             }
         });
     }
+
     public void guardarProyecto(Proyecto proyecto) {
 
         Backendless.Persistence.save(new Proyecto(proyecto.getNombre(), proyecto.getJefeProyecto(), proyecto.getPresupuesto(), proyecto.getCliente(), proyecto.getFechaInicio(),proyecto.getFechaFin(),false), new BackendlessCallback<Proyecto>() {
@@ -127,6 +127,7 @@ public class NuevoProyecto extends AppCompatActivity implements MenuItemCompat.O
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
@@ -163,6 +164,11 @@ public class NuevoProyecto extends AppCompatActivity implements MenuItemCompat.O
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 
     @Override

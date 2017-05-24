@@ -30,7 +30,6 @@ public class MiCuenta extends AppCompatActivity implements MenuItemCompat.OnActi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mi_cuenta);
 
-        //email = (EditText) findViewById(R.id.email);
         nuevaContraseña = (EditText) findViewById(R.id.nuevaContraseña);
         confirmacion = (EditText) findViewById(R.id.confirmacion);
         cambiarContraseña = (BootstrapButton) findViewById(R.id.cambiarContraseña);
@@ -41,13 +40,6 @@ public class MiCuenta extends AppCompatActivity implements MenuItemCompat.OnActi
         cambiarContraseña.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //BackendlessUser user = new BackendlessUser();
-
-                //user.setEmail(email.getText().toString());
-                //user.setPassword(contraseñaActual.getText().toString());
-
-                //modificarContraseña(user, nuevaContraseña.getText().toString(), confirmacion.getText().toString());
                 cambiarPw();
             }
         });
@@ -149,36 +141,3 @@ public class MiCuenta extends AppCompatActivity implements MenuItemCompat.OnActi
         return false;
     }
 }
-
-
-   /* public void modificarContraseña(BackendlessUser user, final String nuevaContraseña, final String confirmacion){
-
-        Backendless.UserService.login( user.getEmail(), user.getPassword(), new AsyncCallback<BackendlessUser>()
-        {
-            public void handleResponse( BackendlessUser user )
-            {
-                if(nuevaContraseña.equals(confirmacion)){
-                    user.setPassword(nuevaContraseña);
-                    Backendless.UserService.update( user, new AsyncCallback<BackendlessUser>()
-                    {
-                        public void handleResponse( BackendlessUser user )
-                        {
-                            Toast.makeText(getApplicationContext(), "Usuario actualizado.", Toast.LENGTH_LONG).show();
-                        }
-
-                        public void handleFault( BackendlessFault fault )
-                        {
-                            Toast.makeText(getApplicationContext(), fault.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }else{
-                    Toast.makeText(getApplicationContext(),"La contraseña deben coincidir con la confirmación.", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            public void handleFault( BackendlessFault fault )
-            {
-                Toast.makeText(getApplicationContext(), "Los datos introducidos no son correctos.", Toast.LENGTH_LONG).show();
-            }
-        });
-    }*/

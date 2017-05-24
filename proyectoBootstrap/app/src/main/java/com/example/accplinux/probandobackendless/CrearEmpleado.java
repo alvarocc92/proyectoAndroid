@@ -195,6 +195,7 @@ public class CrearEmpleado extends AppCompatActivity implements MenuItemCompat.O
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

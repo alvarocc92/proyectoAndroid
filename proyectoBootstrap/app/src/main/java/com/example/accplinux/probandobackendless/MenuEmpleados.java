@@ -35,6 +35,7 @@ import com.backendless.persistence.QueryOptions;
 import com.backendless.property.ObjectProperty;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapProgressBar;
+import com.whygraphics.gifview.gif.GIFView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -56,6 +57,8 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
     ArrayList<String> mostrarEmpleados = new ArrayList<>();
     ArrayList<String> idEmpleados = new ArrayList<>();
 
+    GIFView mGifView;
+
     //List<Empleado> listBusqueadaEmpleados = new ArrayList<>();
 
     @Override
@@ -70,10 +73,23 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
 
         actividad = (View) findViewById(R.id.activity_menu_empleados);
 
-        gif = (ImageView) findViewById(R.id.gif);
+        mGifView = (GIFView) findViewById(R.id.gif_menu_empleados);
+        mGifView.setOnSettingGifListener(new GIFView.OnSettingGifListener() {
+            @Override
+            public void onSuccess(GIFView view, Exception e) {
+                mGifView.stop();
+                mGifView.setOnClickStartOrPause(true);
+            }
+            @Override
+            public void onFailure(GIFView view, Exception e) {
+
+            }
+        });
+
+       /* gif = (ImageView) findViewById(R.id.gif);
         gif.setBackgroundResource(R.drawable.gif_empleado);
         frame = (AnimationDrawable) gif.getBackground();
-        frame.start();
+        frame.start();*/
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
 
@@ -130,9 +146,11 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
 
     @Override
     protected void onDestroy() {
-        frame.stop();
+        //frame.stop();
+        if(mGifView.isGifInitialized()){
+            mGifView.stop();
+        }
         super.onDestroy();
-
         unbindDrawables(actividad);
 
     }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
@@ -31,7 +32,7 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
 
 
     EditText nombre,jefeProyecto,presupuesto,cliente,fechaInicio,fechaFin;
-    //CheckBox proyectoAcabado;
+    RadioButton finalizado;
     BootstrapButton actualizarProyecto;
     boolean antiguo;
 
@@ -50,7 +51,7 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
         cliente = (EditText) findViewById(R.id.cliente);
         fechaInicio = (EditText) findViewById(R.id.fechaInicio);
         fechaFin = (EditText) findViewById(R.id.fechaFin);
-        //proyectoAcabado = (CheckBox) findViewById(R.id.proyectoAcabado);
+        finalizado = (RadioButton) findViewById(R.id.finalizado);
         actualizarProyecto = (BootstrapButton) findViewById(R.id.actualizarProyecto);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
@@ -66,6 +67,20 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
         jefeProyecto.setText(proyecto.getJefeProyecto());
         presupuesto.setText(proyecto.getPresupuesto().toString()+" €");
         cliente.setText(proyecto.getCliente());
+
+        if(proyecto.getFinalizado().equals(false)){
+            finalizado.setChecked(false);
+        }else{
+            finalizado.setChecked(true);
+        }
+
+        finalizado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                proyecto.setFinalizado(!proyecto.getFinalizado());
+                finalizado.setChecked(proyecto.getFinalizado());
+            }
+        });
 
         try {
             Date fechInicio = input.parse(proyecto.getFechaInicio().toString());
@@ -111,9 +126,13 @@ public class EditProyecto extends AppCompatActivity implements MenuItemCompat.On
             e.printStackTrace();
         }
 
-        //proyecto.setFinalizado(Boolean.valueOf(proyectoAcabado.getText().toString()));
-        listProyectos.remove(position);
-        listProyectos.add(position, proyecto);
+        if(proyecto.getFinalizado().equals(false)){
+            listProyectos.remove(position);
+            listProyectos.add(position, proyecto);
+        }else{
+            listProyectos.remove(position);
+        }
+
 
         Backendless.Persistence.save(proyecto, new BackendlessCallback<Proyecto>() {
             @Override
