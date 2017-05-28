@@ -41,12 +41,12 @@ public class MenuInformesDetalles extends AppCompatActivity {
         setContentView(R.layout.activity_menu_informes_detalles);
         chart = (PieChart) findViewById(R.id.chartDetalles);
 
-        chart.setTransparentCircleColor(Color.BLACK);
-        chart.setTransparentCircleAlpha(125);
         chart.setUsePercentValues(true);
         chart.setCenterText("Detalle");
-        chart.animateX(1000);
-        chart.animateY(1000);
+        chart.setHoleRadius(25);
+        chart.animateX(2000);
+        chart.animateY(2000);
+        chart.setTransparentCircleRadius(0);
         proyecto = (Proyecto) getIntent().getSerializableExtra("proyecto");
 
         Description descripcion = new Description();
@@ -68,7 +68,9 @@ public class MenuInformesDetalles extends AppCompatActivity {
         long meses = dias / 28;
 
         for(int i = 0; i<listEmpleados.size(); i++){
-            if(listEmpleados.get(i).getSalario()!=null){
+            if(listEmpleados.get(i).getSalario()!=null &&
+                    listEmpleados.get(i).getProyecto().getObjectId().equals(proyecto.getObjectId())
+                    && listEmpleados.get(i).getDesasignado().equals(true)){
                 entries.add(new PieEntry((listEmpleados.get(i).getSalario().floatValue()/12)*meses, listEmpleados.get(i).getNombre()));
             }
         }
@@ -76,10 +78,12 @@ public class MenuInformesDetalles extends AppCompatActivity {
         for(int i = 0; i<listGastos.size(); i++){
             entries.add(new PieEntry(listGastos.get(i).getCantidad(), listGastos.get(i).getDescripcion()));
         }
-
         PieDataSet set = new PieDataSet(entries, "Detalle Informe");
         set.setColors(ColorTemplate.COLORFUL_COLORS);
+        set.setValueTextColor(Color.BLACK);
         PieData data = new PieData(set);
+        data.setValueTextSize(11f);
+        data.setValueTextColor(Color.BLACK);
 
         chart.setData(data);
         chart.invalidate();

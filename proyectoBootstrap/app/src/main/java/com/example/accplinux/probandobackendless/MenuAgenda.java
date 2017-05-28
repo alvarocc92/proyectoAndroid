@@ -86,12 +86,16 @@ public class MenuAgenda extends AppCompatActivity implements  CalendarPickerCont
             public void onClick(View v) {
                 Agenda event = new Agenda();
 
-                event.setTitulo(titulo.getText().toString());
-                event.setDescription(description.getText().toString());
-                event.setLocalizacion(localizacion.getText().toString());
-                event.setInicio(dayItem.getDate());
+                if(titulo.getText()!= null && !titulo.getText().toString().isEmpty()){
+                    event.setTitulo(titulo.getText().toString());
+                    event.setDescription(description.getText().toString());
+                    event.setLocalizacion(localizacion.getText().toString());
+                    event.setInicio(dayItem.getDate());
+                    guardarEvento(event);
+                }else{
+                    Toast.makeText(getApplicationContext(), "El título no puede estar vacío.", Toast.LENGTH_LONG).show();
+                }
 
-                guardarEvento(event);
             }
         });
 
@@ -107,7 +111,7 @@ public class MenuAgenda extends AppCompatActivity implements  CalendarPickerCont
     @Override
     public void onEventSelected(final CalendarEvent event) {
 
-        if(!event.getTitle().equals("No events")){
+        if(!event.getTitle().equals("No events") && event.getTitle().length()>0){
 
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("¿Deseas eliminar este evento?");

@@ -67,9 +67,11 @@ public class EditEmpleado extends AppCompatActivity implements MenuItemCompat.On
         salario.setText(empleado.getSalario().toString()+" €");
 
         try {
-            Date fechInicio = input.parse(empleado.getFechaContratacion().toString());
-            String fechIni = output.format(fechInicio);
-            fechaContratacion.setText(fechIni.toString());
+            if(empleado.getFechaContratacion()!=null){
+                Date fechInicio = input.parse(empleado.getFechaContratacion().toString());
+                String fechIni = output.format(fechInicio);
+                fechaContratacion.setText(fechIni.toString());
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }

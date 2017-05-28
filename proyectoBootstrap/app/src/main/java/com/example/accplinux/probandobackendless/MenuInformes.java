@@ -44,8 +44,8 @@ public class MenuInformes extends AppCompatActivity implements OnChartGestureLis
 
         chart = (BarChart) findViewById(R.id.chart);
         chart.setTouchEnabled(true);
-        chart.animateX(1000);
-        chart.animateY(1000);
+        chart.animateX(2000);
+        chart.animateY(2000);
 
         proyecto = (Proyecto) getIntent().getSerializableExtra("proyecto");
 
@@ -71,7 +71,9 @@ public class MenuInformes extends AppCompatActivity implements OnChartGestureLis
         long meses = dias / 28;
 
         for(int i = 0; i<listEmpleados.size(); i++){
-            if(listEmpleados.get(i).getSalario()!=null){
+            if(listEmpleados.get(i).getSalario()!=null &&
+                    listEmpleados.get(i).getProyecto().getObjectId().equals(proyecto.getObjectId())
+                    && listEmpleados.get(i).getDesasignado().equals(true)){
                 float salario = 0;
                 salario = ((listEmpleados.get(i).getSalario().floatValue()/12)*meses);
                 gastos+=salario;
@@ -94,7 +96,7 @@ public class MenuInformes extends AppCompatActivity implements OnChartGestureLis
         set2.setColors(ColorTemplate.MATERIAL_COLORS);
 
 
-        final String[] quarters = new String[] { proyecto.getNombre()," " };
+        final String[] quarters = new String[] { " ",proyecto.getNombre()};
 
         IAxisValueFormatter formatter = new IAxisValueFormatter() {
             @Override
@@ -106,6 +108,13 @@ public class MenuInformes extends AppCompatActivity implements OnChartGestureLis
         XAxis xAxis = chart.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setValueFormatter(formatter);
+
+        YAxis yAxisLeft = chart.getAxisLeft();
+        yAxisLeft.setAxisMinimum(0f);
+        yAxisLeft.setAxisMaximum(presupuesto);
+
+        YAxis yAxisRight = chart.getAxisRight();
+        yAxisRight.setEnabled(false);
 
         float groupSpace = 0.06f;
         float barSpace = 0.02f; // x2 dataset
