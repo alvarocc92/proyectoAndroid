@@ -68,7 +68,7 @@ public class MenuInformesDetalles extends AppCompatActivity {
         long meses = dias / 28;
 
         for(int i = 0; i<listEmpleados.size(); i++){
-            if(listEmpleados.get(i).getSalario()!=null &&
+            if(listEmpleados.get(i).getSalario()!=null &&  listEmpleados.get(i).getProyecto()!=null &&
                     listEmpleados.get(i).getProyecto().getObjectId().equals(proyecto.getObjectId())
                     && listEmpleados.get(i).getDesasignado().equals(true)){
                 entries.add(new PieEntry((listEmpleados.get(i).getSalario().floatValue()/12)*meses, listEmpleados.get(i).getNombre()));

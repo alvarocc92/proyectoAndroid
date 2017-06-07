@@ -206,6 +206,7 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
 
         String whereClause = "nombre LIKE '%"+arg0+"%' OR  cliente LIKE '%"+arg0+"%'";
         BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+        dataQuery.setPageSize(20);
         dataQuery.setWhereClause( whereClause );
 
         Backendless.Persistence.of( Proyecto.class ).find( dataQuery,
@@ -257,7 +258,7 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
             final boolean[] acabado = {false};
 
             BackendlessDataQuery dataQuery = new BackendlessDataQuery();
-            dataQuery.setPageSize(20);
+            dataQuery.setPageSize(25);
 
             Backendless.Persistence.of(Proyecto.class).find(dataQuery, new AsyncCallback<BackendlessCollection<Proyecto>>(){
                 @Override
@@ -333,7 +334,7 @@ public class MenuProyectos extends AppCompatActivity implements SearchView.OnQue
             final boolean[] acabado = {false};
 
             BackendlessDataQuery dataQuery = new BackendlessDataQuery();
-            dataQuery.setPageSize(20);
+            dataQuery.setPageSize(25);
 
             Backendless.Persistence.of(Proyecto.class).find(dataQuery, new AsyncCallback<BackendlessCollection<Proyecto>>(){
                 @Override

@@ -71,7 +71,7 @@ public class MenuInformes extends AppCompatActivity implements OnChartGestureLis
         long meses = dias / 28;
 
         for(int i = 0; i<listEmpleados.size(); i++){
-            if(listEmpleados.get(i).getSalario()!=null &&
+            if(listEmpleados.get(i).getSalario()!=null && listEmpleados.get(i).getProyecto()!=null &&
                     listEmpleados.get(i).getProyecto().getObjectId().equals(proyecto.getObjectId())
                     && listEmpleados.get(i).getDesasignado().equals(true)){
                 float salario = 0;

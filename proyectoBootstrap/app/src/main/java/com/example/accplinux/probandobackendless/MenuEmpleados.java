@@ -224,6 +224,7 @@ public class MenuEmpleados extends AppCompatActivity implements SearchView.OnQue
 
         String whereClause = "nombre LIKE '%"+arg0+"%' OR  apellidos LIKE '%"+arg0+"%'";
         BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+        dataQuery.setPageSize(40);
         dataQuery.setWhereClause( whereClause );
 
         Backendless.Persistence.of( Empleado.class ).find( dataQuery,

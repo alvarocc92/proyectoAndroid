@@ -20,6 +20,8 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.accplinux.probandobackendless.R.id.actualizarProyecto;
 import static com.example.accplinux.probandobackendless.R.id.jefeProyecto;
@@ -83,6 +85,10 @@ public class GastoProyecto extends AppCompatActivity implements MenuItemCompat.O
             @Override
             public void handleResponse(Gastos gastos) {
                 Log.i("Empleado", "Nuevo gasto registrado");
+                List<Gastos> listGastos = proyecto.getListGastos();
+                listGastos.clear();
+                listGastos = new ArrayList<Gastos>();
+                proyecto.setListGastos(listGastos);
                 proyecto.getListGastos().add(gastos);
                 updateProyecto();
             }
@@ -104,6 +110,8 @@ public class GastoProyecto extends AppCompatActivity implements MenuItemCompat.O
 
                 Log.i("proyecto", "Gasto guardado en proyecto" );
                 Toast.makeText(getApplicationContext(), "Gasto guardado.", Toast.LENGTH_LONG).show();
+                Intent menuPrincipal = new Intent(GastoProyecto.this, MenuPrincipal.class);
+                startActivity(menuPrincipal);
 
             }
             @Override

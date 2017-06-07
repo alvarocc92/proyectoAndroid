@@ -39,27 +39,41 @@ public class CustomAdapterAsignarEmpleado extends BaseAdapter implements ListAda
         this.empleadosAsignados = proyecto.getEmpleadoAsignados();
 
     }
+    public static class ViewHolder{
+        TextView listItemText;
+        BootstrapButton asignarEmpleado;
+        BootstrapButton desAsignar;
+    }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
+        ViewHolder holder;
 
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.precarga_asignar_empleados, null);
+            holder = new ViewHolder();
+            holder.listItemText = (TextView) view.findViewById(R.id.list_item_empleado);
+            holder.asignarEmpleado = (BootstrapButton) view.findViewById(R.id.asignar_empleado);
+            holder.desAsignar = (BootstrapButton) view.findViewById(R.id.desAsignar);
+            view.setTag(holder);
+        }else{
+            holder = (ViewHolder) view.getTag();
         }
 
         if(listEmpleados.get(position).getDesasignado().equals(true)){
 
-            final TextView listItemText = (TextView)view.findViewById(R.id.list_item_empleado);
-            listItemText.setText(listEmpleados.get(position).getNombre()+" "+listEmpleados.get(position).getApellidos());
-            BootstrapButton asignarEmpleado = (BootstrapButton) view.findViewById(R.id.asignar_empleado);
-            BootstrapButton desAsignar = (BootstrapButton) view.findViewById(R.id.desAsignar);
+           // final TextView listItemText = (TextView)view.findViewById(R.id.list_item_empleado);
+            holder.listItemText.setText(listEmpleados.get(position).getNombre()+" "+listEmpleados.get(position).getApellidos());
+           // BootstrapButton asignarEmpleado = (BootstrapButton) view.findViewById(R.id.asignar_empleado);
+            //BootstrapButton desAsignar = (BootstrapButton) view.findViewById(R.id.desAsignar);
 
-            asignarEmpleado.setEnabled(false);
-            asignarEmpleado.setVisibility(View.GONE);
+            //holder.asignarEmpleado.setEnabled(false);
+            holder.asignarEmpleado.setVisibility(View.GONE);
+            holder.desAsignar.setVisibility(View.VISIBLE);
 
-            desAsignar.setOnClickListener(new View.OnClickListener(){
+            holder.desAsignar.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v)  {
                     Log.i("AsignarProyecto", "id empleado: " + listEmpleados.get(position).getObjectId()+" .Nombre del empleado : "+ listEmpleados.get(position).getNombre());
@@ -68,16 +82,18 @@ public class CustomAdapterAsignarEmpleado extends BaseAdapter implements ListAda
             });
 
         }else{
-            final TextView listItemText = (TextView)view.findViewById(R.id.list_item_empleado);
-            listItemText.setText(listEmpleados.get(position).getNombre()+" "+listEmpleados.get(position).getApellidos());
+           // final TextView listItemText = (TextView)view.findViewById(R.id.list_item_empleado);
+            holder.listItemText.setText(listEmpleados.get(position).getNombre()+" "+listEmpleados.get(position).getApellidos());
 
-            BootstrapButton asignarEmpleado = (BootstrapButton) view.findViewById(R.id.asignar_empleado);
-            BootstrapButton desAsignar = (BootstrapButton) view.findViewById(R.id.desAsignar);
+           // BootstrapButton asignarEmpleado = (BootstrapButton) view.findViewById(R.id.asignar_empleado);
+            //BootstrapButton desAsignar = (BootstrapButton) view.findViewById(R.id.desAsignar);
 
-            desAsignar.setEnabled(false);
-            desAsignar.setVisibility(View.GONE);
+            //holder.desAsignar.setEnabled(false);
+            holder.desAsignar.setVisibility(View.GONE);
+            holder.asignarEmpleado.setVisibility(View.VISIBLE);
 
-            asignarEmpleado.setOnClickListener(new View.OnClickListener(){
+
+            holder.asignarEmpleado.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v)  {
                     Log.i("AsignarProyecto", "id empleado: " + listEmpleados.get(position).getObjectId()+" .Nombre del empleado : "+ listEmpleados.get(position).getNombre());
@@ -91,6 +107,7 @@ public class CustomAdapterAsignarEmpleado extends BaseAdapter implements ListAda
     public void asignarProyectoEmpleado(final Empleado empleado, final Proyecto proyecto, final int position){
 
         proyecto.getEmpleadoAsignados().add(empleado);
+
         empleado.setProyecto(proyecto);
         empleado.setDesasignado(true);
 

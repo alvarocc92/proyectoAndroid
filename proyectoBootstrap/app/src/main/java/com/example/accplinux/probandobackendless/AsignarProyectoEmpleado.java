@@ -128,7 +128,7 @@ public class AsignarProyectoEmpleado extends AppCompatActivity implements MenuIt
             final boolean[] acabado = {false};
 
             BackendlessDataQuery dataQuery = new BackendlessDataQuery();
-            dataQuery.setPageSize(20);
+            dataQuery.setPageSize(25);
 
             Backendless.Persistence.of(Proyecto.class).find(dataQuery, new AsyncCallback<BackendlessCollection<Proyecto>>(){
                 @Override
